@@ -22,7 +22,8 @@ namespace Assets.Behaviours
 
         public string Message => "Press E to enter";
 
-        public bool CanInteract() => _playerCollider.Value.IsTouching(_collider.Value);
+        public bool CanInteract() => Mathf.Abs(_playerCollider.Value.transform.position.x - transform.position.x) <= 0.5 * _playerCollider.Value.bounds.size.x
+            && Mathf.Abs(_playerCollider.Value.transform.position.y - transform.position.y) <= 0.5 * _playerCollider.Value.bounds.size.y;
 
         public void Interact()
         {
