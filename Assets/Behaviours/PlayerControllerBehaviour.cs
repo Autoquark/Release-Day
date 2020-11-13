@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Assets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerControllerBehaviour : MonoBehaviour
@@ -22,7 +24,11 @@ public class PlayerControllerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var interactable = FindObjectsOfType<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault(x => x.CanInteract());
+        if(interactable != null && Input.GetKeyDown(KeyCode.E))
+        {
+            interactable.Interact();
+        }
     }
 
     private void FixedUpdate()
