@@ -66,7 +66,7 @@ namespace Assets.Behaviours
                     continue;
                 }
 
-                remainingDistance -= MoveX(MaxStepAngle, remainingDistance, right);
+                distanceMoved -= MoveX(MaxStepAngle, remainingDistance, right);
                 if (distanceMoved > 0)
                 {
                     remainingDistance -= distanceMoved;
