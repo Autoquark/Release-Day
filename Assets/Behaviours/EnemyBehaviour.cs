@@ -33,15 +33,18 @@ namespace Assets.Behaviours
 
         void Update()
         {
-            float xFloorProbeOffset = _collider.Value.bounds.size.x * 0.5f;
+            float xFloorProbeOffset = _collider.Value.bounds.size.x * 0.6f;
+            float yFloorProbeOffset = _collider.Value.bounds.size.y * 0.6f;
+
             float xWallProbeOffset = _collider.Value.bounds.size.x / 10;
-            float yProbeOffset = _collider.Value.bounds.size.y * 0.7f;
 
-            Vector3 rightFloorProbe = new Vector2(xFloorProbeOffset, -yProbeOffset);
-            Vector3 leftFloorProbe = new Vector2(-xFloorProbeOffset, -yProbeOffset);
+            Vector3 rightFloorProbeStart = new Vector2(xFloorProbeOffset, 0);
+            Vector3 rightFloorProbeEnd = new Vector2(xFloorProbeOffset, -yFloorProbeOffset);
+            Vector3 leftFloorProbeStart = new Vector2(-xFloorProbeOffset, 0);
+            Vector3 leftFloorProbeEnd = new Vector2(-xFloorProbeOffset, -yFloorProbeOffset);
 
-            bool rightFloor = Physics2D.OverlapPoint((Vector2)(transform.position + rightFloorProbe)) != null;
-            bool leftFloor = Physics2D.OverlapPoint((Vector2)(transform.position + leftFloorProbe)) != null;
+            bool rightFloor = Physics2D.Raycast((Vector2)(transform.position + rightFloorProbeStart), Vector2.down, yFloorProbeOffset).collider != null;
+            bool leftFloor = Physics2D.Raycast((Vector2)(transform.position + leftFloorProbeStart), Vector2.down, yFloorProbeOffset).collider != null;
 
             RaycastHit2D[] unused = new RaycastHit2D[1];
 
@@ -50,11 +53,11 @@ namespace Assets.Behaviours
 
             //if (rightFloor)
             //{
-            //    Debug.DrawLine(transform.position, transform.position + rightFloorProbe, Color.green, 0, false);
+            //    Debug.DrawLine(transform.position + rightFloorProbeStart, transform.position + rightFloorProbeEnd, Color.green, 0, false);
             //}
             //if (leftFloor)
             //{
-            //    Debug.DrawLine(transform.position, transform.position + leftFloorProbe, Color.green, 0, false);
+            //    Debug.DrawLine(transform.position + leftFloorProbeStart, transform.position + leftFloorProbeEnd, Color.green, 0, false);
             //}
             //if (rightWall)
             //{
