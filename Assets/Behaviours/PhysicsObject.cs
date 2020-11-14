@@ -43,10 +43,8 @@ namespace Assets.Behaviours
 
             // Handle walking, including up or down a slope
             var remainingDistance = Mathf.Abs(WalkIntent);
-            bool progress = true;
-            while (progress && remainingDistance >= _minimumMoveDistance)
+            while (remainingDistance >= _minimumMoveDistance)
             {
-                progress = false;
                 var right = WalkIntent > 0;
                 var distanceMoved = 0f;
 
@@ -56,33 +54,26 @@ namespace Assets.Behaviours
                     distanceMoved = MoveX(-MaxStepAngle, remainingDistance, right);
                     if(distanceMoved > 0)
                     {
-                        progress = true;
                         remainingDistance -= distanceMoved;
+                        continue;
                     }
                 }
-                remainingDistance -= MoveX(0, remainingDistance, right);
+
+                distanceMoved = MoveX(0, remainingDistance, right);
                 if (distanceMoved > 0)
                 {
-                    progress = true;
                     remainingDistance -= distanceMoved;
+                    continue;
                 }
+
                 remainingDistance -= MoveX(MaxStepAngle, remainingDistance, right);
                 if (distanceMoved > 0)
                 {
-                    progress = true;
                     remainingDistance -= distanceMoved;
+                    continue;
                 }
 
-                /*foreach (var direction in new[] {
-                    // Step down
-                    Vector2.right.RotateClockwise(MaxStepAngle * Mathf.Sign(WalkIntent)),
-                    // Straight
-                    Vector2.right,
-                    // Step up
-                    Vector2.right.RotateClockwise(MaxStepAngle * -Mathf.Sign(WalkIntent))})
-                {
-                    
-                }*/
+                break;
             }
 
             // Handle vertical movement
