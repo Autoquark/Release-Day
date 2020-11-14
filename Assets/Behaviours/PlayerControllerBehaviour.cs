@@ -1,4 +1,6 @@
 ﻿using Assets;
+using Assets.Behaviours;
+using Assets.Extensions;
 using Extensions;
 using System;
 using System.Collections;
@@ -6,25 +8,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerControllerBehaviour : MonoBehaviour
+class PlayerControllerBehaviour : PhysicsObject
 {
     const float _moveSpeed = 0.1f;
-    const float _minSeparationDistance = 0.05f;
+    const float _minSeparationDistance = 0.1f;
+    const float _jumpVelocity = 5f;
     readonly Lazy<Rigidbody2D> _rigidbody;
     readonly Lazy<Collider2D> _collider;
 
     bool _jumpPending = false;
+    Vector2 _velocity = Vector2.zero;
 
     public PlayerControllerBehaviour()
     {
         _rigidbody = new Lazy<Rigidbody2D>(GetComponent<Rigidbody2D>);
         _collider = new Lazy<Collider2D>(GetComponent<Collider2D>);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -38,71 +36,31 @@ public class PlayerControllerBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            _jumpPending = true;
         }
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        var baseMovement = Vector2.zero;
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            // https://answers.unity.com/questions/696068/difference-between-forcemodeforceaccelerationimpul.html
-            // Basically, I think Impulse simulates an instantaneous force whereas Force simulates a constant force over the duration of the fixed update interval
-            // _rigidbody.Value.AddForce(Vector2.left * _moveSpeed, ForceMode2D.Force);
-            baseMovement = Vector2.left * _moveSpeed;
+            WalkIntent = -_moveSpeed;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            //_rigidbody.Value.AddForce(Vector2.right * _moveSpeed, ForceMode2D.Force);
-            baseMovement = Vector2.right * _moveSpeed;
+            WalkIntent = _moveSpeed;
         }
-
-        var results = new List<RaycastHit2D>();
-        var filter = new ContactFilter2D().NoFilter();
-        filter.useTriggers = false;
-
-        // Check if falling
-        var grounded = _collider.Value.Cast(Vector2.down, filter, results, _minSeparationDistance + 0.01f) != 0;
-        if(!grounded)
+        else
         {
-            baseMovement += Physics2D.gravity * Time.fixedDeltaTime;
+            WalkIntent = 0;
         }
 
-        if(baseMovement == Vector2.zero)
+        if(_jumpPending)
         {
-            return;
+            YVelocity = _jumpVelocity;
+            _jumpPending = false;
         }
 
-        _collider.Value.Cast(baseMovement, filter, results, baseMovement.magnitude);
-        var bestDistance = results.MinOrDefault(x => Mathf.Max(x.distance - _minSeparationDistance, 0), baseMovement.magnitude);
-        var movement = baseMovement;
-
-        // Try to move down a slope
-        if (grounded)
-        {
-            var downMovement = Vector2.Lerp(Vector2.down * baseMovement.magnitude, baseMovement, 0.5f);
-            _collider.Value.Cast(downMovement, filter, results, baseMovement.magnitude);
-            var downDistance = results.MinOrDefault(x => Mathf.Max(x.distance - _minSeparationDistance, 0), baseMovement.magnitude);
-            if (downDistance >= bestDistance)
-            {
-                bestDistance = downDistance;
-                movement = downMovement;
-            }
-
-            var upMovement = Vector2.Lerp(Vector2.up * baseMovement.magnitude, baseMovement, 0.5f);
-            _collider.Value.Cast(upMovement, new ContactFilter2D().NoFilter(), results, baseMovement.magnitude);
-
-            var upDistance = results.MinOrDefault(x => Mathf.Max(x.distance - _minSeparationDistance, 0), upMovement.magnitude);
-            if (upDistance > bestDistance)
-            {
-                bestDistance = upDistance;
-                movement = upMovement;
-            }
-        }
-
-        movement = movement.normalized * bestDistance;
-
-        _rigidbody.Value.MovePosition(_rigidbody.Value.position + movement);
+        base.FixedUpdate();
     }
 }
