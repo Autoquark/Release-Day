@@ -49,7 +49,7 @@ namespace Assets.Behaviours
                 var distanceMoved = 0f;
 
                 // Try stepping down if grounded
-                if (Grounded)
+                if (Grounded && MaxStepAngle > 0.0001f)
                 {
                     distanceMoved = MoveX(-MaxStepAngle, remainingDistance, right);
                     if(distanceMoved > 0)
