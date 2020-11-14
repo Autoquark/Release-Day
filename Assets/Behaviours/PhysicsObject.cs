@@ -12,7 +12,7 @@ namespace Assets.Behaviours
     class PhysicsObject : MonoBehaviour
     {
         const float _minimumMoveDistance = 0.001f;
-        const float _minSeparationDistance = 0.02f;
+        const float _minSeparationDistance = 0.03f;
         const float _minimumGroundNormalY = 0.65f;
 
         public bool Grounded { get; private set; } = false;
@@ -39,7 +39,12 @@ namespace Assets.Behaviours
 
         protected virtual void FixedUpdate()
         {
-            var results = new List<RaycastHit2D>();
+            var colliders = new List<Collider2D>();
+            _rigidbody.Value.OverlapCollider(Filter, colliders);
+            if (colliders.Any(x => Rigidbody.IsTouching(x)))
+            {
+                Debug.LogWarning(this + " is overlapping one or more colliders that are solid to it");
+            }
 
             // Handle walking, including up or down a slope
             var remainingDistance = Mathf.Abs(WalkIntent);
@@ -80,7 +85,7 @@ namespace Assets.Behaviours
             YVelocity += Physics2D.gravity.y * Time.fixedDeltaTime;
             var frameVelocity = YVelocity * Time.fixedDeltaTime;
 
-            results = new List<RaycastHit2D>();
+            var results = new List<RaycastHit2D>();
             Rigidbody.Cast(new Vector2(0, frameVelocity), Filter, results, Mathf.Abs(frameVelocity));
             Grounded = frameVelocity < 0 && results.Select(x => x.normal)
                 .Any(normal => normal.y >= _minimumGroundNormalY);

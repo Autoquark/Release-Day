@@ -34,7 +34,7 @@ class PlayerControllerBehaviour : PhysicsObject
             interactable.Interact();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Grounded && Input.GetKeyDown(KeyCode.Space))
         {
             _jumpPending = true;
         }
