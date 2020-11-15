@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6540164959275438957}
   - component: {fileID: 2352197415294378845}
   - component: {fileID: 8403313278285561762}
+  - component: {fileID: 7311056458033022578}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -170,3 +171,20 @@ MonoBehaviour:
   _animationName: 
   loop: 0
   timeScale: 1
+--- !u!114 &7311056458033022578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991626027384477691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4735efb50045fec4ebe4e4cfa9d17c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  run: {fileID: 11400000, guid: 696bc1d696434da4e8e492d5799f0086, type: 2}
+  idle: {fileID: 11400000, guid: 08e3310e1c6b2814fb72bf98281bb645, type: 2}
+  jumpStart: {fileID: 11400000, guid: c872de9d774471a4fb17448dc03a5f8e, type: 2}
+  jumpApex: {fileID: 11400000, guid: 730bf8d336b00d149a82746a67e7bf88, type: 2}
+  fall: {fileID: 11400000, guid: 909b84efa3b6fa942b5a80e4753b2824, type: 2}

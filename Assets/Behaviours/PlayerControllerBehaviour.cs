@@ -12,7 +12,7 @@ class PlayerControllerBehaviour : PhysicsObject
 {
     const float _moveSpeed = 0.1f;
     const float _minSeparationDistance = 0.1f;
-    const float _jumpVelocity = 5f;
+    const float _jumpVelocity = 6f;
     readonly Lazy<Rigidbody2D> _rigidbody;
     readonly Lazy<Collider2D> _collider;
 

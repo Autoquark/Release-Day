@@ -15,6 +15,7 @@ namespace Assets.Behaviours
         const float _minSeparationDistance = 0.03f;
 
         public bool Grounded { get; private set; } = false;
+        public Vector2 MovementLastFrame { get; private set; }
 
         protected Rigidbody2D Rigidbody => _rigidbody.Value;
         protected float YVelocity { get; set; }
@@ -38,6 +39,8 @@ namespace Assets.Behaviours
 
         protected virtual void FixedUpdate()
         {
+            MovementLastFrame = Vector2.zero;
+
             var colliders = new List<Collider2D>();
             _rigidbody.Value.OverlapCollider(Filter, colliders);
             if (colliders.Any(x => Rigidbody.IsTouching(x)))
@@ -77,6 +80,7 @@ namespace Assets.Behaviours
                     continue;
                 }
 
+
                 break;
             }
 
@@ -90,7 +94,9 @@ namespace Assets.Behaviours
 
             var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - _minSeparationDistance), Mathf.Abs(frameVelocity));
 
-            Rigidbody.position += new Vector2(0, frameVelocity).normalized * distance;
+            var movement = new Vector2(0, frameVelocity).normalized * distance;
+            Rigidbody.position += movement;
+            MovementLastFrame += movement;
 
             if (results.Any())
             {
@@ -109,6 +115,7 @@ namespace Assets.Behaviours
             if (distance > _minimumMoveDistance)
             {
                 Rigidbody.position += direction * distance;
+                MovementLastFrame += direction * distance;
                 return distance;
             }
 
