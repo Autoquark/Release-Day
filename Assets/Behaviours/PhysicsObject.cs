@@ -13,7 +13,6 @@ namespace Assets.Behaviours
     {
         const float _minimumMoveDistance = 0.001f;
         const float _minSeparationDistance = 0.03f;
-        const float _minimumGroundNormalY = 0.65f;
 
         public bool Grounded { get; private set; } = false;
 
@@ -87,8 +86,7 @@ namespace Assets.Behaviours
 
             var results = new List<RaycastHit2D>();
             Rigidbody.Cast(new Vector2(0, frameVelocity), Filter, results, Mathf.Abs(frameVelocity));
-            Grounded = frameVelocity < 0 && results.Select(x => x.normal)
-                .Any(normal => normal.y >= _minimumGroundNormalY);
+            Grounded = frameVelocity < 0 && results.Any();
 
             var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - _minSeparationDistance), Mathf.Abs(frameVelocity));
 
