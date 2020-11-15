@@ -95,7 +95,7 @@ namespace Assets.Behaviours
             _moveIntent = _direction ? MoveIntent.Right : MoveIntent.Left;
         }
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
             switch(_moveIntent)
             {
