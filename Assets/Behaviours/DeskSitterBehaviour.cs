@@ -15,6 +15,9 @@ namespace Assets.Behaviours
         public AnimationClip _idleAnimation;
         public AnimationClip _talkingAnimation;
 
+        private AnimationClipPlayable _idlePlayable;
+        private AnimationClipPlayable _talkingPlayable;
+
         private PlayableGraph _playableGraph;
         private Lazy<Animator> _animator;
         private PlayableOutput _playableOutput;
@@ -34,6 +37,9 @@ namespace Assets.Behaviours
 
             _playableGraph.Play();
 
+            _idlePlayable = AnimationClipPlayable.Create(_playableGraph, _idleAnimation);
+            _talkingPlayable = AnimationClipPlayable.Create(_playableGraph, _talkingAnimation);
+
             StartCoroutine(AnimationCoroutine());
         }
 
@@ -41,22 +47,11 @@ namespace Assets.Behaviours
         {
             while (true)
             {
-                PlayClip(_idleAnimation);
+                _playableOutput.SetSourcePlayable(_idlePlayable);
                 yield return new WaitForSeconds(2);
-                PlayClip(_talkingAnimation);
+                _playableOutput.SetSourcePlayable(_talkingPlayable);
                 yield return new WaitForSeconds(2);
             }
-        }
-
-        private void PlayClip(AnimationClip clip)
-        {
-            var clipPlayable = AnimationClipPlayable.Create(_playableGraph, clip);
-            var toDestroy = _playableOutput.GetSourcePlayable();
-            //if(toDestroy != null)
-            {
-                //_playableGraph.DestroyPlayable();
-            }
-            _playableOutput.SetSourcePlayable(clipPlayable);
         }
     }
 }
