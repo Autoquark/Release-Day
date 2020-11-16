@@ -11,6 +11,7 @@ namespace Assets.Behaviours
     {
         private Lazy<Collider2D> _playerCollider;
         private Lazy<ConversationController> _conversationController;
+        private Lazy<ConversationLoader> _loader;
 
         private bool _alreadyTriggered = false;
 
@@ -18,6 +19,7 @@ namespace Assets.Behaviours
         {
             _playerCollider = new Lazy<Collider2D>(() => FindObjectOfType<PlayerControllerBehaviour>().GetComponent<Collider2D>());
             _conversationController = new Lazy<ConversationController>(() => FindObjectOfType<ConversationController>());
+            _loader = new Lazy<ConversationLoader>(GetComponent<ConversationLoader>);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -27,7 +29,8 @@ namespace Assets.Behaviours
 
             if (collision == _playerCollider.Value)
             {
-                _conversationController.Value.ToggleVisibility();
+                _conversationController.Value.SetConversation(_loader.Value.Conversation);
+                _conversationController.Value.SetVisibility(true);
             }
         }
     }
