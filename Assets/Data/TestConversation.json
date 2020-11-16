@@ -2,13 +2,13 @@
 	"Speaker": "Alex",
 	"Text": "What about the bounce pad on the boss level?",
 	"Next": [{
-		"Speaker": "Clive",
+		"Speaker": "Colin",
 		"Text": "What about it?",
 		"Next": [{
 				"Speaker": "Alex",
 				"Text": "Did you fix it?",
 				"Next": [{
-					"Speaker": "Clive",
+					"Speaker": "Colin",
 					"Text": "Not as such..."
 				}]
 			},
@@ -16,7 +16,7 @@
 				"Speaker": "Alex",
 				"Text": "It it safe?",
 				"Next": [{
-					"Speaker": "Clive",
+					"Speaker": "Colin",
 					"Text": "Define 'safe' ..."
 				}]
 			},
@@ -25,7 +25,7 @@
 				"Text": "Stop messing around and give me a hint!",
 				"IsHint": true,
 				"Next": [{
-					"Speaker": "Clive",
+					"Speaker": "Colin",
 					"Text": "I am sure you'll be fine if you hit it from high enough ;-)"
 				}]
 			}
