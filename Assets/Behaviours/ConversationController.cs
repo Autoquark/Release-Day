@@ -10,6 +10,7 @@ namespace Assets.Behaviours
     {
         public GameObject MessagePrefabLeft;
         public GameObject MessagePrefabRight;
+        public GameObject MessagePrefabOptions;
 
         private bool _visible = false;
         private Lazy<Canvas> _canvas;
@@ -49,26 +50,21 @@ namespace Assets.Behaviours
 
         private void AdvanceConversation()
         {
-            int num_inserted = 0;
+            _lastInteraction = 0.0f;
 
-            if (_currentNode.Next.Length > 0)
+            if (_currentNode.Next.Length == 1)
             {
-                foreach(var c in _currentNode.Next)
-                {
-                    num_inserted++;
-
-                    AddNodeToIM(c);
-                }
-            }
-
-            if (num_inserted == 1)
-            {
-                _lastInteraction = Time.realtimeSinceStartup;
                 _currentNode = _currentNode.Next[0];
+                AddStatementToIM(_currentNode);
+                _lastInteraction = Time.realtimeSinceStartup;
+            }
+            else if (_currentNode.Next.Length > 1)
+            {
+                AddOptionsToIM(_currentNode.Next);
+                _currentNode = null;
             }
             else
             {
-                _lastInteraction = 0.0f;
             }
         }
 
@@ -86,7 +82,7 @@ namespace Assets.Behaviours
             _conversation = conv;
             _currentNode = conv;
 
-            AddNodeToIM(_currentNode);
+            AddStatementToIM(_currentNode);
 
             _lastInteraction = Time.realtimeSinceStartup;
 
@@ -95,22 +91,32 @@ namespace Assets.Behaviours
 
         private void ClearIM()
         {
-            foreach(var child in _scrollPanel.Value.transform.Children())
-            {
-                GameObject.Destroy(child.gameObject);
-            }
+            _scrollPanel.Value.transform.DestroyChildren();
 
             _lastInteraction = 0.0f;
         }
 
-        private void AddNodeToIM(Conversation c)
+        private void AddStatementToIM(Conversation c)
         {
-            var msg = Instantiate(c.Speaker == "Alex" ? MessagePrefabLeft : MessagePrefabRight, _scrollPanel.Value.transform);
+            bool is_right = c.Speaker != "Alex";
+
+            var msg = Instantiate(is_right ? MessagePrefabRight : MessagePrefabLeft, _scrollPanel.Value.transform);
             msg.transform.localScale = new Vector3(1, 1, 1);
             var cms = msg.GetComponent<ConversationMessageUtil>();
-            cms.SetMessage(c);
+            cms.SetMessage(c, is_right);
 
             _newContentAdded = true;
         }
+
+        private void AddOptionsToIM(Conversation[] c)
+        {
+            var msg = Instantiate(MessagePrefabOptions, _scrollPanel.Value.transform);
+            msg.transform.localScale = new Vector3(1, 1, 1);
+            var cms = msg.GetComponent<ConversationMessageUtil>();
+            cms.SetOptions(c, false);
+
+            _newContentAdded = true;
+        }
+
     }
 }

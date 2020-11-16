@@ -204,6 +204,8 @@ MonoBehaviour:
     type: 3}
   MessagePrefabRight: {fileID: 1613131223659504741, guid: 12fdadbc2896dec46ad58ad58d406340,
     type: 3}
+  MessagePrefabOptions: {fileID: 1613131223659504741, guid: 837750b324a43584cb817e8fdee959f3,
+    type: 3}
 --- !u!1 &7633092570669061321
 GameObject:
   m_ObjectHideFlags: 0
