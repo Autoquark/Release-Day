@@ -28,6 +28,11 @@ class PlayerControllerBehaviour : MonoBehaviour
         _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
     }
 
+    private void Start()
+    {
+        _physicsObject.Value.PositionOnGround();
+    }
+
     // Update is called once per frame
     void Update()
     {

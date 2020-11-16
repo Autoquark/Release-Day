@@ -30,6 +30,13 @@ namespace Assets.Behaviours
             _rigidbody = new Lazy<Rigidbody2D>(GetComponent<Rigidbody2D>);
         }
 
+        public void PositionOnGround()
+        {
+            var results = new List<RaycastHit2D>();
+            Rigidbody.Cast(Vector2.down, Filter, results, 10);
+            Rigidbody.position += Vector2.down * results.MinOrDefault(x => x.distance);
+        }
+
         private void Start()
         {
             Filter.useTriggers = false;
