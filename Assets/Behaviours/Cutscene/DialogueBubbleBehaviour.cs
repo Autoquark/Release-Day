@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Behaviours
+namespace Assets.Behaviours.Cutscene
 {
     class DialogueBubbleBehaviour : MonoBehaviour
     {

@@ -8,23 +8,47 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 
-namespace Assets.Behaviours
+namespace Assets.Behaviours.Cutscene
 {
-    class DeskSitterBehaviour : MonoBehaviour
+    class DeskSitterBehaviour : TalkBehaviour
     {
         public AnimationClip _idleAnimation;
         public AnimationClip _talkingAnimation;
+        public Sprite _listeningSprite;
 
         private AnimationClipPlayable _idlePlayable;
         private AnimationClipPlayable _talkingPlayable;
 
         private PlayableGraph _playableGraph;
-        private Lazy<Animator> _animator;
+        private readonly Lazy<Animator> _animator;
+        private readonly Lazy<SpriteRenderer> _spriteRenderer;
         private PlayableOutput _playableOutput;
 
         public DeskSitterBehaviour()
         {
             _animator = new Lazy<Animator>(GetComponent<Animator>);
+            _spriteRenderer = new Lazy<SpriteRenderer>(GetComponent<SpriteRenderer>);
+        }
+
+        public override void Say(string text)
+        {
+            base.Say(text);
+            _playableGraph.Play();
+            _playableOutput.SetSourcePlayable(_talkingPlayable);
+        }
+
+        public override void ShowListening()
+        {
+            base.ShowListening();
+            _playableGraph.Stop();
+            _spriteRenderer.Value.sprite = _listeningSprite;
+        }
+
+        public override void EndConversation()
+        {
+            base.EndConversation();
+            _playableGraph.Play();
+            _playableOutput.SetSourcePlayable(_idlePlayable);
         }
 
         private void Start()
@@ -40,18 +64,7 @@ namespace Assets.Behaviours
             _idlePlayable = AnimationClipPlayable.Create(_playableGraph, _idleAnimation);
             _talkingPlayable = AnimationClipPlayable.Create(_playableGraph, _talkingAnimation);
 
-            StartCoroutine(AnimationCoroutine());
-        }
-
-        private IEnumerator AnimationCoroutine()
-        {
-            while (true)
-            {
-                _playableOutput.SetSourcePlayable(_idlePlayable);
-                yield return new WaitForSeconds(2);
-                _playableOutput.SetSourcePlayable(_talkingPlayable);
-                yield return new WaitForSeconds(2);
-            }
+            _playableOutput.SetSourcePlayable(_idlePlayable);
         }
 
         private void OnDestroy()

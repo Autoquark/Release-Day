@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _idleAnimation: {fileID: 0}
   _talkingAnimation: {fileID: 0}
+  _listeningSprite: {fileID: 0}
 --- !u!1001 &2931029665987614106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -167,11 +168,16 @@ PrefabInstance:
     - target: {fileID: 3075269013993083744, guid: e7be6db64e0aa904f91d51a43e6df59a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3075269013993083744, guid: e7be6db64e0aa904f91d51a43e6df59a,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075269013993083744, guid: e7be6db64e0aa904f91d51a43e6df59a,
+        type: 3}
+      propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7426692070891693189, guid: e7be6db64e0aa904f91d51a43e6df59a,

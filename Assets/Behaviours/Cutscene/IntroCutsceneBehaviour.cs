@@ -29,8 +29,8 @@ namespace Assets.Behaviours.Cutscene
                 layla.transform.position.x + layla.GetComponent<SpriteRenderer>().sprite.bounds.min.x - player.GetComponent<MeshRenderer>().bounds.extents.x,
                 player.walkSpeed);
 
-            SpeakersByName["Alex"] = player.transform.Find("DialogueBubble").GetComponent<DialogueBubbleBehaviour>();
-            SpeakersByName["Layla"] = layla.transform.Find("DialogueBubble").GetComponent<DialogueBubbleBehaviour>();
+            SpeakersByName["Alex"] = player.GetComponent<TalkBehaviour>();
+            SpeakersByName["Layla"] = layla.GetComponent<TalkBehaviour>();
 
             yield return PlayConversation(JsonUtility.FromJson<Conversation>(laylaConversation.text));
         }

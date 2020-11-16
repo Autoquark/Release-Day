@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2352197415294378845}
   - component: {fileID: 8403313278285561762}
   - component: {fileID: 7311056458033022578}
+  - component: {fileID: 2009944686965902312}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -205,6 +206,18 @@ MonoBehaviour:
   jumpUp: {fileID: 11400000, guid: c872de9d774471a4fb17448dc03a5f8e, type: 2}
   jumpApex: {fileID: 11400000, guid: 730bf8d336b00d149a82746a67e7bf88, type: 2}
   fall: {fileID: 11400000, guid: 909b84efa3b6fa942b5a80e4753b2824, type: 2}
+--- !u!114 &2009944686965902312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991626027384477691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2449e16f12aceef4ba1b3743dec5a448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6223839202034088738
 PrefabInstance:
   m_ObjectHideFlags: 0

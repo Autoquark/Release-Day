@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Behaviours
+namespace Assets.Behaviours.Cutscene
 {
     abstract class CutsceneControllerBehaviour : MonoBehaviour
     {
         protected PlayerControllerBehaviour PlayerControllerBehaviour => _playerControllerBehaviour.Value;
 
         private Lazy<PlayerControllerBehaviour> _playerControllerBehaviour;
-        protected IDictionary<string, DialogueBubbleBehaviour> SpeakersByName { get; } = new Dictionary<string, DialogueBubbleBehaviour>();
+        protected IDictionary<string, TalkBehaviour> SpeakersByName { get; } = new Dictionary<string, TalkBehaviour>();
 
         public CutsceneControllerBehaviour()
         {
@@ -37,11 +37,16 @@ namespace Assets.Behaviours
         {
             while (conversation != null)
             {
-                SpeakersByName[conversation.Speaker].SetText(conversation.Text);
+                var speaker = SpeakersByName[conversation.Speaker];
+                speaker.Say(conversation.Text);
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
                 yield return null;
-                SpeakersByName[conversation.Speaker].SetText(null);
+                speaker.ShowListening();
                 conversation = conversation.Next?.SingleOrDefault();
+            }
+            foreach(var speaker in SpeakersByName.Values)
+            {
+                speaker.EndConversation();
             }
         }
     }
