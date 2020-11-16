@@ -29,7 +29,7 @@ namespace Assets.Behaviours
             {
                 SetAnimationIfDifferent(jumpStart);
             }
-            else if(_playerController.Value.MovementLastFrame.y < 0 && !_playerController.Value.Grounded)
+            else if(_playerController.Value.MovementLastFrame.y < -PhysicsObject.MinimumMoveDistance && !_playerController.Value.Grounded)
             {
                 SetAnimationIfDifferent(fall);
             }

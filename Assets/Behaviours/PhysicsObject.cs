@@ -11,8 +11,8 @@ namespace Assets.Behaviours
 {
     class PhysicsObject : MonoBehaviour
     {
-        const float _minimumMoveDistance = 0.001f;
-        const float _minSeparationDistance = 0.03f;
+        public const float MinimumMoveDistance = 0.001f;
+        public const float MinSeparationDistance = 0.03f;
 
         public bool Grounded { get; private set; } = false;
         public Vector2 MovementLastFrame { get; private set; }
@@ -34,7 +34,9 @@ namespace Assets.Behaviours
         {
             var results = new List<RaycastHit2D>();
             Rigidbody.Cast(Vector2.down, Filter, results, 10);
-            Rigidbody.position += Vector2.down * results.MinOrDefault(x => x.distance);
+            Rigidbody.position += Vector2.down * results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance));
+
+            Rigidbody.Cast(Vector2.down, Filter, results, 10);
         }
 
         private void Start()
@@ -56,7 +58,7 @@ namespace Assets.Behaviours
 
             // Handle walking, including up or down a slope
             var remainingDistance = Mathf.Abs(WalkIntent);
-            while (remainingDistance >= _minimumMoveDistance)
+            while (remainingDistance >= MinimumMoveDistance)
             {
                 var right = WalkIntent > 0;
                 var distanceMoved = 0f;
@@ -95,10 +97,10 @@ namespace Assets.Behaviours
             var frameVelocity = YVelocity * Time.fixedDeltaTime;
 
             var results = new List<RaycastHit2D>();
-            Rigidbody.Cast(new Vector2(0, frameVelocity), Filter, results, Mathf.Abs(frameVelocity));
+            Rigidbody.Cast(new Vector2(0, frameVelocity), Filter, results, Mathf.Abs(frameVelocity) + MinSeparationDistance);
             Grounded = frameVelocity < 0 && results.Any();
 
-            var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - _minSeparationDistance), Mathf.Abs(frameVelocity));
+            var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance), Mathf.Abs(frameVelocity));
 
             var movement = new Vector2(0, frameVelocity).normalized * distance;
             Rigidbody.position += movement;
@@ -115,10 +117,10 @@ namespace Assets.Behaviours
             var direction = right ? Vector2.right.RotateClockwise(-climbAngle) : Vector2.left.RotateClockwise(climbAngle);
 
             var results = new List<RaycastHit2D>();
-            Rigidbody.Cast(direction, Filter, results, maxDistance);
-            var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - _minSeparationDistance), maxDistance);
+            Rigidbody.Cast(direction, Filter, results, maxDistance + MinSeparationDistance);
+            var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance), maxDistance);
 
-            if (distance > _minimumMoveDistance)
+            if (distance > MinimumMoveDistance)
             {
                 Rigidbody.position += direction * distance;
                 MovementLastFrame += direction * distance;
