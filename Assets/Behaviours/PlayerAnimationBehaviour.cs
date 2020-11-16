@@ -12,14 +12,14 @@ namespace Assets.Behaviours
 {
     class PlayerAnimationBehaviour : MonoBehaviour
     {
-        public AnimationReferenceAsset run, idle, jumpStart, jumpApex, fall;
+        public AnimationReferenceAsset run, idle, jumpStart, jumpUp, jumpApex, fall;
 
-        private Lazy<PlayerControllerBehaviour> _playerController;
+        private Lazy<PhysicsObject> _playerController;
         private Lazy<SkeletonAnimation> _skeletonAnimation;
 
         public PlayerAnimationBehaviour()
         {
-            _playerController = new Lazy<PlayerControllerBehaviour>(GetComponent<PlayerControllerBehaviour>);
+            _playerController = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
             _skeletonAnimation = new Lazy<SkeletonAnimation>(GetComponent<SkeletonAnimation>);
         }
 

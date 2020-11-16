@@ -8,13 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-class PlayerControllerBehaviour : PhysicsObject
+class PlayerControllerBehaviour : MonoBehaviour
 {
-    const float _moveSpeed = 0.1f;
+    public float jumpVelocity = 6f;
+    public float walkSpeed = 0.1f;
+
     const float _minSeparationDistance = 0.1f;
-    const float _jumpVelocity = 6f;
     readonly Lazy<Rigidbody2D> _rigidbody;
     readonly Lazy<Collider2D> _collider;
+    readonly Lazy<PhysicsObject> _physicsObject;
 
     bool _jumpPending = false;
     Vector2 _velocity = Vector2.zero;
@@ -23,6 +25,7 @@ class PlayerControllerBehaviour : PhysicsObject
     {
         _rigidbody = new Lazy<Rigidbody2D>(GetComponent<Rigidbody2D>);
         _collider = new Lazy<Collider2D>(GetComponent<Collider2D>);
+        _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
     }
 
     // Update is called once per frame
@@ -34,33 +37,31 @@ class PlayerControllerBehaviour : PhysicsObject
             interactable.Interact();
         }
 
-        if (Grounded && Input.GetKeyDown(KeyCode.Space))
+        if (_physicsObject.Value.Grounded && Input.GetKeyDown(KeyCode.Space))
         {
             _jumpPending = true;
         }
     }
 
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            WalkIntent = -_moveSpeed;
+            _physicsObject.Value.WalkIntent = -walkSpeed;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            WalkIntent = _moveSpeed;
+            _physicsObject.Value.WalkIntent = walkSpeed;
         }
         else
         {
-            WalkIntent = 0;
+            _physicsObject.Value.WalkIntent = 0;
         }
 
         if(_jumpPending)
         {
-            YVelocity = _jumpVelocity;
+            _physicsObject.Value.YVelocity = jumpVelocity;
             _jumpPending = false;
         }
-
-        base.FixedUpdate();
     }
 }

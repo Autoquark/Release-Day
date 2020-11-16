@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: laylaTalk
+  m_Name: LaylaWork
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 831e0a30ca0818b41a7e0ee678e76cad, type: 3}
+      value: {fileID: 21300000, guid: ecdebbed2fed9b249ac290db7bc30393, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 3cd95aa62a9cd9340b5df90de3c30c91, type: 3}
+      value: {fileID: 21300000, guid: 68b965cdec95081409100f0afc424746, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 831e0a30ca0818b41a7e0ee678e76cad, type: 3}
-    - {fileID: 21300000, guid: 3cd95aa62a9cd9340b5df90de3c30c91, type: 3}
+    - {fileID: 21300000, guid: ecdebbed2fed9b249ac290db7bc30393, type: 3}
+    - {fileID: 21300000, guid: 68b965cdec95081409100f0afc424746, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

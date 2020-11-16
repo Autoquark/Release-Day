@@ -1,0 +1,111 @@
+
+Alex master.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm
+  rotate: false
+  xy: 375, 139
+  size: 72, 114
+  orig: 72, 114
+  offset: 0, 0
+  index: -1
+Arm back
+  rotate: false
+  xy: 388, 32
+  size: 86, 105
+  orig: 86, 105
+  offset: 0, 0
+  index: -1
+Body
+  rotate: true
+  xy: 191, 66
+  size: 187, 182
+  orig: 187, 182
+  offset: 0, 0
+  index: -1
+Brown 01
+  rotate: true
+  xy: 248, 15
+  size: 49, 30
+  orig: 49, 30
+  offset: 0, 0
+  index: -1
+Brown 02
+  rotate: true
+  xy: 200, 13
+  size: 51, 30
+  orig: 51, 30
+  offset: 0, 0
+  index: -1
+Face
+  rotate: false
+  xy: 2, 63
+  size: 187, 190
+  orig: 187, 190
+  offset: 0, 0
+  index: -1
+Mouth 02
+  rotate: false
+  xy: 291, 6
+  size: 18, 20
+  orig: 18, 20
+  offset: 0, 0
+  index: -1
+Mouth 03
+  rotate: true
+  xy: 232, 13
+  size: 51, 14
+  orig: 51, 14
+  offset: 0, 0
+  index: -1
+Mouth 04
+  rotate: true
+  xy: 179, 5
+  size: 56, 19
+  orig: 56, 19
+  offset: 0, 0
+  index: -1
+eyes
+  rotate: false
+  xy: 298, 30
+  size: 88, 34
+  orig: 88, 34
+  offset: 0, 0
+  index: -1
+eyes close
+  rotate: true
+  xy: 449, 165
+  size: 88, 33
+  orig: 88, 33
+  offset: 0, 0
+  index: -1
+foot 1
+  rotate: false
+  xy: 2, 5
+  size: 89, 56
+  orig: 89, 56
+  offset: 0, 0
+  index: -1
+foot 2
+  rotate: false
+  xy: 93, 5
+  size: 84, 56
+  orig: 84, 56
+  offset: 0, 0
+  index: -1
+mouth 01
+  rotate: false
+  xy: 248, 2
+  size: 41, 11
+  orig: 41, 11
+  offset: 0, 0
+  index: -1
+nose
+  rotate: true
+  xy: 280, 28
+  size: 36, 16
+  orig: 36, 16
+  offset: 0, 0
+  index: -1

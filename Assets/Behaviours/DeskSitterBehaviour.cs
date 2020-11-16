@@ -53,5 +53,10 @@ namespace Assets.Behaviours
                 yield return new WaitForSeconds(2);
             }
         }
+
+        private void OnDestroy()
+        {
+            _playableGraph.Destroy();
+        }
     }
 }

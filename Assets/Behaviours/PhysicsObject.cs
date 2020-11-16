@@ -16,13 +16,12 @@ namespace Assets.Behaviours
 
         public bool Grounded { get; private set; } = false;
         public Vector2 MovementLastFrame { get; private set; }
+        public float WalkIntent { get; set; }
+        public float YVelocity { get; set; }
 
         protected Rigidbody2D Rigidbody => _rigidbody.Value;
-        protected float YVelocity { get; set; }
         protected float MaxStepAngle { get; set; } = 45;
         protected ContactFilter2D Filter;
-
-        protected float WalkIntent { get; set; }
 
         private Lazy<Rigidbody2D> _rigidbody;
 
