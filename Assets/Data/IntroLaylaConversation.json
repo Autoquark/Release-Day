@@ -1,0 +1,22 @@
+{
+  "Speaker": "Layla",
+  "Text": "Stop looking at my screen! ",
+  "Next": [
+    {
+      "Speaker": "Alex",
+      "Text": "I can't if you're covering it with your arms!",
+      "Next": [
+        {
+          "Speaker": "Layla",
+          "Text": "This art is nowhere near done. Honestly, it's grotesque. Unfit for human retina. You're right, I should start again. ",
+          "Next": [
+            {
+              "Speaker": "Alex",
+              "Text": "I'd say I'm sorry I asked but I actually didn't."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
