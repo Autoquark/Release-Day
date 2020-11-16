@@ -41,7 +41,7 @@ namespace Assets.Behaviours
             }
 
             if (_lastInteraction != 0
-                && Time.time > _lastInteraction + 2.0f)
+                && Time.realtimeSinceStartup > _lastInteraction + 2.0f)
             {
                 AdvanceConversation();
             }
@@ -63,7 +63,7 @@ namespace Assets.Behaviours
 
             if (num_inserted == 1)
             {
-                _lastInteraction = Time.time;
+                _lastInteraction = Time.realtimeSinceStartup;
                 _currentNode = _currentNode.Next[0];
             }
             else
@@ -88,7 +88,9 @@ namespace Assets.Behaviours
 
             AddNodeToIM(_currentNode);
 
-            _lastInteraction = Time.time;
+            _lastInteraction = Time.realtimeSinceStartup;
+
+            Time.timeScale = 0;
         }
 
         private void ClearIM()
