@@ -1,4 +1,5 @@
 ﻿using Assets.Common;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,10 @@ namespace Assets.Behaviours
         {
             var camera = GetComponent<Camera>();
             var bounds = FindObjectsOfType<CameraBoundBehaviour>();
-            _minX = bounds.Min(x => x.transform.position.x) + camera.orthographicSize * camera.aspect;
-            _maxX = bounds.Max(x => x.transform.position.x) - camera.orthographicSize * camera.aspect;
-            _minY = bounds.Min(x => x.transform.position.y) + camera.orthographicSize;
-            _maxY = bounds.Max(x => x.transform.position.y) - camera.orthographicSize;
+            _minX = bounds.MinOrDefault(x => x.transform.position.x, -999) + camera.orthographicSize * camera.aspect;
+            _maxX = bounds.MaxOrDefault(x => x.transform.position.x, 999) - camera.orthographicSize * camera.aspect;
+            _minY = bounds.MinOrDefault(x => x.transform.position.y, -999) + camera.orthographicSize;
+            _maxY = bounds.MaxOrDefault(x => x.transform.position.y, 999) - camera.orthographicSize;
         }
 
         private void Update()
