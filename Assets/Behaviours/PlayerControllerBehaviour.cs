@@ -13,6 +13,7 @@ class PlayerControllerBehaviour : MonoBehaviour
     public float jumpVelocity = 6f;
     public float runSpeed = 0.1f;
     public float walkSpeed = 0.1f;
+    public float jumpGracePeriod = 0.1f;
 
     const float _minSeparationDistance = 0.1f;
     private readonly Lazy<Rigidbody2D> _rigidbody;
@@ -20,8 +21,9 @@ class PlayerControllerBehaviour : MonoBehaviour
     private readonly Lazy<PhysicsObject> _physicsObject;
     private readonly Lazy<GameObject> _prompt;
 
-    bool _jumpPending = false;
-    Vector2 _velocity = Vector2.zero;
+    private bool _jumpPending = false;
+    private float _lastGroundedTime = -999;
+    private bool _jumpedSinceLastGrounded = false;
 
     public PlayerControllerBehaviour()
     {
@@ -47,7 +49,9 @@ class PlayerControllerBehaviour : MonoBehaviour
             interactable.Interact();
         }
 
-        if (_physicsObject.Value.Grounded && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)
+            && (_physicsObject.Value.Grounded || Time.fixedTime - _lastGroundedTime < jumpGracePeriod)
+            && !_jumpedSinceLastGrounded)
         {
             _jumpPending = true;
         }
@@ -72,6 +76,12 @@ class PlayerControllerBehaviour : MonoBehaviour
         {
             _physicsObject.Value.YVelocity = jumpVelocity;
             _jumpPending = false;
+            _jumpedSinceLastGrounded = true;
+        }
+        else if(_physicsObject.Value.Grounded)
+        {
+            _lastGroundedTime = Time.fixedTime;
+            _jumpedSinceLastGrounded = false;
         }
     }
 

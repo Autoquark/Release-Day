@@ -76,7 +76,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.2}
-  m_Size: {x: 1, y: 1.7}
+  m_Size: {x: 0.8, y: 1.7}
   m_Direction: 0
 --- !u!114 &8623018049621040489
 MonoBehaviour:
@@ -105,6 +105,7 @@ MonoBehaviour:
   jumpVelocity: 6
   runSpeed: 0.1
   walkSpeed: 0.1
+  jumpGracePeriod: 0.1
 --- !u!33 &6540164959275438957
 MeshFilter:
   m_ObjectHideFlags: 0
