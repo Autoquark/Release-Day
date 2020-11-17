@@ -36,6 +36,12 @@ namespace Assets.Behaviours
 
         private void Update()
         {
+            // If player is dead
+            if(_player.Value == null)
+            {
+                return;
+            }
+
             var camera = GetComponent<Camera>();
             var deadzone = RectEx.FromCorners(camera.ViewportToWorldPoint(new Vector2(_margin, _margin)), camera.ViewportToWorldPoint(new Vector2(1 - _margin, 1 - _margin)));
 

@@ -3,28 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets
 {
     static class LevelDataStore
     {
-        static LevelDataStore()
+        private static string _previousScene;
+
+        [RuntimeInitializeOnLoadMethod()]
+        static void Init()
         {
             SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+            _previousScene = SceneManager.GetActiveScene().name;
         }
 
-        private static void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
+        private static void SceneManager_activeSceneChanged(Scene _, Scene newScene)
         {
-            if(arg0 != arg1)
+            if(newScene.name != _previousScene)
             {
                 _data = new Dictionary<(Type, string), object>();
+                _previousScene = newScene.name;
             }
         }
 
         private static IDictionary<(Type, string), object> _data = new Dictionary<(Type, string), object>();
 
-        static T GetOrCreate<T>(string name = "") where T : new()
+        public static T GetOrCreate<T>(string name = "") where T : new()
         {
             if(_data.TryGetValue((typeof(T), name), out var value))
             {

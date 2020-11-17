@@ -9,6 +9,11 @@ namespace Assets.Behaviours
 {
     class ConversationRegion : MonoBehaviour
     {
+        class Info
+        {
+            public bool hasTriggered = false;
+        }
+
         private Lazy<Collider2D> _playerCollider;
         private Lazy<ConversationController> _conversationController;
         private Lazy<ConversationLoader> _loader;
@@ -24,13 +29,15 @@ namespace Assets.Behaviours
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (_alreadyTriggered)
+            var data = LevelDataStore.GetOrCreate<Info>(gameObject.name);
+            if (data.hasTriggered)
                 return;
 
             if (collision == _playerCollider.Value)
             {
                 _conversationController.Value.SetConversation(_loader.Value.Conversation);
                 _conversationController.Value.SetVisibility(true);
+                data.hasTriggered = true;
             }
         }
     }
