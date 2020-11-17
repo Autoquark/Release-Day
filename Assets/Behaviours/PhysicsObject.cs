@@ -112,6 +112,14 @@ namespace Assets.Behaviours
             }
         }
 
+        private float CastForMovement(Vector2 direction, List<RaycastHit2D> results, float moveDistance)
+        {
+            Rigidbody.Cast(direction, Filter, results, moveDistance + MinSeparationDistance);
+            results = results.Where(x => Vector2.Angle(x.point - (Vector2)transform.position, direction) >= 180)
+                .ToList();
+            return results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance), moveDistance); 
+        }
+
         private float MoveX(float climbAngle, float maxDistance, bool right)
         {
             var direction = right ? Vector2.right.RotateClockwise(-climbAngle) : Vector2.left.RotateClockwise(climbAngle);
