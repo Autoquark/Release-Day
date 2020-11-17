@@ -11,6 +11,7 @@ using UnityEngine;
 class PlayerControllerBehaviour : MonoBehaviour
 {
     public float jumpVelocity = 6f;
+    public float runSpeed = 0.1f;
     public float walkSpeed = 0.1f;
 
     const float _minSeparationDistance = 0.1f;
@@ -52,11 +53,11 @@ class PlayerControllerBehaviour : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            _physicsObject.Value.WalkIntent = -walkSpeed;
+            _physicsObject.Value.WalkIntent = -runSpeed;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            _physicsObject.Value.WalkIntent = walkSpeed;
+            _physicsObject.Value.WalkIntent = runSpeed;
         }
         else
         {
