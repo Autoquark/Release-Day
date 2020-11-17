@@ -1,0 +1,974 @@
+fileFormatVersion: 2
+guid: 65fe607170b15864cb5ef0d77f6a7e9a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8213782765776912250
+    second: TileSet_0
+  - first:
+      213: -8518063296010493290
+    second: TileSet_1
+  - first:
+      213: -8871038989383191861
+    second: TileSet_2
+  - first:
+      213: 3637694436591301765
+    second: TileSet_3
+  - first:
+      213: -8921557701501664739
+    second: TileSet_4
+  - first:
+      213: 658610804543150169
+    second: TileSet_5
+  - first:
+      213: 1303555410413672225
+    second: TileSet_6
+  - first:
+      213: -3462126092104230500
+    second: TileSet_7
+  - first:
+      213: 3818911086006376876
+    second: TileSet_8
+  - first:
+      213: -2968160521145883719
+    second: TileSet_9
+  - first:
+      213: -8082063572214372527
+    second: TileSet_10
+  - first:
+      213: -8265232490957100610
+    second: TileSet_11
+  - first:
+      213: -3293226114871820431
+    second: TileSet_12
+  - first:
+      213: 3253857429519456842
+    second: TileSet_13
+  - first:
+      213: -92138599614758986
+    second: TileSet_14
+  - first:
+      213: 8886558474639481304
+    second: TileSet_15
+  - first:
+      213: -5913383478371155081
+    second: TileSet_16
+  - first:
+      213: 8568142618917566389
+    second: TileSet_17
+  - first:
+      213: -5142650238756481487
+    second: TileSet_18
+  - first:
+      213: -9220975972155412195
+    second: TileSet_19
+  - first:
+      213: 8290902767777311385
+    second: TileSet_20
+  - first:
+      213: 8872051553670027449
+    second: TileSet_21
+  - first:
+      213: -3732473049520515647
+    second: TileSet_22
+  - first:
+      213: 1647431860368624933
+    second: TileSet_23
+  - first:
+      213: 4126501046328475923
+    second: TileSet_24
+  - first:
+      213: -8781195206041585980
+    second: TileSet_25
+  - first:
+      213: 927177990519731529
+    second: TileSet_26
+  - first:
+      213: 349827557065106098
+    second: BaseTileSet_0
+  - first:
+      213: 5251873809443828210
+    second: BaseTileSet_1
+  - first:
+      213: 5009526616365779086
+    second: BaseTileSet_2
+  - first:
+      213: 3074188974858307376
+    second: BaseTileSet_3
+  - first:
+      213: -9008408035071160061
+    second: BaseTileSet_4
+  - first:
+      213: -8486595220777482731
+    second: BaseTileSet_5
+  - first:
+      213: -10579149834158129
+    second: BaseTileSet_6
+  - first:
+      213: 587224529094978482
+    second: BaseTileSet_7
+  - first:
+      213: 1918340737118244499
+    second: BaseTileSet_8
+  - first:
+      213: 3828059587941590582
+    second: BaseTileSet_9
+  - first:
+      213: -953714599474389468
+    second: BaseTileSet_10
+  - first:
+      213: 4365888045920201152
+    second: BaseTileSet_11
+  - first:
+      213: 5910644180788391453
+    second: BaseTileSet_12
+  - first:
+      213: 8934080556140068875
+    second: BaseTileSet_13
+  - first:
+      213: 476740691945443158
+    second: BaseTileSet_14
+  - first:
+      213: -3301473238192477383
+    second: BaseTileSet_15
+  - first:
+      213: -4500164096364830138
+    second: BaseTileSet_16
+  - first:
+      213: 8782956561905146669
+    second: BaseTileSet_17
+  - first:
+      213: -1789415942581326392
+    second: BaseTileSet_18
+  - first:
+      213: 2484865102352798545
+    second: BaseTileSet_19
+  - first:
+      213: 1134779641830999863
+    second: BaseTileSet_20
+  - first:
+      213: 8800765019043319311
+    second: BaseTileSet_21
+  - first:
+      213: -1545524561492477553
+    second: BaseTileSet_22
+  - first:
+      213: -8415522468440724871
+    second: BaseTileSet_23
+  - first:
+      213: -6250254381315062191
+    second: BaseTileSet_24
+  - first:
+      213: -8938745250075093188
+    second: BaseTileSet_25
+  - first:
+      213: 4759047066022445320
+    second: BaseTileSet_26
+  - first:
+      213: -4411326295929793870
+    second: BaseTileSet_27
+  - first:
+      213: -1631581746414978691
+    second: BaseTileSet_28
+  - first:
+      213: -8718454519792089326
+    second: BaseTileSet_0
+  - first:
+      213: 6532413673160468380
+    second: BaseTileSet_1
+  - first:
+      213: -3204888610915330252
+    second: BaseTileSet_2
+  - first:
+      213: -9005796455786754132
+    second: BaseTileSet_3
+  - first:
+      213: 8855023040795354212
+    second: BaseTileSet_4
+  - first:
+      213: 6297100546621203551
+    second: BaseTileSet_5
+  - first:
+      213: -6381162461717707121
+    second: BaseTileSet_6
+  - first:
+      213: 6747624930842216833
+    second: BaseTileSet_7
+  - first:
+      213: 6823585444247626681
+    second: BaseTileSet_8
+  - first:
+      213: 4794580519799912983
+    second: BaseTileSet_9
+  - first:
+      213: 837218877369902658
+    second: BaseTileSet_10
+  - first:
+      213: 5198415727233546083
+    second: BaseTileSet_11
+  - first:
+      213: 1448996658520852410
+    second: BaseTileSet_12
+  - first:
+      213: -3792569500025890532
+    second: BaseTileSet_13
+  - first:
+      213: -2036270240860418911
+    second: BaseTileSet_14
+  - first:
+      213: -350377968212733619
+    second: BaseTileSet_15
+  - first:
+      213: -6190662389809714461
+    second: BaseTileSet_16
+  - first:
+      213: -7027946981102052543
+    second: BaseTileSet_17
+  - first:
+      213: 7846192624858597070
+    second: BaseTileSet_18
+  - first:
+      213: 5038356833002800374
+    second: BaseTileSet_19
+  - first:
+      213: 2660465114015888552
+    second: BaseTileSet_20
+  - first:
+      213: -1204668187813330643
+    second: BaseTileSet_21
+  - first:
+      213: -5107806642513819993
+    second: BaseTileSet_22
+  - first:
+      213: -2455076392588448406
+    second: BaseTileSet_23
+  - first:
+      213: -3394556272056558122
+    second: BaseTileSet_24
+  - first:
+      213: 8730451734380532959
+    second: BaseTileSet_25
+  - first:
+      213: -7384938873899499268
+    second: BaseTileSet_26
+  - first:
+      213: 7178498305620194241
+    second: BaseTileSet_27
+  - first:
+      213: 4535758330509430416
+    second: BaseTileSet_28
+  - first:
+      213: 4690785685173148068
+    second: BaseTileSet_29
+  - first:
+      213: -5285661481960327826
+    second: BaseTileSet_30
+  - first:
+      213: 7842465553266410634
+    second: BaseTileSet_31
+  - first:
+      213: -1327500806246821765
+    second: BaseTileSet_32
+  - first:
+      213: 2867086571223114372
+    second: BaseTileSet_33
+  - first:
+      213: 2850177059023383096
+    second: BaseTileSet_34
+  - first:
+      213: 954101743224742303
+    second: BaseTileSet_35
+  - first:
+      213: 5568984281873756915
+    second: BaseTileSet_36
+  - first:
+      213: 7729562462036824329
+    second: BaseTileSet_37
+  - first:
+      213: 1841795906741380276
+    second: BaseTileSet_38
+  - first:
+      213: 1066564372785200458
+    second: BaseTileSet_39
+  - first:
+      213: -5983814225922604538
+    second: BaseTileSet_40
+  - first:
+      213: -382111109696030042
+    second: BaseTileSet_41
+  - first:
+      213: 4492587426983134726
+    second: BaseTileSet_42
+  - first:
+      213: 7304228112414164119
+    second: BaseTileSet_43
+  - first:
+      213: -3681893283156766293
+    second: BaseTileSet_44
+  - first:
+      213: -5372482804937151204
+    second: BaseTileSet_45
+  - first:
+      213: -6585982545431646954
+    second: BaseTileSet_46
+  - first:
+      213: -2320560839143253775
+    second: BaseTileSet_47
+  - first:
+      213: -1151889465693527883
+    second: BaseTileSet_48
+  - first:
+      213: 1633468664524650901
+    second: BaseTileSet_49
+  - first:
+      213: -8383850045028021277
+    second: BaseTileSet_50
+  - first:
+      213: 74949550484429915
+    second: BaseTileSet_51
+  - first:
+      213: 3642596071218082371
+    second: BaseTileSet_52
+  - first:
+      213: 5268342956726664139
+    second: BaseTileSet_53
+  - first:
+      213: -5661325022842453601
+    second: BaseTileSet_54
+  - first:
+      213: 2974095596864580555
+    second: BaseTileSet_55
+  - first:
+      213: -6996258614777477540
+    second: BaseTileSet_56
+  - first:
+      213: -5124223262965582967
+    second: BaseTileSet_57
+  - first:
+      213: 5808825208005153897
+    second: BaseTileSet_58
+  - first:
+      213: 6423621490150804920
+    second: BaseTileSet_59
+  - first:
+      213: -7025641898370159698
+    second: BaseTileSet_60
+  - first:
+      213: -71838834569959280
+    second: BaseTileSet_61
+  - first:
+      213: -1958538921060310820
+    second: BaseTileSet_62
+  - first:
+      213: 9029837006771214733
+    second: BaseTileSet_63
+  - first:
+      213: -4168295775491849583
+    second: BaseTileSet_64
+  - first:
+      213: -6327072652920437422
+    second: BaseTileSet_65
+  - first:
+      213: -8946258979516862080
+    second: BaseTileSet_66
+  - first:
+      213: -515065018299458350
+    second: BaseTileSet_67
+  - first:
+      213: 2456837210603704958
+    second: BaseTileSet_68
+  - first:
+      213: -5584053163518528812
+    second: BaseTileSet_69
+  - first:
+      213: 1042061340086731476
+    second: BaseTileSet_70
+  - first:
+      213: -3779629210009494983
+    second: BaseTileSet_71
+  - first:
+      213: -3206416599287410093
+    second: BaseTileSet_72
+  - first:
+      213: 3419350699251479510
+    second: BaseTileSet_73
+  - first:
+      213: 2482872351760803487
+    second: BaseTileSet_74
+  - first:
+      213: 8697073408955616794
+    second: BaseTileSet_75
+  - first:
+      213: -3517138828594446779
+    second: BaseTileSet_76
+  - first:
+      213: 8031762158755980148
+    second: BaseTileSet_77
+  - first:
+      213: -2192466312949621158
+    second: BaseTileSet_78
+  - first:
+      213: -81362483094948948
+    second: BaseTileSet_79
+  - first:
+      213: -8885869204372147444
+    second: BaseTileSet_80
+  - first:
+      213: 5008156094056071578
+    second: BaseTileSet_81
+  - first:
+      213: 1965441112336821279
+    second: BaseTileSet_82
+  - first:
+      213: 1336998500668007095
+    second: BaseTileSet_83
+  - first:
+      213: 9187904471713097418
+    second: BaseTileSet_84
+  - first:
+      213: -2222313247727664072
+    second: BaseTileSet_85
+  - first:
+      213: -8163057853832221879
+    second: BaseTileSet_86
+  - first:
+      213: -7801541471806496511
+    second: BaseTileSet_87
+  - first:
+      213: 3918415470301181917
+    second: BaseTileSet_88
+  - first:
+      213: 6221087638322872675
+    second: BaseTileSet_89
+  - first:
+      213: -919332959264146491
+    second: BaseTileSet_90
+  - first:
+      213: -8734731796945571062
+    second: BaseTileSet_91
+  - first:
+      213: -4616699468339520599
+    second: BaseTileSet_92
+  - first:
+      213: -993781802164952072
+    second: BaseTileSet_93
+  - first:
+      213: 7939479193119761237
+    second: BaseTileSet_94
+  - first:
+      213: 3214704566755364812
+    second: BaseTileSet_95
+  - first:
+      213: 3943168366663255473
+    second: BaseTileSet_96
+  - first:
+      213: 8690723295122480139
+    second: BaseTileSet_97
+  - first:
+      213: -4298080332104555545
+    second: BaseTileSet_98
+  - first:
+      213: -3235429029404070544
+    second: BaseTileSet_99
+  - first:
+      213: 122737799608351599
+    second: BaseTileSet_29
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BaseTileSet_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c19d9f432261e5bc0800000000000000
+      internalID: -3792569500025890532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1acc0da2107bdb3e0800000000000000
+      internalID: -2036270240860418911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b222874f46dad400800000000000000
+      internalID: 349827557065106098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f1b311776762e840800000000000000
+      internalID: 5251873809443828210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e88c85d7ae9658540800000000000000
+      internalID: 5009526616365779086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0370adab596b9aa20800000000000000
+      internalID: 3074188974858307376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3011fc5ee94bbf280800000000000000
+      internalID: -9008408035071160061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 516c7015c9e893a80800000000000000
+      internalID: -8486595220777482731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcffb1cb15a6adff0800000000000000
+      internalID: -10579149834158129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bb2a14199d362800800000000000000
+      internalID: 587224529094978482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39e08129cb05f9a10800000000000000
+      internalID: 1918340737118244499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 636694ec9efff1530800000000000000
+      internalID: 3828059587941590582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_10
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e9931ff99b3c2f0800000000000000
+      internalID: -953714599474389468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c9a23adb00c69c30800000000000000
+      internalID: 4365888045920201152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e2f950193d60250800000000000000
+      internalID: 5910644180788391453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93b2412f49fce22d0800000000000000
+      internalID: -3301473238192477383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_16
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6422535e8943c81c0800000000000000
+      internalID: -4500164096364830138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2bda0e757453e970800000000000000
+      internalID: 8782956561905146669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseTileSet_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cde4035ea7ba27e0800000000000000
+      internalID: -1789415942581326392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
