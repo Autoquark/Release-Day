@@ -10,21 +10,25 @@ namespace Assets.Behaviours
     {
         public GameObject MessagePrefabLeft;
         public GameObject MessagePrefabRight;
+        public GameObject MessagePrefabOptions;
 
         private bool _visible = false;
         private Lazy<Canvas> _canvas;
-        private Lazy<GameObject> _scrollPanel;
+        private Lazy<GameObject> _scrollContent;
         private Lazy<ScrollRect> _scrollRect;
+        private Lazy<Text> _promptText;
         private Conversation _conversation;
         private Conversation _currentNode;
+        private Conversation _selectionsNode;
         private float _lastInteraction = 0.0f;
         private bool _newContentAdded = false;
 
         public ConversationController()
         {
             _canvas = new Lazy<Canvas>(GetComponent<Canvas>);
-            _scrollPanel = new Lazy<GameObject>(() => transform.Find("ScrollPanel/ScrollContent").gameObject);
-            _scrollRect = new Lazy<ScrollRect>(() => transform.Find("ScrollPanel").GetComponent<ScrollRect>());
+            _scrollContent = new Lazy<GameObject>(() => transform.Find("MaskPanel/ScrollPanel/ScrollContent").gameObject);
+            _scrollRect = new Lazy<ScrollRect>(() => transform.Find("MaskPanel/ScrollPanel").GetComponent<ScrollRect>());
+            _promptText = new Lazy<Text>(() => transform.Find("MaskPanel/PromptPanel").GetComponent<Text>());
         }
 
         private void Start()
@@ -34,6 +38,9 @@ namespace Assets.Behaviours
 
         private void Update()
         {
+            if (!_visible)
+                return;
+
             if (_newContentAdded)
             {
                 _scrollRect.Value.verticalNormalizedPosition = 0;
@@ -45,30 +52,58 @@ namespace Assets.Behaviours
             {
                 AdvanceConversation();
             }
+
+            if (_currentNode == null
+                && _selectionsNode == null
+                && Input.GetKeyDown(KeyCode.Q))
+            {
+                ClearIM();
+
+                SetVisibility(false);
+            }
+        }
+
+        internal void SelectionMade(int selectedOption)
+        {
+            RemoveLastStatement();
+            _currentNode = _selectionsNode.Next[selectedOption];
+            AddStatementToIM(_currentNode);
+            AdvanceConversation();
+        }
+
+        private void RemoveLastStatement()
+        {
+            _scrollContent.Value.transform.DestroyChild(_scrollContent.Value.transform.childCount - 1);
         }
 
         private void AdvanceConversation()
         {
-            int num_inserted = 0;
+            _lastInteraction = 0.0f;
 
-            if (_currentNode.Next.Length > 0)
+            int numNextNodes = _currentNode != null ? _currentNode.Next != null ? _currentNode.Next.Length : 0 : 0;
+
+            if (numNextNodes == 1)
             {
-                foreach(var c in _currentNode.Next)
-                {
-                    num_inserted++;
-
-                    AddNodeToIM(c);
-                }
-            }
-
-            if (num_inserted == 1)
-            {
-                _lastInteraction = Time.realtimeSinceStartup;
                 _currentNode = _currentNode.Next[0];
+                _selectionsNode = null;
+                AddStatementToIM(_currentNode);
+                _lastInteraction = Time.realtimeSinceStartup;
+
+                _promptText.Value.text = "(online)";
+            }
+            else if (numNextNodes > 1)
+            {
+                AddOptionsToIM(_currentNode.Next);
+                _selectionsNode = _currentNode;
+                _currentNode = null;
+
+                _promptText.Value.text = "E to select";
             }
             else
             {
-                _lastInteraction = 0.0f;
+                _currentNode = null;
+
+                _promptText.Value.text = "Q to exit";
             }
         }
 
@@ -77,6 +112,8 @@ namespace Assets.Behaviours
             _visible = visible;
 
             _canvas.Value.enabled = _visible;
+
+            Time.timeScale = _visible ? 0 : 1;
         }
 
         public void SetConversation(Conversation conv)
@@ -86,31 +123,39 @@ namespace Assets.Behaviours
             _conversation = conv;
             _currentNode = conv;
 
-            AddNodeToIM(_currentNode);
+            AddStatementToIM(_currentNode);
 
             _lastInteraction = Time.realtimeSinceStartup;
-
-            Time.timeScale = 0;
         }
 
         private void ClearIM()
         {
-            foreach(var child in _scrollPanel.Value.transform.Children())
-            {
-                GameObject.Destroy(child.gameObject);
-            }
+            _scrollContent.Value.transform.DestroyChildren();
 
             _lastInteraction = 0.0f;
         }
 
-        private void AddNodeToIM(Conversation c)
+        private void AddStatementToIM(Conversation c)
         {
-            var msg = Instantiate(c.Speaker == "Alex" ? MessagePrefabLeft : MessagePrefabRight, _scrollPanel.Value.transform);
+            bool is_right = c.Speaker != "Alex";
+
+            var msg = Instantiate(is_right ? MessagePrefabRight : MessagePrefabLeft, _scrollContent.Value.transform);
             msg.transform.localScale = new Vector3(1, 1, 1);
             var cms = msg.GetComponent<ConversationMessageUtil>();
-            cms.SetMessage(c);
+            cms.SetMessage(c, is_right);
 
             _newContentAdded = true;
         }
+
+        private void AddOptionsToIM(Conversation[] c)
+        {
+            var msg = Instantiate(MessagePrefabOptions, _scrollContent.Value.transform);
+            msg.transform.localScale = new Vector3(1, 1, 1);
+            var cms = msg.GetComponent<ConversationMessageUtil>();
+            cms.SetOptions(c, false, this);
+
+            _newContentAdded = true;
+        }
+
     }
 }

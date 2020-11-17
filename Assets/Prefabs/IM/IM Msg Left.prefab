@@ -26,12 +26,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140352057500159448}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2259741228720853049}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 438158644127479530}
   - component: {fileID: 5673636206179674213}
   m_Layer: 5
-  m_Name: IM Message Right
+  m_Name: IM Msg Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,8 +132,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 3447277658133257629}
   - {fileID: 9052406243175977323}
+  - {fileID: 3447277658133257629}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -200,12 +200,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02578aa358527b34ea33d9246c06d930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlexFace: {fileID: 21300000, guid: 9f252efd188880441bb8f833e006512e, type: 3}
-  ColinFace: {fileID: 21300000, guid: 4f0d580f3a416b24093fd1dca72c675c, type: 3}
-  FrancesFace: {fileID: 21300000, guid: 75c55048a778dc449aaf8738e80fbfcb, type: 3}
-  HenryFace: {fileID: 21300000, guid: 53f609c818dc3794ab59bba7709b4ecd, type: 3}
-  LaylaFace: {fileID: 21300000, guid: 854788475d5b6b244a717e4133d712ae, type: 3}
-  MyraFace: {fileID: 21300000, guid: 8fe2f754bfdf2f24f80c667aad785064, type: 3}
+  AlexFace: {fileID: 21300000, guid: 60064cf78d598c34cb763420f0ac3314, type: 3}
+  ColinFace: {fileID: 21300000, guid: 3d0c2815b8f282842a13a00361b77e75, type: 3}
+  FrancesFace: {fileID: 21300000, guid: 79a77649f5a87e74da1c924947898912, type: 3}
+  HenryFace: {fileID: 21300000, guid: ea6e5ee2a63100f46b343d11c5f43055, type: 3}
+  LaylaFace: {fileID: 21300000, guid: e3014ea8ed1cfad4b97a9654e4c1563b, type: 3}
+  MyraFace: {fileID: 21300000, guid: 39166a6c0197df645869d6ac5805632e, type: 3}
+  ChoicePrefab: {fileID: 0}
 --- !u!1 &5508537972837903492
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +334,7 @@ RectTransform:
   m_GameObject: {fileID: 6713794435341423477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9052406243175977323}
   m_RootOrder: 0
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9f252efd188880441bb8f833e006512e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60064cf78d598c34cb763420f0ac3314, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -431,7 +432,7 @@ RectTransform:
   - {fileID: 262296314388520339}
   - {fileID: 2531965180630663432}
   m_Father: {fileID: 2259741228720853049}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
