@@ -22,7 +22,7 @@ namespace Assets.Behaviours.Cutscene
             GetComponent<CanvasScaler>().dynamicPixelsPerUnit = 2;
         }
 
-        public void SetText(string text)
+        public void ShowDialogue(string text)
         {
             _text.Value.text = text;
             gameObject.SetActive(!string.IsNullOrEmpty(text));
