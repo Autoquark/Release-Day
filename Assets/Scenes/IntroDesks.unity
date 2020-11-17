@@ -216,7 +216,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _listeningSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 79a77649f5a87e74da1c924947898912,
+      objectReference: {fileID: 21300000, guid: 19720e096c9cbf34e9475fbd02f0eeca,
         type: 3}
     - target: {fileID: 5746015763461271839, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
