@@ -10,10 +10,14 @@ namespace Assets.Behaviours
     class ConversationRegion : MonoBehaviour
     {
         public bool _requireGrounded = true;
+        public bool _triggerAutomatically = true;
+        public bool _hasNonHintOptions = true;
+        public float _delayBeforeHintOptions = 30;
 
         class Info
         {
-            public bool hasTriggered = false;
+            public bool HasTriggered { get; set; } = false;
+            public float? DelayStartTime { get; set; }
         }
 
         private Lazy<Collider2D> _playerCollider;
@@ -30,14 +34,24 @@ namespace Assets.Behaviours
         private void OnTriggerStay2D(Collider2D collision)
         {
             var data = LevelDataStore.GetOrCreate<Info>(gameObject.name);
-            if (data.hasTriggered)
+            if (_triggerAutomatically && data.HasTriggered)
                 return;
 
-            if (collision == _playerCollider.Value && (!_requireGrounded || collision.GetComponent<PhysicsObject>().Grounded))
+            if (collision == _playerCollider.Value)
             {
-                _conversationController.Value.SetConversation(_loader.Value.Conversation);
-                _conversationController.Value.SetVisibility(true);
-                data.hasTriggered = true;
+                if (!data.DelayStartTime.HasValue)
+                {
+                    data.DelayStartTime = Time.time;
+                }
+
+                if ((!_requireGrounded || collision.GetComponent<PhysicsObject>().Grounded)
+                    && (_triggerAutomatically || Input.GetKeyDown(KeyCode.Q))
+                    && (_hasNonHintOptions || Time.time - data.DelayStartTime > _delayBeforeHintOptions))
+                {
+                    _conversationController.Value.SetConversation(_loader.Value.Conversation);
+                    _conversationController.Value.SetVisibility(true);
+                    data.HasTriggered = true;
+                }
             }
         }
     }
