@@ -97,10 +97,8 @@ namespace Assets.Behaviours
             var frameVelocity = YVelocity * Time.fixedDeltaTime;
 
             var results = new List<RaycastHit2D>();
-            Rigidbody.Cast(new Vector2(0, frameVelocity), Filter, results, Mathf.Abs(frameVelocity) + MinSeparationDistance);
+            var distance = CastForMovement(new Vector2(0, frameVelocity), results, Mathf.Abs(frameVelocity));
             Grounded = frameVelocity < 0 && results.Any();
-
-            var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance), Mathf.Abs(frameVelocity));
 
             var movement = new Vector2(0, frameVelocity).normalized * distance;
             Rigidbody.position += movement;
@@ -115,7 +113,7 @@ namespace Assets.Behaviours
         private float CastForMovement(Vector2 direction, List<RaycastHit2D> results, float moveDistance)
         {
             Rigidbody.Cast(direction, Filter, results, moveDistance + MinSeparationDistance);
-            results = results.Where(x => Vector2.Angle(x.point - (Vector2)transform.position, direction) >= 180)
+            results = results.Where(x => Vector2.Angle(x.point - (Vector2)transform.position, direction) <= 180)
                 .ToList();
             return results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance), moveDistance); 
         }
@@ -125,8 +123,7 @@ namespace Assets.Behaviours
             var direction = right ? Vector2.right.RotateClockwise(-climbAngle) : Vector2.left.RotateClockwise(climbAngle);
 
             var results = new List<RaycastHit2D>();
-            Rigidbody.Cast(direction, Filter, results, maxDistance + MinSeparationDistance);
-            var distance = results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance), maxDistance);
+            var distance = CastForMovement(direction, results, maxDistance);
 
             if (distance > MinimumMoveDistance)
             {
