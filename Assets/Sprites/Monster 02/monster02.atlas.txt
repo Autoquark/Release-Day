@@ -1,0 +1,48 @@
+
+monster02.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body 01
+  rotate: false
+  xy: 2, 200
+  size: 295, 308
+  orig: 295, 308
+  offset: 0, 0
+  index: -1
+Body 02
+  rotate: true
+  xy: 568, 233
+  size: 275, 294
+  orig: 275, 294
+  offset: 0, 0
+  index: -1
+Body 03
+  rotate: false
+  xy: 299, 210
+  size: 267, 298
+  orig: 267, 298
+  offset: 0, 0
+  index: -1
+Theet
+  rotate: true
+  xy: 239, 43
+  size: 155, 93
+  orig: 155, 93
+  offset: 0, 0
+  index: -1
+Wing 01
+  rotate: false
+  xy: 2, 2
+  size: 235, 196
+  orig: 235, 196
+  offset: 0, 0
+  index: -1
+Wing 02
+  rotate: false
+  xy: 568, 6
+  size: 257, 225
+  orig: 257, 225
+  offset: 0, 0
+  index: -1

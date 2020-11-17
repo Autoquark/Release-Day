@@ -1,0 +1,62 @@
+
+monster03.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body 01
+  rotate: false
+  xy: 2, 47
+  size: 308, 218
+  orig: 308, 218
+  offset: 0, 0
+  index: -1
+Body 02
+  rotate: false
+  xy: 656, 2
+  size: 301, 241
+  orig: 301, 241
+  offset: 0, 0
+  index: -1
+Body 03
+  rotate: false
+  xy: 312, 17
+  size: 342, 235
+  orig: 342, 235
+  offset: 0, 0
+  index: -1
+Leg-L-01
+  rotate: false
+  xy: 583, 254
+  size: 210, 136
+  orig: 210, 136
+  offset: 0, 0
+  index: -1
+Leg-L-02
+  rotate: false
+  xy: 795, 245
+  size: 187, 145
+  orig: 187, 145
+  offset: 0, 0
+  index: -1
+Leg-R-1
+  rotate: false
+  xy: 203, 267
+  size: 207, 123
+  orig: 207, 123
+  offset: 0, 0
+  index: -1
+Leg-R-2
+  rotate: false
+  xy: 412, 262
+  size: 169, 128
+  orig: 169, 128
+  offset: 0, 0
+  index: -1
+teeth
+  rotate: false
+  xy: 2, 291
+  size: 199, 99
+  orig: 199, 99
+  offset: 0, 0
+  index: -1
