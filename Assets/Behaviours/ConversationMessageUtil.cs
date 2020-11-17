@@ -13,6 +13,8 @@ namespace Assets.Behaviours
         private Lazy<Image> _image;
         private Lazy<GameObject> _id;
         private Lazy<GameObject> _choices;
+        private int _selectedOption = 0;
+        private ConversationController _controller;
 
         public UnityEngine.Sprite AlexFace;
         public UnityEngine.Sprite ColinFace;
@@ -23,16 +25,49 @@ namespace Assets.Behaviours
 
         public GameObject ChoicePrefab;
 
+        void Update()
+        {
+            if (_choices.Value)
+            {
+                ShowSelection();
+            }
+
+            if (_controller)
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow) && _selectedOption > 0)
+                {
+                    _selectedOption--;
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow) && _selectedOption < _choices.Value.transform.childCount - 1)
+                {
+                    _selectedOption++;
+                }
+                else if (Input.GetKeyDown(KeyCode.E))
+                {
+                    _controller.SelectionMade(_selectedOption);
+                    _controller = null;
+                }
+            }
+        }
+
         public ConversationMessageUtil()
         {
             _text = new Lazy<Text>(() => transform.Find("Text").GetComponent<Text>());
             _name = new Lazy<Text>(() => transform.Find("Id/Name").GetComponent<Text>());
             _image = new Lazy<Image>(() => transform.Find("Id/Image").GetComponent<Image>());
-            _choices = new Lazy<GameObject>(() => transform.Find("Choices").gameObject);
+            _choices = new Lazy<GameObject>(
+                () =>
+                {
+                    var obj = transform.Find("Choices");
+                    return obj ? obj.gameObject : null;
+                }
+            );
         }
 
         public void SetMessage(Conversation c, bool isRight)
         {
+            _controller = null;
+
             _text.Value.text = c.Text;
             _name.Value.text = c.Speaker;
             switch(c.Speaker)
@@ -63,8 +98,10 @@ namespace Assets.Behaviours
             }
         }
 
-        internal void SetOptions(Conversation[] convs, bool isRight)
+        internal void SetOptions(Conversation[] convs, bool isRight, ConversationController controller)
         {
+            _controller = controller;
+
             ClearChoices();
 
             _name.Value.text = convs[0].Speaker;
@@ -95,8 +132,6 @@ namespace Assets.Behaviours
                 _image.Value.transform.localScale = new Vector3(-1, 1, 1);
             }
 
-            bool first = true;
-
             foreach(var choice in convs)
             {
                 var msg = Instantiate(ChoicePrefab, _choices.Value.transform);
@@ -107,14 +142,26 @@ namespace Assets.Behaviours
                 {
                     text.color = Color.red;
                 }
-                msg.transform.Find("Image").GetComponent<Image>().color = first ? Color.white : Color.grey;
-                first = false;
             }
         }
 
         private void ClearChoices()
         {
             _choices.Value.transform.DestroyChildren();
+
+            _selectedOption = 0;
         }
+
+        private void ShowSelection()
+        {
+            int count = 0;
+
+            foreach(var child in _choices.Value.transform.Children())
+            {
+                child.transform.Find("Image").GetComponent<Image>().color = _selectedOption == count ? Color.white : Color.grey;
+                count++;
+            }
+        }
+
     }
 }

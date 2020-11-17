@@ -17,5 +17,21 @@ namespace Assets.Extensions
                 GameObject.Destroy(child.gameObject);
             }
         }
+
+        public static void DestroyChild(this Transform transform, int index)
+        {
+            int count = 0;
+
+            foreach (var child in transform.Children())
+            {
+                if (count == index)
+                {
+                    GameObject.Destroy(child.gameObject);
+                    break;
+                }
+
+                count++;
+            }
+        }
     }
 }
