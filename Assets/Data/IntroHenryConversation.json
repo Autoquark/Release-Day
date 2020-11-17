@@ -1,0 +1,22 @@
+{
+  "Speaker": "Henry",
+  "Text": "I've completed it. My magnum opus. The <i>Carmen</i> to my Bizet. My <i>Claire de Lune</i>.",
+  "Next": [
+    {
+      "Speaker": "Alex",
+      "Text": "Are these women you know?",
+      "Next": [
+        {
+          "Speaker": "Henry",
+          "Text": "All this modern musical malarky is rotting your brain. I listened to that... Spotify fellow the other day. Terrible arrangement... he didn't include a single aria. ",
+          "Next": [
+            {
+              "Speaker": "Alex",
+              "Text": "Yeah. Spotify's last album was definitely overrated. "
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

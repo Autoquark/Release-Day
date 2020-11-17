@@ -12,6 +12,10 @@ namespace Assets.Behaviours.Cutscene
     class IntroCutsceneBehaviour : CutsceneControllerBehaviour
     {
         public TextAsset laylaConversation;
+        public TextAsset henryConversation;
+        public TextAsset myraConversation;
+        public TextAsset colinConversation;
+        public TextAsset francesConversation;
 
         void Start()
         {
@@ -22,17 +26,14 @@ namespace Assets.Behaviours.Cutscene
         {
             var player = FindObjectOfType<PlayerControllerBehaviour>();
             player.enabled = false;
-            var playerPhysics = player.GetComponent<PhysicsObject>();
 
-            var layla = GameObject.Find("Layla");
-            yield return WalkToX(playerPhysics,
-                layla.transform.position.x + layla.GetComponent<SpriteRenderer>().sprite.bounds.min.x - player.GetComponent<MeshRenderer>().bounds.extents.x,
-                player.walkSpeed);
+            var frances = GameObject.Find("Frances");
 
             SpeakersByName["Alex"] = player.GetComponent<TalkBehaviour>();
-            SpeakersByName["Layla"] = layla.GetComponent<TalkBehaviour>();
+            SpeakersByName["Frances"] = frances.GetComponent<TalkBehaviour>();
 
-            yield return PlayConversation(JsonUtility.FromJson<Conversation>(laylaConversation.text));
+            yield return PlayConversation(JsonUtility.FromJson<Conversation>(francesConversation.text));
+            player.enabled = true;
         }
     }
 }

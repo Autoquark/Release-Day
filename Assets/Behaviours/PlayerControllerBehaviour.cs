@@ -69,4 +69,9 @@ class PlayerControllerBehaviour : MonoBehaviour
             _jumpPending = false;
         }
     }
+
+    private void OnDisable()
+    {
+        _physicsObject.Value.WalkIntent = 0;
+    }
 }

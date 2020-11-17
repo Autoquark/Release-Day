@@ -1,0 +1,28 @@
+{
+  "Speaker": "Myra",
+  "Text": "Oh, Alex! Could you test a level for me? I wanna make sure it's fun!",
+  "Next": [
+    {
+      "Speaker": "Alex",
+      "Text": "Is this the section with 15 jump pads?",
+      "Next": [
+        {
+          "Speaker": "Myra",
+          "Text": "Maybe.",
+          "Next": [
+            {
+              "Speaker": "Alex",
+              "Text": "And is your solution more jump pads?",
+              "Next": [
+                {
+                  "Speaker": "Myra",
+                  "Text": "Let me know how it goes!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
