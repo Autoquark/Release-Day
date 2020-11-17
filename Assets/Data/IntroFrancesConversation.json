@@ -1,0 +1,16 @@
+{
+  "Speaker": "Frances",
+  "Text": "<i>Alex! You're late!</i>",
+  "Next": [
+    {
+      "Speaker": "Alex",
+      "Text": "What? We start at 8:00am! ",
+      "Next": [
+        {
+          "Speaker": "Frances",
+          "Text": "And yesterday you got here at 7:40. Now get to work!"
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets.Behaviours.Cutscene
 {
-    abstract class CutsceneControllerBehaviour : MonoBehaviour
+    class CutsceneControllerBehaviour : MonoBehaviour
     {
         protected PlayerControllerBehaviour PlayerControllerBehaviour => _playerControllerBehaviour.Value;
 
@@ -21,7 +21,9 @@ namespace Assets.Behaviours.Cutscene
             _playerControllerBehaviour = new Lazy<PlayerControllerBehaviour>(() => FindObjectOfType<PlayerControllerBehaviour>());
         }
 
-        protected IEnumerator WalkToX(PhysicsObject obj, float x, float speed)
+        public void RegisterSpeaker(string name, TalkBehaviour talkBehaviour) => SpeakersByName[name] = talkBehaviour;
+
+        public IEnumerator WalkToX(PhysicsObject obj, float x, float speed)
         {
             while (Mathf.Abs(obj.transform.position.x - x) > 0.01f)
             {
@@ -33,8 +35,13 @@ namespace Assets.Behaviours.Cutscene
             obj.WalkIntent = 0;
         }
 
-        protected IEnumerator PlayConversation(Conversation conversation)
+        public IEnumerator PlayConversation(Conversation conversation)
         {
+            var wasEnabled = _playerControllerBehaviour.Value.enabled;
+            _playerControllerBehaviour.Value.enabled = false;
+
+            // Wait a frame in case the conversation was triggered by pressing E, so it does not register as pressed immediately
+            yield return null;
             while (conversation != null)
             {
                 var speaker = SpeakersByName[conversation.Speaker];
@@ -48,6 +55,8 @@ namespace Assets.Behaviours.Cutscene
             {
                 speaker.EndConversation();
             }
+
+            _playerControllerBehaviour.Value.enabled = wasEnabled;
         }
     }
 }

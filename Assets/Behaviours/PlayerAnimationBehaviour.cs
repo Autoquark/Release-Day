@@ -14,6 +14,8 @@ namespace Assets.Behaviours
     {
         public AnimationReferenceAsset run, idle, jumpStart, jumpUp, jumpApex, fall;
 
+        public float runAnimationSpeedFactor = 2;
+
         private Lazy<PhysicsObject> _playerController;
         private Lazy<SkeletonAnimation> _skeletonAnimation;
 
@@ -41,6 +43,7 @@ namespace Assets.Behaviours
             else if (_playerController.Value.Grounded)
             {
                 SetAnimationIfDifferent(run);
+                _skeletonAnimation.Value.AnimationState.TimeScale = runAnimationSpeedFactor * Mathf.Abs(_playerController.Value.MovementLastFrame.x);
             }
 
             if(_playerController.Value.MovementLastFrame.x != 0)
@@ -58,6 +61,7 @@ namespace Assets.Behaviours
             }
 
             _skeletonAnimation.Value.state.SetAnimation(0, animation, true);
+            _skeletonAnimation.Value.AnimationState.TimeScale = 1;
         }
     }
 }

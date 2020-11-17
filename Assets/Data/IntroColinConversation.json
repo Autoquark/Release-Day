@@ -1,0 +1,34 @@
+{
+  "Speaker": "Alex",
+  "Text": "Hey Colin, just wondered if you'd fixed the inverted input on level 5?",
+  "Next": [
+    {
+      "Speaker": "Colin",
+      "Text": "Is that a question?",
+      "Next": [
+        {
+          "Speaker": "Alex",
+          "Text": "No I just--",
+          "Next": [
+            {
+              "Speaker": "Colin",
+              "Text": "Where do questions go?",
+              "Next": [
+                {
+                  "Speaker": "Alex",
+                  "Text": "... In the ticket system?",
+                  "Next": [
+                    {
+                      "Speaker": "Colin",
+                      "Text": "That sounded awfully like another question Alex. Don't make me report you again. "
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
