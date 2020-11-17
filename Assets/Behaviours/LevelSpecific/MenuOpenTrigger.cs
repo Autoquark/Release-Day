@@ -26,6 +26,7 @@ namespace Assets.Behaviours.LevelSpecific
             }
 
             _inGameMenu.Value.SetMenuVisible(_open);
+            Destroy(gameObject);
         }
     }
 }

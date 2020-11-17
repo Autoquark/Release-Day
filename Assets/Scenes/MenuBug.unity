@@ -367,6 +367,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2856784822942372917, guid: 36c57224b3ab741498dafe26d01b52c5,
+        type: 3}
+      propertyPath: m_sendNavigationEvents
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2856784822942372918, guid: 36c57224b3ab741498dafe26d01b52c5,
         type: 3}
       propertyPath: m_LocalPosition.x
