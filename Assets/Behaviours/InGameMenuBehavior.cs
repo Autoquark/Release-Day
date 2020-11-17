@@ -5,7 +5,8 @@ using System;
 
 public class InGameMenuBehavior : MonoBehaviour
 {
-    bool _visible = false;
+    protected bool Visible { get; private set; } = false;
+    protected bool PauseWhenOpen { get; set; } = true;
 
     private Lazy<GameObject> _panel;
 
@@ -14,13 +15,18 @@ public class InGameMenuBehavior : MonoBehaviour
         _panel = new Lazy<GameObject>(() => transform.Find("Panel").gameObject);
     }
 
-    private void ToggleMenu()
+    protected void ToggleMenu()
     {
-        _visible = !_visible;
+        Visible = !Visible;
 
         if (_panel.Value != null)
         {
-            _panel.Value.SetActive(_visible);
+            _panel.Value.SetActive(Visible);
+        }
+
+        if (PauseWhenOpen)
+        {
+            Time.timeScale = Visible ? 0 : 1;
         }
     }
 
