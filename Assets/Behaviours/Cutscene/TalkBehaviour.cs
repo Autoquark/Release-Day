@@ -18,12 +18,12 @@ namespace Assets.Behaviours.Cutscene
 
         public virtual void Say(string text)
         {
-            _dialogueBubble.Value.SetText(text);
+            _dialogueBubble.Value.ShowDialogue(text);
         }
 
         public virtual void ShowListening()
         {
-            _dialogueBubble.Value.SetText(null);
+            _dialogueBubble.Value.ShowDialogue(null);
         }
 
         public virtual void EndConversation() { }

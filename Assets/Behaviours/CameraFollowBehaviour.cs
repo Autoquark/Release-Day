@@ -13,10 +13,24 @@ namespace Assets.Behaviours
         private const float _margin = 0.3f;
 
         private Lazy<Transform> _player;
+        private float _minX;
+        private float _maxX;
+        private float _minY;
+        private float _maxY;
 
         public CameraFollowBehaviour()
         {
             _player = new Lazy<Transform>(() => FindObjectOfType<PlayerControllerBehaviour>().transform);
+        }
+
+        private void Start()
+        {
+            var camera = GetComponent<Camera>();
+            var bounds = FindObjectsOfType<CameraBoundBehaviour>();
+            _minX = bounds.Min(x => x.transform.position.x) + camera.orthographicSize * camera.aspect;
+            _maxX = bounds.Max(x => x.transform.position.x) - camera.orthographicSize * camera.aspect;
+            _minY = bounds.Min(x => x.transform.position.y) + camera.orthographicSize;
+            _maxY = bounds.Max(x => x.transform.position.y) - camera.orthographicSize;
         }
 
         private void Update()
@@ -42,6 +56,8 @@ namespace Assets.Behaviours
             {
                 transform.position += new Vector3(0, playerPosition.y - deadzone.yMax);
             }
+
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, _minX, _maxX), Mathf.Clamp(transform.position.y, _minY, _maxY), transform.position.z);
         }
     }
 }

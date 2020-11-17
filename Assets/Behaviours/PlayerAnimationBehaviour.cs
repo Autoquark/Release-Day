@@ -14,7 +14,7 @@ namespace Assets.Behaviours
     {
         public AnimationReferenceAsset run, idle, jumpStart, jumpUp, jumpApex, fall;
 
-        public float runAnimationSpeedFactor = 2;
+        public float runAnimationSpeedFactor = 30;
 
         private Lazy<PhysicsObject> _playerController;
         private Lazy<SkeletonAnimation> _skeletonAnimation;

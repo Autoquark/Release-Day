@@ -15,9 +15,10 @@ class PlayerControllerBehaviour : MonoBehaviour
     public float walkSpeed = 0.1f;
 
     const float _minSeparationDistance = 0.1f;
-    readonly Lazy<Rigidbody2D> _rigidbody;
-    readonly Lazy<Collider2D> _collider;
-    readonly Lazy<PhysicsObject> _physicsObject;
+    private readonly Lazy<Rigidbody2D> _rigidbody;
+    private readonly Lazy<Collider2D> _collider;
+    private readonly Lazy<PhysicsObject> _physicsObject;
+    private readonly Lazy<GameObject> _prompt;
 
     bool _jumpPending = false;
     Vector2 _velocity = Vector2.zero;
@@ -27,6 +28,7 @@ class PlayerControllerBehaviour : MonoBehaviour
         _rigidbody = new Lazy<Rigidbody2D>(GetComponent<Rigidbody2D>);
         _collider = new Lazy<Collider2D>(GetComponent<Collider2D>);
         _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
+        _prompt = new Lazy<GameObject>(() => transform.Find("Prompt").gameObject);
     }
 
     private void Start()
@@ -38,8 +40,10 @@ class PlayerControllerBehaviour : MonoBehaviour
     void Update()
     {
         var interactable = FindObjectsOfType<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault(x => x.CanInteract());
+        _prompt.Value.SetActive(interactable != null);
         if (interactable != null && Input.GetKeyDown(KeyCode.E))
         {
+            _prompt.Value.SetActive(false);
             interactable.Interact();
         }
 
