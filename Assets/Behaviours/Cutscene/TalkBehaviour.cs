@@ -16,14 +16,19 @@ namespace Assets.Behaviours.Cutscene
             _dialogueBubble = new Lazy<DialogueBubbleBehaviour>(() => transform.Find("DialogueBubble").GetComponent<DialogueBubbleBehaviour>());
         }
 
+        public void Remark(string text)
+        {
+            _dialogueBubble.Value.ShowRemark(text);
+        }
+
         public virtual void Say(string text)
         {
-            _dialogueBubble.Value.ShowDialogue(text);
+            _dialogueBubble.Value.ShowCutsceneDialogue(text);
         }
 
         public virtual void ShowListening()
         {
-            _dialogueBubble.Value.ShowDialogue(null);
+            _dialogueBubble.Value.ShowCutsceneDialogue(null);
         }
 
         public virtual void EndConversation() { }
