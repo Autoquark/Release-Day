@@ -106,6 +106,8 @@ MonoBehaviour:
   runSpeed: 0.1
   walkSpeed: 0.1
   jumpGracePeriod: 0.1
+  DeadPlayer: {fileID: 877376677156231229, guid: f22d3beeb64360b4a91e2e3564cd4dc5,
+    type: 3}
 --- !u!33 &6540164959275438957
 MeshFilter:
   m_ObjectHideFlags: 0

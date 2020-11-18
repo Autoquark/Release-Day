@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 class PlayerControllerBehaviour : MonoBehaviour
 {
@@ -14,17 +15,21 @@ class PlayerControllerBehaviour : MonoBehaviour
     public float runSpeed = 0.1f;
     public float walkSpeed = 0.1f;
     public float jumpGracePeriod = 0.1f;
+    public GameObject DeadPlayer = null;
 
     const float _minSeparationDistance = 0.1f;
     private readonly Lazy<Rigidbody2D> _rigidbody;
     private readonly Lazy<Collider2D> _collider;
     private readonly Lazy<PhysicsObject> _physicsObject;
     private readonly Lazy<GameObject> _prompt;
+    private readonly Lazy<Tilemap> _tileMap;
 
     private bool _jumpPending = false;
     private float _lastGroundedTime = -999;
     private bool _jumpedSinceLastGrounded = false;
+    private bool _quitting = false;
 
+    // static
     static List<PlayerControllerBehaviour> _allPlayers = new List<PlayerControllerBehaviour>();
 
     public static PlayerControllerBehaviour FirstPlayer() => _allPlayers.FirstOrDefault();
@@ -37,12 +42,20 @@ class PlayerControllerBehaviour : MonoBehaviour
         _collider = new Lazy<Collider2D>(GetComponent<Collider2D>);
         _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
         _prompt = new Lazy<GameObject>(() => transform.Find("Prompt").gameObject);
+        _tileMap = new Lazy<Tilemap>(FindObjectOfType<Tilemap>);
     }
+
+    // end-static
 
     private void Start()
     {
         _allPlayers.Add(this);
         _physicsObject.Value.PositionOnGround();
+    }
+
+    private void OnApplicationQuit()
+    {
+        _quitting = true;        
     }
 
     private void OnDestroy()
@@ -66,6 +79,11 @@ class PlayerControllerBehaviour : MonoBehaviour
             && !_jumpedSinceLastGrounded)
         {
             _jumpPending = true;
+        }
+
+        if (_tileMap.Value.localBounds.SqrDistance(transform.position) > 100)
+        {
+            KillPlayer();
         }
     }
 
@@ -100,5 +118,15 @@ class PlayerControllerBehaviour : MonoBehaviour
     private void OnDisable()
     {
         _physicsObject.Value.WalkIntent = 0;
+    }
+
+    public void KillPlayer()
+    {
+        if (!_quitting && DeadPlayer != null)
+        {
+            Instantiate(DeadPlayer, transform.position, transform.rotation);
+        }
+
+        GameObject.Destroy(gameObject);
     }
 }

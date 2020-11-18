@@ -17,7 +17,7 @@ namespace Assets.Behaviours
             if (!player)
                 return;
 
-            GameObject.Destroy(player.gameObject);
+            player.KillPlayer();
         }
     }
 }
