@@ -12,10 +12,17 @@ namespace Assets.Behaviours
         public GameObject MessagePrefabRight;
         public GameObject MessagePrefabOptions;
 
-        private bool _visible = false;
-        private Lazy<Canvas> _canvas;
+        public void ShowAlertIconThisFrame()
+        {
+            _showAlertIcon = true;
+        }
+
+        private bool _showAlertIcon = false;
+        private bool Visible => _maskPanel.Value.activeSelf;
+        private Lazy<GameObject> _maskPanel;
         private Lazy<GameObject> _scrollContent;
         private Lazy<ScrollRect> _scrollRect;
+        private Lazy<GameObject> _alertIcon;
         private Lazy<Text> _promptText;
         private Conversation _conversation;
         private Conversation _currentNode;
@@ -25,8 +32,9 @@ namespace Assets.Behaviours
 
         public ConversationController()
         {
-            _canvas = new Lazy<Canvas>(GetComponent<Canvas>);
+            _maskPanel = new Lazy<GameObject>(() => transform.Find("MaskPanel").gameObject);
             _scrollContent = new Lazy<GameObject>(() => transform.Find("MaskPanel/ScrollPanel/ScrollContent").gameObject);
+            _alertIcon = new Lazy<GameObject>(() => transform.Find("AlertIcon").gameObject);
             _scrollRect = new Lazy<ScrollRect>(() => transform.Find("MaskPanel/ScrollPanel").GetComponent<ScrollRect>());
             _promptText = new Lazy<Text>(() => transform.Find("MaskPanel/PromptPanel").GetComponent<Text>());
         }
@@ -38,8 +46,12 @@ namespace Assets.Behaviours
 
         private void Update()
         {
-            if (!_visible)
+            if (!Visible)
+            {
                 return;
+            }
+
+            _alertIcon.Value.SetActive(false);
 
             if (_newContentAdded)
             {
@@ -61,6 +73,12 @@ namespace Assets.Behaviours
 
                 SetVisibility(false);
             }
+        }
+
+        private void FixedUpdate()
+        {
+            _alertIcon.Value.SetActive(_showAlertIcon);
+            _showAlertIcon = false;
         }
 
         internal void SelectionMade(int selectedOption)
@@ -109,11 +127,9 @@ namespace Assets.Behaviours
 
         public void SetVisibility(bool visible)
         {
-            _visible = visible;
+            _maskPanel.Value.SetActive(visible);
 
-            _canvas.Value.enabled = _visible;
-
-            Time.timeScale = _visible ? 0 : 1;
+            Time.timeScale = visible ? 0 : 1;
         }
 
         public void SetConversation(Conversation conv)
