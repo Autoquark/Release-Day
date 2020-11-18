@@ -12,13 +12,14 @@ namespace Assets.Behaviours
         public GameObject MessagePrefabRight;
         public GameObject MessagePrefabOptions;
 
+        public bool Visible => _maskPanel.Value.activeSelf;
+
         public void ShowAlertIconThisFrame()
         {
             _showAlertIcon = true;
         }
 
         private bool _showAlertIcon = false;
-        private bool Visible => _maskPanel.Value.activeSelf;
         private Lazy<GameObject> _maskPanel;
         private Lazy<GameObject> _scrollContent;
         private Lazy<ScrollRect> _scrollRect;
