@@ -46,7 +46,7 @@ namespace Assets.Behaviours
                         Instantiate(player.gameObject, SendsTo.transform.position, SendsTo.transform.rotation);
                     }
 
-                    _coolDownEnd = SendsTo._coolDownEnd = Time.time + 0.7f;
+                    _coolDownEnd = SendsTo._coolDownEnd = Time.time + 1.5f;
                 }
             }
         }

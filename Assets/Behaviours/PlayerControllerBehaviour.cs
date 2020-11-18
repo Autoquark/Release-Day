@@ -60,10 +60,6 @@ class PlayerControllerBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (!_quitting && DeadPlayer != null) {
-            Instantiate(DeadPlayer, transform.position, transform.rotation);
-        }
-
         _allPlayers.Remove(this);
     }
 
@@ -87,7 +83,7 @@ class PlayerControllerBehaviour : MonoBehaviour
 
         if (_tileMap.Value.localBounds.SqrDistance(transform.position) > 100)
         {
-            GameObject.Destroy(gameObject);
+            KillPlayer();
         }
     }
 
@@ -122,5 +118,15 @@ class PlayerControllerBehaviour : MonoBehaviour
     private void OnDisable()
     {
         _physicsObject.Value.WalkIntent = 0;
+    }
+
+    public void KillPlayer()
+    {
+        if (!_quitting && DeadPlayer != null)
+        {
+            Instantiate(DeadPlayer, transform.position, transform.rotation);
+        }
+
+        GameObject.Destroy(gameObject);
     }
 }
