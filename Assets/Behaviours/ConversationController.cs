@@ -3,6 +3,7 @@ using UnityEngine;
 using Assets.Data;
 using Assets.Extensions;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace Assets.Behaviours
 {
@@ -28,7 +29,6 @@ namespace Assets.Behaviours
         private Conversation _conversation;
         private Conversation _currentNode;
         private Conversation _selectionsNode;
-        private float _lastInteraction = 0.0f;
         private bool _newContentAdded = false;
 
         public ConversationController()
@@ -60,14 +60,13 @@ namespace Assets.Behaviours
                 _newContentAdded = false;
             }
 
-            if (_lastInteraction != 0
-                && Time.realtimeSinceStartup > _lastInteraction + 2.0f)
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 AdvanceConversation();
             }
 
-            if (_currentNode == null
-                && _selectionsNode == null
+            if (_selectionsNode == null
+                && !_currentNode.Next.Any()
                 && Input.GetKeyDown(KeyCode.Q))
             {
                 ClearIM();
@@ -97,18 +96,15 @@ namespace Assets.Behaviours
 
         private void AdvanceConversation()
         {
-            _lastInteraction = 0.0f;
-
-            int numNextNodes = _currentNode != null ? _currentNode.Next != null ? _currentNode.Next.Length : 0 : 0;
+            int numNextNodes = _currentNode?.Next.Length ?? 0;
 
             if (numNextNodes == 1)
             {
                 _currentNode = _currentNode.Next[0];
                 _selectionsNode = null;
                 AddStatementToIM(_currentNode);
-                _lastInteraction = Time.realtimeSinceStartup;
 
-                _promptText.Value.text = "(online)";
+                _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to exit";
             }
             else if (numNextNodes > 1)
             {
@@ -117,12 +113,6 @@ namespace Assets.Behaviours
                 _currentNode = null;
 
                 _promptText.Value.text = "E to select";
-            }
-            else
-            {
-                _currentNode = null;
-
-                _promptText.Value.text = "Q to exit";
             }
         }
 
@@ -140,16 +130,13 @@ namespace Assets.Behaviours
             _conversation = conv;
             _currentNode = conv;
 
-            AddStatementToIM(_currentNode);
-
-            _lastInteraction = Time.realtimeSinceStartup;
+            //AddStatementToIM(_currentNode);
+            AdvanceConversation();
         }
 
         private void ClearIM()
         {
             _scrollContent.Value.transform.DestroyChildren();
-
-            _lastInteraction = 0.0f;
         }
 
         private void AddStatementToIM(Conversation c)

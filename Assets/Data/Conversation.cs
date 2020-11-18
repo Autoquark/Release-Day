@@ -10,6 +10,6 @@ namespace Assets.Data
         public String Speaker;
         public String Text;
         public bool IsHint = false;
-        public Conversation[] Next;
+        public Conversation[] Next = new Conversation[0];
     }
 }

@@ -423,7 +423,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 23877544849362012}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &655000809
+--- !u!61 &655000810
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20932,7 +20932,7 @@ PrefabInstance:
     - target: {fileID: 726824824393468949, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 726824824393468949, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
