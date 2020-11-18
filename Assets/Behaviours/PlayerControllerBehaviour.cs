@@ -32,15 +32,9 @@ class PlayerControllerBehaviour : MonoBehaviour
     // static
     static List<PlayerControllerBehaviour> _allPlayers = new List<PlayerControllerBehaviour>();
 
-    public static PlayerControllerBehaviour FirstPlayer()
-    {
-        return _allPlayers.FirstOrDefault<PlayerControllerBehaviour>();
-    }
+    public static PlayerControllerBehaviour FirstPlayer() => _allPlayers.FirstOrDefault();
 
-    public static IEnumerable<PlayerControllerBehaviour> AllPlayers()
-    {
-        return _allPlayers;
-    }
+    public static IEnumerable<PlayerControllerBehaviour> AllPlayers() => _allPlayers;
 
     public PlayerControllerBehaviour()
     {
