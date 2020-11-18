@@ -19,6 +19,7 @@ namespace Assets.Behaviours
         private float _minY;
         private float _maxY;
         private Vector3 _targetPosition;
+        bool _first = true;
 
         public float TravelSpeed = 0.2f;
 
@@ -34,6 +35,13 @@ namespace Assets.Behaviours
 
         private void Update()
         {
+            PlayerControllerBehaviour first_player = this.FirstPlayer();
+            if (_first && first_player != null)
+            {
+                _first = false;
+                AccommodatePlayer(first_player.transform);
+            }
+
             List<PlayerControllerBehaviour> rev_players = this.AllPlayers().ToList();
             rev_players.Reverse();
 
