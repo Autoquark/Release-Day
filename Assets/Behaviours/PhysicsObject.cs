@@ -113,8 +113,10 @@ namespace Assets.Behaviours
         private float CastForMovement(Vector2 direction, List<RaycastHit2D> results, float moveDistance)
         {
             Rigidbody.Cast(direction, Filter, results, moveDistance + MinSeparationDistance);
-            results = results.Where(x => Vector2.Angle(x.point - (Vector2)transform.position, direction) <= 180)
-                .ToList();
+
+//            results.RemoveAll(x => Vector2.Angle(x.point - (Vector2)transform.position, direction) > 90);
+            results.RemoveAll(x => Vector2.Angle(x.normal, direction) < 90);
+
             return results.MinOrDefault(x => Mathf.Max(0, x.distance - MinSeparationDistance), moveDistance); 
         }
 
