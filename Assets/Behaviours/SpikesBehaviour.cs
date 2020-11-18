@@ -10,12 +10,6 @@ namespace Assets.Behaviours
 {
     class SpikesBehaviour : MonoBehaviour
     {
-        private Lazy<Collider2D> _collider;
-
-        SpikesBehaviour()
-        {
-        }
-
         private void OnTriggerEnter2D(Collider2D hitBy)
         {
             var player = hitBy.GetComponent<PlayerControllerBehaviour>();

@@ -10,8 +10,8 @@ namespace Assets
     {
         string Message { get; }
 
-        bool CanInteract();
+        bool CanInteractWith(PlayerControllerBehaviour player);
 
-        void Interact();
+        void InteractWith(PlayerControllerBehaviour player);
     }
 }

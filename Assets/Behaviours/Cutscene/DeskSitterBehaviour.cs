@@ -29,7 +29,6 @@ namespace Assets.Behaviours.Cutscene
 
         private readonly Lazy<Animator> _animator;
         private readonly Lazy<SpriteRenderer> _spriteRenderer;
-        private readonly Lazy<Collider2D> _playerCollider;
         private readonly Lazy<CutsceneControllerBehaviour> _cutsceneController;
 
         public string Message => "Press E to talk";
@@ -38,7 +37,6 @@ namespace Assets.Behaviours.Cutscene
         {
             _animator = new Lazy<Animator>(GetComponent<Animator>);
             _spriteRenderer = new Lazy<SpriteRenderer>(GetComponent<SpriteRenderer>);
-            _playerCollider = new Lazy<Collider2D>(() => FindObjectOfType<PlayerControllerBehaviour>().GetComponent<Collider2D>());
             _cutsceneController = new Lazy<CutsceneControllerBehaviour>(() => FindObjectOfType<CutsceneControllerBehaviour>());
         }
 
@@ -90,10 +88,10 @@ namespace Assets.Behaviours.Cutscene
             _playableGraph.Destroy();
         }
 
-        public bool CanInteract() => _conversation != null && !string.IsNullOrEmpty(_name)
-            && Mathf.Abs(_playerCollider.Value.transform.position.x - transform.position.x) <= _playerCollider.Value.bounds.size.x + _spriteRenderer.Value.bounds.extents.x
-            && Mathf.Abs(_playerCollider.Value.transform.position.y - transform.position.y) <= 0.5 * _playerCollider.Value.bounds.size.y;
+        public bool CanInteractWith(PlayerControllerBehaviour player) => _conversation != null && !string.IsNullOrEmpty(_name)
+            && Mathf.Abs(player.transform.position.x - transform.position.x) <= player.GetComponent<Collider2D>().bounds.size.x + _spriteRenderer.Value.bounds.extents.x
+            && Mathf.Abs(player.transform.position.y - transform.position.y) <= 0.5 * player.GetComponent<Collider2D>().bounds.size.y;
 
-        public void Interact() => StartCoroutine(_cutsceneController.Value.PlayConversation(_conversationData));
+        public void InteractWith(PlayerControllerBehaviour player) => StartCoroutine(_cutsceneController.Value.PlayConversation(_conversationData));
     }
 }
