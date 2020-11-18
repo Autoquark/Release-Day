@@ -57,7 +57,7 @@ namespace Assets.Behaviours
             }
 
             // Handle walking, including up or down a slope
-            var remainingDistance = Mathf.Abs(WalkIntent);
+            var remainingDistance = Mathf.Abs(WalkIntent) * Time.fixedDeltaTime;
             while (remainingDistance >= MinimumMoveDistance)
             {
                 var right = WalkIntent > 0;

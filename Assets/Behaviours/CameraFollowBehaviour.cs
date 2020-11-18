@@ -18,6 +18,9 @@ namespace Assets.Behaviours
         private float _maxX;
         private float _minY;
         private float _maxY;
+        private Vector3 _targetPosition;
+
+        public float TravelSpeed = 0.2f;
 
         private void Start()
         {
@@ -31,39 +34,60 @@ namespace Assets.Behaviours
 
         private void Update()
         {
-            var player_obj = this.FirstPlayer();
+            List<PlayerControllerBehaviour> rev_players = this.AllPlayers().ToList();
+            rev_players.Reverse();
 
-            Transform player = player_obj != null ? player_obj.transform : null;
+            var camera = GetComponent<Camera>();
 
-            // If player is dead
-            if(player == null)
+            Vector3 keep_pos = camera.transform.position;
+
+            foreach (var player in rev_players)
             {
-                return;
+                AccommodatePlayer(player.transform);
             }
 
+            _targetPosition = camera.transform.position;
+
+            camera.transform.position = keep_pos;
+
+            if (_targetPosition != null) {
+                Vector3 full_move = _targetPosition - camera.transform.position;
+                float len = full_move.magnitude;
+                float max_move = Mathf.Min(len, Time.deltaTime * TravelSpeed);
+                Vector3 move = full_move.normalized * max_move;
+
+                if (move != Vector3.zero)
+                {
+                    camera.transform.position += move;
+                }
+            }
+        }
+
+        private void AccommodatePlayer(Transform player)
+        {
             var camera = GetComponent<Camera>();
             var deadzone = RectEx.FromCorners(camera.ViewportToWorldPoint(new Vector2(_margin, _margin)), camera.ViewportToWorldPoint(new Vector2(1 - _margin, 1 - _margin)));
 
             var playerPosition = player.position;
             if (playerPosition.x < deadzone.xMin)
             {
-                transform.position -= new Vector3(deadzone.xMin - playerPosition.x, 0);
+                camera.transform.position -= new Vector3(deadzone.xMin - playerPosition.x, 0);
             }
             else if (playerPosition.x > deadzone.xMax)
             {
-                transform.position += new Vector3(playerPosition.x - deadzone.xMax, 0);
+                camera.transform.position += new Vector3(playerPosition.x - deadzone.xMax, 0);
             }
 
             if (playerPosition.y < deadzone.yMin)
             {
-                transform.position -= new Vector3(0, deadzone.yMin - playerPosition.y);
+                camera.transform.position -= new Vector3(0, deadzone.yMin - playerPosition.y);
             }
             else if (playerPosition.y > deadzone.yMax)
             {
-                transform.position += new Vector3(0, playerPosition.y - deadzone.yMax);
+                camera.transform.position += new Vector3(0, playerPosition.y - deadzone.yMax);
             }
 
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, _minX, _maxX), Mathf.Clamp(transform.position.y, _minY, _maxY), transform.position.z);
+            camera.transform.position = new Vector3(Mathf.Clamp(camera.transform.position.x, _minX, _maxX), Mathf.Clamp(camera.transform.position.y, _minY, _maxY), transform.position.z);
         }
     }
 }
