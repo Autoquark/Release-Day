@@ -20,13 +20,11 @@ namespace Assets.Behaviours
             public float? DelayStartTime { get; set; }
         }
 
-        private Lazy<Collider2D> _playerCollider;
         private Lazy<ConversationController> _conversationController;
         private Lazy<ConversationLoader> _loader;
 
         public ConversationRegion()
         {
-            _playerCollider = new Lazy<Collider2D>(() => FindObjectOfType<PlayerControllerBehaviour>().GetComponent<Collider2D>());
             _conversationController = new Lazy<ConversationController>(() => FindObjectOfType<ConversationController>());
             _loader = new Lazy<ConversationLoader>(GetComponent<ConversationLoader>);
         }
@@ -37,7 +35,7 @@ namespace Assets.Behaviours
             if (_triggerAutomatically && data.HasTriggered)
                 return;
 
-            if (collision == _playerCollider.Value)
+            if (collision.GetComponent<PlayerControllerBehaviour>() != null)
             {
                 if (!data.DelayStartTime.HasValue)
                 {

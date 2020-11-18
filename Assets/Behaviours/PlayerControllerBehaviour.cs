@@ -25,6 +25,18 @@ class PlayerControllerBehaviour : MonoBehaviour
     private float _lastGroundedTime = -999;
     private bool _jumpedSinceLastGrounded = false;
 
+    static List<PlayerControllerBehaviour> _allPlayers = new List<PlayerControllerBehaviour>();
+
+    public static PlayerControllerBehaviour FirstPlayer()
+    {
+        return _allPlayers.FirstOrDefault<PlayerControllerBehaviour>();
+    }
+
+    public static IEnumerable<PlayerControllerBehaviour> AllPlayers()
+    {
+        return _allPlayers;
+    }
+
     public PlayerControllerBehaviour()
     {
         _rigidbody = new Lazy<Rigidbody2D>(GetComponent<Rigidbody2D>);
@@ -35,18 +47,24 @@ class PlayerControllerBehaviour : MonoBehaviour
 
     private void Start()
     {
+        _allPlayers.Add(this);
         _physicsObject.Value.PositionOnGround();
+    }
+
+    private void OnDestroy()
+    {
+        _allPlayers.Remove(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        var interactable = FindObjectsOfType<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault(x => x.CanInteract());
+        var interactable = FindObjectsOfType<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault(x => x.CanInteractWith(this));
         _prompt.Value.SetActive(interactable != null);
         if (interactable != null && Input.GetKeyDown(KeyCode.E))
         {
             _prompt.Value.SetActive(false);
-            interactable.Interact();
+            interactable.InteractWith(this);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)

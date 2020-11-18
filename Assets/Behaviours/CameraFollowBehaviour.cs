@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Extensions;
 
 namespace Assets.Behaviours
 {
@@ -13,16 +14,10 @@ namespace Assets.Behaviours
     {
         private const float _margin = 0.3f;
 
-        private Lazy<Transform> _player;
         private float _minX;
         private float _maxX;
         private float _minY;
         private float _maxY;
-
-        public CameraFollowBehaviour()
-        {
-            _player = new Lazy<Transform>(() => FindObjectOfType<PlayerControllerBehaviour>().transform);
-        }
 
         private void Start()
         {
@@ -36,8 +31,12 @@ namespace Assets.Behaviours
 
         private void Update()
         {
+            var player_obj = this.FirstPlayer();
+
+            Transform player = player_obj != null ? player_obj.transform : null;
+
             // If player is dead
-            if(_player.Value == null)
+            if(player == null)
             {
                 return;
             }
@@ -45,7 +44,7 @@ namespace Assets.Behaviours
             var camera = GetComponent<Camera>();
             var deadzone = RectEx.FromCorners(camera.ViewportToWorldPoint(new Vector2(_margin, _margin)), camera.ViewportToWorldPoint(new Vector2(1 - _margin, 1 - _margin)));
 
-            var playerPosition = _player.Value.position;
+            var playerPosition = player.position;
             if (playerPosition.x < deadzone.xMin)
             {
                 transform.position -= new Vector3(deadzone.xMin - playerPosition.x, 0);
