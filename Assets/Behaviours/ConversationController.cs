@@ -13,7 +13,7 @@ namespace Assets.Behaviours
         public GameObject MessagePrefabRight;
         public GameObject MessagePrefabOptions;
 
-        public bool Visible => _maskPanel.Value.activeSelf;
+        public bool Visible => _rootPanel.Value.activeSelf;
 
         public void ShowAlertIconThisFrame()
         {
@@ -21,7 +21,7 @@ namespace Assets.Behaviours
         }
 
         private bool _showAlertIcon = false;
-        private Lazy<GameObject> _maskPanel;
+        private Lazy<GameObject> _rootPanel;
         private Lazy<GameObject> _scrollContent;
         private Lazy<ScrollRect> _scrollRect;
         private Lazy<GameObject> _alertIcon;
@@ -33,11 +33,11 @@ namespace Assets.Behaviours
 
         public ConversationController()
         {
-            _maskPanel = new Lazy<GameObject>(() => transform.Find("MaskPanel").gameObject);
-            _scrollContent = new Lazy<GameObject>(() => transform.Find("MaskPanel/ScrollPanel/ScrollContent").gameObject);
+            _rootPanel = new Lazy<GameObject>(() => transform.Find("MessageRoot").gameObject);
+            _scrollContent = new Lazy<GameObject>(() => _rootPanel.Value.transform.Find("Background/ScrollPanel/Viewport/ScrollContent").gameObject);
             _alertIcon = new Lazy<GameObject>(() => transform.Find("AlertIcon").gameObject);
-            _scrollRect = new Lazy<ScrollRect>(() => transform.Find("MaskPanel/ScrollPanel").GetComponent<ScrollRect>());
-            _promptText = new Lazy<Text>(() => transform.Find("MaskPanel/PromptPanel").GetComponent<Text>());
+            _scrollRect = new Lazy<ScrollRect>(() => _rootPanel.Value.transform.Find("Background/ScrollPanel").GetComponent<ScrollRect>());
+            _promptText = new Lazy<Text>(() => _rootPanel.Value.transform.Find("Background/PromptPanel/Text").GetComponent<Text>());
         }
 
         private void Start()
@@ -118,7 +118,7 @@ namespace Assets.Behaviours
 
         public void SetVisibility(bool visible)
         {
-            _maskPanel.Value.SetActive(visible);
+            _rootPanel.Value.SetActive(visible);
 
             Time.timeScale = visible ? 0 : 1;
         }
@@ -130,8 +130,9 @@ namespace Assets.Behaviours
             _conversation = conv;
             _currentNode = conv;
 
-            //AddStatementToIM(_currentNode);
-            AdvanceConversation();
+            AddStatementToIM(_currentNode);
+
+            _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to exit";
         }
 
         private void ClearIM()
