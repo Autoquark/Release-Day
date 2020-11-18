@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpVelocity: 6
-  runSpeed: 0.1
-  walkSpeed: 0.1
+  runSpeed: 5
+  walkSpeed: 5
   jumpGracePeriod: 0.1
   DeadPlayer: {fileID: 877376677156231229, guid: f22d3beeb64360b4a91e2e3564cd4dc5,
     type: 3}
