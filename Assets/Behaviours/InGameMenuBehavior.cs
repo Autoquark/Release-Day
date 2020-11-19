@@ -19,7 +19,7 @@ namespace Assets.Behaviours
         public InGameMenuBehavior()
         {
             _panel = new Lazy<GameObject>(() => transform.Find("Panel").gameObject);
-	    _optionsMenu = new Lazy<GameObject>(() => transform.Find("../OptionsMenu").gameObject);
+    	    _optionsMenu = new Lazy<GameObject>(() => transform.Find("../OptionsMenu").gameObject);
             _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
         }
 
