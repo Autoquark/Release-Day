@@ -266,6 +266,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4350300997407591302, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125,
+        type: 3}
+      propertyPath: InputFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 60c4cc1867d785f46a40db6766736e4f, type: 3}
     - target: {fileID: 4350300997407591304, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125,
         type: 3}
       propertyPath: m_Size.x
@@ -674,6 +679,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4350300997407591302, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125,
+        type: 3}
+      propertyPath: InputFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 6406d7b3a3b44cf479119d5f24309c92, type: 3}
     - target: {fileID: 4350300997407591304, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125,
         type: 3}
       propertyPath: m_Size.x
@@ -21187,7 +21197,7 @@ PrefabInstance:
     - target: {fileID: 4375452916790189738, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 699.52563
+      value: 710
       objectReference: {fileID: 0}
     - target: {fileID: 4375452916790189738, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
