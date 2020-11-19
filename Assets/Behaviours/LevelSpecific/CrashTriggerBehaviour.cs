@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Assets.Behaviours;
 
 namespace Assets.Behaviours.LevelSpecific
 {
@@ -18,11 +19,13 @@ namespace Assets.Behaviours.LevelSpecific
 
         private readonly Lazy<ConversationController> _conversationController;
         private readonly Lazy<GameObject> _crashUi;
+        private readonly Lazy<LevelControllerBehaviour> _levelController;
 
         public CrashTriggerBehaviour()
         {
             _conversationController = new Lazy<ConversationController>(() => FindObjectOfType<ConversationController>());
             _crashUi = new Lazy<GameObject>(() => GameObject.Find("CrashUi"));
+            _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
         }
 
         private void Start()
@@ -43,7 +46,7 @@ namespace Assets.Behaviours.LevelSpecific
         private IEnumerator Sequence()
         {
             _crashUi.Value.SetActive(true);
-            Time.timeScale = 0;
+            _levelController.Value.StopTime(gameObject, true);
             yield return new WaitForSecondsRealtime(5);
             _conversationController.Value.SetConversation(JsonUtility.FromJson<Conversation>(_conversation.text));
             _conversationController.Value.SetVisibility(true);

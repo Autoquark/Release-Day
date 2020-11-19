@@ -3,47 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class InGameMenuBehavior : MonoBehaviour
+namespace Assets.Behaviours
 {
-    protected bool Visible { get; private set; } = false;
-    protected bool PauseWhenOpen { get; set; } = true;
-
-    private Lazy<GameObject> _panel;
-
-    public InGameMenuBehavior()
+    public class InGameMenuBehavior : MonoBehaviour
     {
-        _panel = new Lazy<GameObject>(() => transform.Find("Panel").gameObject);
-    }
+        protected bool Visible { get; private set; } = false;
+        protected bool PauseWhenOpen { get; set; } = true;
 
-    protected void ToggleMenu()
-    {
-        Visible = !Visible;
+        private readonly Lazy<GameObject> _panel;
+        private readonly Lazy<LevelControllerBehaviour> _levelController;
 
-        if (_panel.Value != null)
+        public InGameMenuBehavior()
         {
-            _panel.Value.SetActive(Visible);
+            _panel = new Lazy<GameObject>(() => transform.Find("Panel").gameObject);
+            _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
         }
 
-        if (PauseWhenOpen)
+        protected void ToggleMenu()
         {
-            Time.timeScale = Visible ? 0 : 1;
-        }
-    }
+            Visible = !Visible;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+            if (_panel.Value != null)
+            {
+                _panel.Value.SetActive(Visible);
+            }
+
+            if (PauseWhenOpen)
+            {
+                _levelController.Value.StopTime(gameObject, Visible);
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ToggleMenu();
+            }
+        }
+        public void OnContinue()
         {
             ToggleMenu();
         }
-    }
-    public void OnContinue()
-    {
-        ToggleMenu();
-    }
 
-    public void OnQuit()
-    {
-        Application.Quit();
+        public void OnQuit()
+        {
+            Application.Quit();
+        }
     }
 }
