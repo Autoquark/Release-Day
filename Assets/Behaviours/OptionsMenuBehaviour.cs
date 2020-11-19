@@ -64,7 +64,7 @@ namespace Assets.Behaviours
             {
                 return;
             }
-            _audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
+            _audioMixer.SetFloat("MusicVolume", value == 0 ? -80 : Mathf.Log10(value) * 20);
         }
 
         public void OnSoundSliderChange(float value)
@@ -73,7 +73,7 @@ namespace Assets.Behaviours
             {
                 return;
             }
-            _audioMixer.SetFloat("SoundVolume", Mathf.Log10(value) * 20);
+            _audioMixer.SetFloat("SoundVolume", value == 0 ? -80 : Mathf.Log10(value) * 20);
         }
 
         public void OnBack()

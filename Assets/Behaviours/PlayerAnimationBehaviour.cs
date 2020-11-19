@@ -42,9 +42,9 @@ namespace Assets.Behaviours
                 _skeletonAnimation.Value.AnimationState.TimeScale = runAnimationSpeedFactor * Mathf.Abs(_playerController.Value.MovementLastFrame.x);
             }
 
-            if(_playerController.Value.MovementLastFrame.x != 0)
+            if(_playerController.Value.WalkIntent != 0)
             {
-                var facingRight = _playerController.Value.MovementLastFrame.x > 0;
+                var facingRight = _playerController.Value.WalkIntent > 0;
                 _skeletonAnimation.Value.Skeleton.ScaleX = facingRight ? -1 : 1;
             }
         }

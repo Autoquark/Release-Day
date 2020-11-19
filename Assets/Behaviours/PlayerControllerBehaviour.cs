@@ -67,10 +67,6 @@ class PlayerControllerBehaviour : MonoBehaviour
     private void OnDestroy()
     {
         _allPlayers.Remove(this);
-        if (_audioListener.Value.enabled && FirstPlayer() != null)
-        {
-            FirstPlayer()._audioListener.Value.enabled = true;
-        }
     }
 
     // Update is called once per frame
@@ -134,9 +130,22 @@ class PlayerControllerBehaviour : MonoBehaviour
     {
         if (!_quitting && DeadPlayer != null)
         {
-            Instantiate(DeadPlayer, transform.position, transform.rotation);
+            var corpse = Instantiate(DeadPlayer, transform.position, transform.rotation);
+            if (_audioListener.Value.enabled)
+            {
+                // If there are any other players, enable the audio listener on one. Otherwise, enable it on the corpse.
+                if (FirstPlayer() != null)
+                {
+                    corpse.GetComponent<AudioListener>().enabled = false;
+                    FirstPlayer()._audioListener.Value.enabled = true;
+                }
+                else
+                {
+                    corpse.GetComponent<AudioListener>().enabled = true;
+                }
+            }
         }
 
-        GameObject.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
