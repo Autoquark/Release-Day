@@ -23,6 +23,7 @@ class PlayerControllerBehaviour : MonoBehaviour
     private readonly Lazy<PhysicsObject> _physicsObject;
     private readonly Lazy<GameObject> _prompt;
     private readonly Lazy<Tilemap> _tileMap;
+    private readonly Lazy<AudioListener> _audioListener;
 
     private bool _jumpPending = false;
     private float _lastGroundedTime = -999;
@@ -43,12 +44,17 @@ class PlayerControllerBehaviour : MonoBehaviour
         _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
         _prompt = new Lazy<GameObject>(() => transform.Find("Prompt").gameObject);
         _tileMap = new Lazy<Tilemap>(FindObjectOfType<Tilemap>);
+        _audioListener = new Lazy<AudioListener>(() => GetComponent<AudioListener>());
     }
 
     // end-static
 
     private void Start()
     {
+        if(_allPlayers.Any())
+        {
+            GetComponent<AudioListener>().enabled = false;
+        }
         _allPlayers.Add(this);
         _physicsObject.Value.PositionOnGround();
     }
@@ -61,6 +67,10 @@ class PlayerControllerBehaviour : MonoBehaviour
     private void OnDestroy()
     {
         _allPlayers.Remove(this);
+        if (_audioListener.Value.enabled && FirstPlayer() != null)
+        {
+            FirstPlayer()._audioListener.Value.enabled = true;
+        }
     }
 
     // Update is called once per frame
