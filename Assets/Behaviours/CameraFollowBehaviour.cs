@@ -41,6 +41,16 @@ namespace Assets.Behaviours
             _maxX = bounds.MaxOrDefault(x => x.transform.position.x, 999) - camera.orthographicSize * camera.aspect;
             _minY = bounds.MinOrDefault(x => x.transform.position.y, -999) + camera.orthographicSize;
             _maxY = bounds.MaxOrDefault(x => x.transform.position.y, 999) - camera.orthographicSize;
+
+            if (_minX > _maxX)
+            {
+                _minX = _maxX = (_minX + _maxX) / 2;
+            }
+
+            if (_minY > _maxY)
+            {
+                _minY = _maxY = (_minY + _maxY) / 2;
+            }
         }
 
         private void Update()
@@ -57,8 +67,12 @@ namespace Assets.Behaviours
 
             var camera = GetComponent<Camera>();
 
-            Vector3 min = rev_players.Aggregate(first_player.transform.position, (x, y) => Vector3.Min(x, y.transform.position));
-            Vector3 max = rev_players.Aggregate(first_player.transform.position, (x, y) => Vector3.Max(x, y.transform.position));
+            var include = FindObjectsOfType<CameraIncludeBehaviour>();
+
+            var all_points = include.Select(x => x.transform).Concat(rev_players.Select(x => x.transform));
+
+            Vector3 min = all_points.Aggregate(first_player.transform.position, (x, y) => Vector3.Min(x, y.position));
+            Vector3 max = all_points.Aggregate(first_player.transform.position, (x, y) => Vector3.Max(x, y.position));
 
             float dx = (max.x - min.x) / camera.aspect;
             float dy = max.y - min.y;
@@ -67,9 +81,9 @@ namespace Assets.Behaviours
 
             Vector3 keep_pos = camera.transform.position;
 
-            foreach (var player in rev_players)
+            foreach (var point in all_points)
             {
-                AccommodatePlayer(player.transform);
+                AccommodatePlayer(point);
             }
 
             _targetPosition = camera.transform.position;
