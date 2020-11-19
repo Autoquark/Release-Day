@@ -11,11 +11,11 @@ namespace Assets.Behaviours.LevelSpecific
     {
         public bool _open = true;
 
-        private Lazy<BuggyInGameMenuBehaviour> _inGameMenu;
+        private Lazy<MenuRootBehaviour> _menuRoot;
 
         public MenuOpenTrigger()
         {
-            _inGameMenu = new Lazy<BuggyInGameMenuBehaviour>(() => FindObjectOfType<BuggyInGameMenuBehaviour>());
+            _menuRoot = new Lazy<MenuRootBehaviour>(() => FindObjectOfType<MenuRootBehaviour>());
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -25,7 +25,7 @@ namespace Assets.Behaviours.LevelSpecific
                 return;
             }
 
-            _inGameMenu.Value.SetMenuVisible(_open);
+            _menuRoot.Value.ShowInGameMenu();
             Destroy(gameObject);
         }
     }

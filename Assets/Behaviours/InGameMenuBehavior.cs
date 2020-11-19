@@ -9,52 +9,45 @@ namespace Assets.Behaviours
 {
     public class InGameMenuBehavior : MonoBehaviour
     {
-        protected bool Visible { get; private set; } = false;
         protected bool PauseWhenOpen { get; set; } = true;
 
-    	private readonly Lazy<GameObject> _panel;
-    	private readonly Lazy<GameObject> _optionsMenu;
+        private readonly Lazy<GameObject> _panel;
         private readonly Lazy<LevelControllerBehaviour> _levelController;
+        private readonly Lazy<MenuRootBehaviour> _menuRoot;
 
         public InGameMenuBehavior()
         {
             _panel = new Lazy<GameObject>(() => transform.Find("Panel").gameObject);
-	    _optionsMenu = new Lazy<GameObject>(() => transform.Find("../OptionsMenu").gameObject);
-            _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
+            _menuRoot = new Lazy<MenuRootBehaviour>(() => GetComponentInParent<MenuRootBehaviour>());
+            _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
         }
 
-	public void ToggleMenu()
+        public void OnEnable()
         {
-            Visible = !Visible;
-
-            if (_panel.Value != null)
-            {
-                _panel.Value.SetActive(Visible);
-            }
-
             if (PauseWhenOpen)
             {
-                _levelController.Value.StopTime(gameObject, Visible);
+                _levelController.Value.StopTime(gameObject, true);
             }
         }
 
-        private void Update()
+        private void OnDisable()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                ToggleMenu();
-            }
+            _levelController.Value.StopTime(gameObject, false);
+        }
+
+        private void OnDestroy()
+        {
+            _levelController.Value.StopTime(gameObject, false);
         }
 
         public void OnContinue()
         {
-        ToggleMenu();
-    }
+            gameObject.SetActive(false);
+        }
 
-    public void OnOptions()
-    {
-        _optionsMenu.Value.SetActive(true);
-            ToggleMenu();
+        public void OnOptions()
+        {
+            _menuRoot.Value.ShowOptionsMenu();
         }
 
         public void OnQuit()
