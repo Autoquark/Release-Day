@@ -30,6 +30,7 @@ namespace Assets.Behaviours
         private Conversation _currentNode;
         private Conversation _selectionsNode;
         private bool _newContentAdded = false;
+        private readonly Lazy<LevelControllerBehaviour> _levelController;
 
         public ConversationController()
         {
@@ -38,6 +39,7 @@ namespace Assets.Behaviours
             _alertIcon = new Lazy<GameObject>(() => transform.Find("AlertIcon").gameObject);
             _scrollRect = new Lazy<ScrollRect>(() => _rootPanel.Value.transform.Find("Background/ScrollPanel").GetComponent<ScrollRect>());
             _promptText = new Lazy<Text>(() => _rootPanel.Value.transform.Find("Background/PromptPanel/Text").GetComponent<Text>());
+            _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
         }
 
         private void Start()
@@ -60,13 +62,15 @@ namespace Assets.Behaviours
                 _newContentAdded = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && _currentNode != null)
             {
                 AdvanceConversation();
             }
 
+            int numNextNodes = _currentNode?.Next.Length ?? 0;
+
             if (_selectionsNode == null
-                && !_currentNode.Next.Any()
+                && numNextNodes == 0
                 && Input.GetKeyDown(KeyCode.Q))
             {
                 ClearIM();
@@ -97,14 +101,12 @@ namespace Assets.Behaviours
         private void AdvanceConversation()
         {
             int numNextNodes = _currentNode?.Next.Length ?? 0;
+            _selectionsNode = null;
 
             if (numNextNodes == 1)
             {
                 _currentNode = _currentNode.Next[0];
-                _selectionsNode = null;
                 AddStatementToIM(_currentNode);
-
-                _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to exit";
             }
             else if (numNextNodes > 1)
             {
@@ -114,13 +116,17 @@ namespace Assets.Behaviours
 
                 _promptText.Value.text = "E to select";
             }
+            else
+            {
+                _currentNode = null;
+            }
         }
 
         public void SetVisibility(bool visible)
         {
             _rootPanel.Value.SetActive(visible);
 
-            Time.timeScale = visible ? 0 : 1;
+            _levelController.Value.StopTime(gameObject, visible);
         }
 
         public void SetConversation(Conversation conv)
@@ -148,6 +154,8 @@ namespace Assets.Behaviours
             msg.transform.localScale = new Vector3(1, 1, 1);
             var cms = msg.GetComponent<ConversationMessageUtil>();
             cms.SetMessage(c, is_right);
+
+            _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to exit";
 
             _newContentAdded = true;
         }
