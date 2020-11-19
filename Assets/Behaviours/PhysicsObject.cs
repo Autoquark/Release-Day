@@ -1,4 +1,5 @@
-﻿using Assets.Extensions;
+﻿using Assets.Common;
+using Assets.Extensions;
 using Extensions;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,24 @@ namespace Assets.Behaviours
     {
         public const float MinimumMoveDistance = 0.001f;
         public const float MinSeparationDistance = 0.03f;
+        const float XVelocityDecayFactor = 0.05f;
 
         public bool Grounded { get; private set; } = false;
         public Vector2 MovementLastFrame { get; private set; }
+
+        /// <summary>
+        /// The sign and magnitude of this value indicate the direction and magnitude of the movement along floors (if grounded) or left/right in midair that this PhysicsObject
+        /// intends to make in each FixedUpdate.
+        /// </summary>
         public float WalkIntent { get; set; }
+        /// <summary>
+        /// The object's vertical velocity, which is modified by gravity each FixedUpdate and becomes zero upon encountering a vertical collision
+        /// </summary>
         public float YVelocity { get; set; }
+        /// <summary>
+        /// The object's horizontal velocity, which decays exponentially each FixedUpdate and becomes zero upon encountering a vertical collision
+        /// </summary>
+        public float XVelocity { get; set; }
 
         protected Rigidbody2D Rigidbody => _rigidbody.Value;
         protected float MaxStepAngle { get; set; } = 45;
@@ -57,10 +71,18 @@ namespace Assets.Behaviours
             }
 
             // Handle walking, including up or down a slope
-            var remainingDistance = Mathf.Abs(WalkIntent) * Time.fixedDeltaTime;
+            var updateWalkIntent = WalkIntent;
+            if(Mathf.Sign(XVelocity) != Mathf.Sign(WalkIntent))
+            {
+                var tempXVelocity = XVelocity + MathEx.ClosestToZero(-XVelocity, WalkIntent);
+                updateWalkIntent += MathEx.ClosestToZero(XVelocity, -WalkIntent);
+                XVelocity = tempXVelocity;
+            }
+
+            var remainingDistance = Mathf.Abs(updateWalkIntent + XVelocity) * Time.fixedDeltaTime;
             while (remainingDistance >= MinimumMoveDistance)
             {
-                var right = WalkIntent > 0;
+                var right = (updateWalkIntent + XVelocity) > 0;
                 var distanceMoved = 0f;
 
                 // Try stepping down if grounded
@@ -88,8 +110,13 @@ namespace Assets.Behaviours
                     continue;
                 }
 
-
                 break;
+            }
+
+            XVelocity *= Mathf.Pow(XVelocityDecayFactor, Time.fixedDeltaTime);
+            if(XVelocity <= MinimumMoveDistance)
+            {
+                XVelocity = 0;
             }
 
             // Handle vertical movement

@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Assets.Behaviours;
+using System.Linq;
 
 public class InGameMenuBehavior : MonoBehaviour
 {
     protected bool Visible { get; private set; } = false;
     protected bool PauseWhenOpen { get; set; } = true;
 
-    private Lazy<GameObject> _panel;
+    private readonly Lazy<GameObject> _panel;
+    private readonly Lazy<GameObject> _optionsMenu;
 
     public InGameMenuBehavior()
     {
         _panel = new Lazy<GameObject>(() => transform.Find("Panel").gameObject);
+        _optionsMenu = new Lazy<GameObject>(() => transform.Find("../OptionsMenu").gameObject);
     }
 
-    protected void ToggleMenu()
+    public void ToggleMenu()
     {
         Visible = !Visible;
 
@@ -37,8 +41,15 @@ public class InGameMenuBehavior : MonoBehaviour
             ToggleMenu();
         }
     }
+
     public void OnContinue()
     {
+        ToggleMenu();
+    }
+
+    public void OnOptions()
+    {
+        _optionsMenu.Value.SetActive(true);
         ToggleMenu();
     }
 
