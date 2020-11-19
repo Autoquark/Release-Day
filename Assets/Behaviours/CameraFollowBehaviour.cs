@@ -12,7 +12,8 @@ namespace Assets.Behaviours
 {
     class CameraFollowBehaviour : MonoBehaviour
     {
-        private const float _margin = 0.3f;
+        private const float _margin = 0.4f;
+        private const float _multi_margin = 0.2f;
 
         private float _minX;
         private float _maxX;
@@ -20,7 +21,8 @@ namespace Assets.Behaviours
         private float _maxY;
         private Vector3 _targetPosition;
         private float _targetSize;
-        bool _first = true;
+        private bool _first = true;
+        private float _shrinkStart = 0;
 
         public float TravelSpeed = 0.2f;
         public float SizeSpeed = 0.2f;
@@ -53,13 +55,27 @@ namespace Assets.Behaviours
             }
         }
 
+        bool InBounds(Transform trn)
+        {
+            var bounds = FindObjectsOfType<CameraBoundBehaviour>();
+            var minX = bounds.MinOrDefault(x => x.transform.position.x, -999);
+            var maxX = bounds.MaxOrDefault(x => x.transform.position.x, 999);
+            var minY = bounds.MinOrDefault(x => x.transform.position.y, -999);
+            var maxY = bounds.MaxOrDefault(x => x.transform.position.y, 999);
+
+            return trn.position.x > minX
+                && trn.position.x < maxX
+                && trn.position.y > minY
+                && trn.position.y < maxY;
+        }
+
         private void Update()
         {
             PlayerControllerBehaviour first_player = this.FirstPlayer();
             if (_first && first_player != null)
             {
                 _first = false;
-                AccommodatePlayer(first_player.transform);
+                AccommodatePlayer(first_player.transform, _margin);
             }
 
             List<PlayerControllerBehaviour> rev_players = this.AllPlayers().ToList();
@@ -69,21 +85,23 @@ namespace Assets.Behaviours
 
             var include = FindObjectsOfType<CameraIncludeBehaviour>();
 
-            var all_points = include.Select(x => x.transform).Concat(rev_players.Select(x => x.transform));
+            var all_points = include.Select(x => x.transform).Concat(rev_players.Select(x => x.transform)).Where(x => InBounds(x)).ToList();
+
+            float margin = all_points.Count > 1 ? _multi_margin : _margin;
 
             Vector3 min = all_points.Aggregate(first_player.transform.position, (x, y) => Vector3.Min(x, y.position));
             Vector3 max = all_points.Aggregate(first_player.transform.position, (x, y) => Vector3.Max(x, y.position));
 
             float dx = (max.x - min.x) / camera.aspect;
-            float dy = max.y - min.y;
+            float dy = (max.y - min.y);
 
-            _targetSize = Mathf.Max(MinCameraSize, dx, dy);
+            _targetSize = Mathf.Max(MinCameraSize, dx / (2 - margin * 4), dy / (2 - margin * 4));
 
             Vector3 keep_pos = camera.transform.position;
 
             foreach (var point in all_points)
             {
-                AccommodatePlayer(point);
+                AccommodatePlayer(point, margin);
             }
 
             _targetPosition = camera.transform.position;
@@ -94,7 +112,7 @@ namespace Assets.Behaviours
                 Vector3 full_move = _targetPosition - camera.transform.position;
                 float max_move = full_move.magnitude;
 
-                if (rev_players.Count > 1)
+                if (all_points.Count() > 1)
                 {
                     max_move = Mathf.Min(max_move, TravelSpeed * Time.deltaTime);
                 }
@@ -106,7 +124,7 @@ namespace Assets.Behaviours
 
                 float full_size_change = _targetSize - camera.orthographicSize;
 
-                if (full_size_change != 0.0f)
+                if (full_size_change > 0.0f)
                 {
                     float scale_speed = SizeSpeed * Time.deltaTime;
                     full_size_change = Mathf.Min(scale_speed, Mathf.Max(-scale_speed, full_size_change));
@@ -114,13 +132,36 @@ namespace Assets.Behaviours
 
                     SetBounds(camera);
                 }
+                else if (full_size_change < -0.001f)
+                {
+                    if (_shrinkStart != 0 && _shrinkStart < Time.time)
+                    {
+                        float scale_speed = SizeSpeed * Time.deltaTime;
+                        full_size_change = Mathf.Min(scale_speed, Mathf.Max(-scale_speed, full_size_change));
+
+                        if (full_size_change < -0.001f)
+                        {
+                            camera.orthographicSize += full_size_change;
+                            SetBounds(camera);
+                        }
+                    }
+                    else if (_shrinkStart == 0)
+                    {
+                        _shrinkStart = Time.time + 2;
+                    }
+                }
+                else
+                {
+                    _shrinkStart = 0;
+                }
             }
         }
 
-        private void AccommodatePlayer(Transform player)
+        private void AccommodatePlayer(Transform player, float margin)
         {
             var camera = GetComponent<Camera>();
-            var deadzone = RectEx.FromCorners(camera.ViewportToWorldPoint(new Vector2(_margin, _margin)), camera.ViewportToWorldPoint(new Vector2(1 - _margin, 1 - _margin)));
+
+            var deadzone = RectEx.FromCorners(camera.ViewportToWorldPoint(new Vector2(margin, margin)), camera.ViewportToWorldPoint(new Vector2(1 - margin, 1 - margin)));
 
             var playerPosition = player.position;
             if (playerPosition.x < deadzone.xMin)
