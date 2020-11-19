@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 877376677156231230}
   - component: {fileID: 877376677156231234}
   - component: {fileID: 4674945092984185096}
+  - component: {fileID: 8831634796127331721}
   m_Layer: 0
   m_Name: DeadPlayer
   m_TagString: Untagged
@@ -146,3 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633cb10e31ce75f4496c78e0a00ce8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &8831634796127331721
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877376677156231229}
+  m_Enabled: 1

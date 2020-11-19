@@ -4,22 +4,81 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 namespace Assets.Behaviours
 {
     class OptionsMenuBehaviour : MonoBehaviour
     {
-        private readonly Lazy<InGameMenuBehavior> _inGameMenu;
+        public AudioMixer _audioMixer;
+
+        private readonly Lazy<LevelControllerBehaviour> _levelController;
+        private readonly Lazy<Slider> _musicSlider;
+        private readonly Lazy<Slider> _soundSlider;
+        private readonly Lazy<MenuRootBehaviour> _menuRoot;
+
+        private bool _slidersInitialized = false;
 
         public OptionsMenuBehaviour()
         {
-            _inGameMenu = new Lazy<InGameMenuBehavior>(() => transform.Find("../In Game Menu").GetComponent<InGameMenuBehavior>());
+            _menuRoot = new Lazy<MenuRootBehaviour>(() => GetComponentInParent<MenuRootBehaviour>());
+            _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
+            _musicSlider = new Lazy<Slider>(() => transform.Find("Content/MusicSliderRow/Slider").GetComponent<Slider>());
+            _soundSlider = new Lazy<Slider>(() => transform.Find("Content/SoundSliderRow/Slider").GetComponent<Slider>());
+        }
+
+        private void Start()
+        {
+            UpdateAudioSliders();
+        }
+
+        private void OnEnable()
+        {
+            UpdateAudioSliders();
+            _levelController.Value.StopTime(gameObject, true);
+        }
+
+        private void UpdateAudioSliders()
+        {
+            _slidersInitialized = true;
+            _audioMixer.GetFloat("MusicVolume", out var volume);
+            _musicSlider.Value.value = Mathf.Pow(10, volume / 20);
+            _audioMixer.GetFloat("SoundVolume", out volume);
+            _soundSlider.Value.value = Mathf.Pow(10, volume / 20);
+        }
+
+        private void OnDisable()
+        {
+            _levelController.Value.StopTime(gameObject, false);
+        }
+
+        private void OnDestroy()
+        {
+            _levelController.Value.StopTime(gameObject, false);
+        }
+
+        public void OnMusicSliderChange(float value)
+        {
+            if(!_slidersInitialized)
+            {
+                return;
+            }
+            _audioMixer.SetFloat("MusicVolume", value == 0 ? -80 : Mathf.Log10(value) * 20);
+        }
+
+        public void OnSoundSliderChange(float value)
+        {
+            if (!_slidersInitialized)
+            {
+                return;
+            }
+            _audioMixer.SetFloat("SoundVolume", value == 0 ? -80 : Mathf.Log10(value) * 20);
         }
 
         public void OnBack()
         {
-            gameObject.SetActive(false);
-            _inGameMenu.Value.ToggleMenu();
+            _menuRoot.Value.ShowInGameMenu();
         }
     }
 }

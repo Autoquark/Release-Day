@@ -23,7 +23,7 @@ class PlayerControllerBehaviour : MonoBehaviour
     private readonly Lazy<PhysicsObject> _physicsObject;
     private readonly Lazy<GameObject> _prompt;
     private readonly Lazy<Tilemap> _tileMap;
-    private readonly Lazy<LevelControllerBehaviour> _levelController;
+    private readonly Lazy<AudioListener> _audioListener;
 
     private bool _jumpPending = false;
     private float _lastGroundedTime = -999;
@@ -44,13 +44,17 @@ class PlayerControllerBehaviour : MonoBehaviour
         _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
         _prompt = new Lazy<GameObject>(() => transform.Find("Prompt").gameObject);
         _tileMap = new Lazy<Tilemap>(FindObjectOfType<Tilemap>);
-        _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
+        _audioListener = new Lazy<AudioListener>(() => GetComponent<AudioListener>());
     }
 
     // end-static
 
     private void Start()
     {
+        if(_allPlayers.Any())
+        {
+            GetComponent<AudioListener>().enabled = false;
+        }
         _allPlayers.Add(this);
         _physicsObject.Value.PositionOnGround();
     }
@@ -70,9 +74,7 @@ class PlayerControllerBehaviour : MonoBehaviour
     {
         var interactable = FindObjectsOfType<MonoBehaviour>().OfType<IInteractable>().FirstOrDefault(x => x.CanInteractWith(this));
         _prompt.Value.SetActive(interactable != null);
-        if (interactable != null
-            && Input.GetKeyDown(KeyCode.E)
-            && !_levelController.Value.IsTimeStopped)
+        if (interactable != null && Input.GetKeyDown(KeyCode.E))
         {
             _prompt.Value.SetActive(false);
             interactable.InteractWith(this);
@@ -128,9 +130,22 @@ class PlayerControllerBehaviour : MonoBehaviour
     {
         if (!_quitting && DeadPlayer != null)
         {
-            Instantiate(DeadPlayer, transform.position, transform.rotation);
+            var corpse = Instantiate(DeadPlayer, transform.position, transform.rotation);
+            if (_audioListener.Value.enabled)
+            {
+                // If there are any other players, enable the audio listener on one. Otherwise, enable it on the corpse.
+                if (FirstPlayer() != null)
+                {
+                    corpse.GetComponent<AudioListener>().enabled = false;
+                    FirstPlayer()._audioListener.Value.enabled = true;
+                }
+                else
+                {
+                    corpse.GetComponent<AudioListener>().enabled = true;
+                }
+            }
         }
 
-        GameObject.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

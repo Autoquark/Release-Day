@@ -114,7 +114,7 @@ namespace Assets.Behaviours
             }
 
             XVelocity *= Mathf.Pow(XVelocityDecayFactor, Time.fixedDeltaTime);
-            if(XVelocity <= MinimumMoveDistance)
+            if(Mathf.Abs(XVelocity) <= MinimumMoveDistance)
             {
                 XVelocity = 0;
             }

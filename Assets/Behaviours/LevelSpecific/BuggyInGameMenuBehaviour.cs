@@ -12,13 +12,5 @@ namespace Assets.Behaviours.LevelSpecific
         {
             PauseWhenOpen = false;
         }
-
-        public void SetMenuVisible(bool value)
-        {
-            if (Visible != value)
-            {
-                ToggleMenu();
-            }
-        }
     }
 }
