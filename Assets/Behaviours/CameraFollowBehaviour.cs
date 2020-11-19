@@ -78,13 +78,16 @@ namespace Assets.Behaviours
 
             if (_targetPosition != null) {
                 Vector3 full_move = _targetPosition - camera.transform.position;
-                float len = full_move.magnitude;
-                float max_move = Mathf.Min(len, Time.deltaTime * TravelSpeed);
-                Vector3 move = full_move.normalized * max_move;
+                float max_move = full_move.magnitude;
 
-                if (move != Vector3.zero)
+                if (rev_players.Count > 1)
                 {
-                    camera.transform.position += move;
+                    max_move = Mathf.Min(max_move, TravelSpeed * Time.deltaTime);
+                }
+
+                if (max_move > 0)
+                {
+                    camera.transform.position += full_move.normalized * max_move;
                 }
 
                 float full_size_change = _targetSize - camera.orthographicSize;
