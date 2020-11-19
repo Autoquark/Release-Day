@@ -1,0 +1,8 @@
+{
+	"Speaker": "Alex",
+	"Text": "There's a teleporter here that looks kinda broken...",
+	"Next": [{
+		"Speaker": "Colin",
+		"Text": "What is the worst that could happen?"
+	}]
+}

@@ -1,0 +1,17 @@
+{
+	"Speaker": "Alex",
+	"Text": "I can't just across this and it is full of spikes...",
+	"Next": [{
+		"Speaker": "Alex",
+		"Text": "Let me just try something."
+	},
+	{
+		"Speaker": "Alex",
+		"Text": "I just don't see how I can get over there!",
+		"IsHint": true,
+		"Next": [{
+				"Speaker": "Colin",
+				"Text": "If the teleporter clones you, could you stack them up?"
+		}]
+	}]
+}
