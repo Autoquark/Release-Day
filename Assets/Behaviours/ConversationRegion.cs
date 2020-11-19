@@ -16,6 +16,7 @@ namespace Assets.Behaviours
         public bool _hasNonHintOptions = true;
         public float _delayBeforeHintOptions = 30;
 
+
         class Info
         {
             public bool HasTriggered { get; set; } = false;
@@ -24,6 +25,7 @@ namespace Assets.Behaviours
 
         private Lazy<ConversationController> _conversationController;
         private Lazy<ConversationLoader> _loader;
+        private readonly Lazy<LevelControllerBehaviour> _levelController;
         private bool _conversationButtonPressed = false;
         private float _lastTriggerTime = -999;
 
@@ -31,11 +33,12 @@ namespace Assets.Behaviours
         {
             _conversationController = new Lazy<ConversationController>(() => FindObjectOfType<ConversationController>());
             _loader = new Lazy<ConversationLoader>(GetComponent<ConversationLoader>);
+            _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
         }
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Q))
+            if(Input.GetKeyDown(KeyCode.Q) && !_levelController.Value.IsTimeStopped)
             {
                 _conversationButtonPressed = true;
             }

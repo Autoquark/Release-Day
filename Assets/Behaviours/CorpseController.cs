@@ -9,7 +9,6 @@ using UnityEngine.Tilemaps;
 
 namespace Assets.Behaviours
 {
-
     class CorpseController : MonoBehaviour
     {
         private readonly Lazy<Tilemap> _tileMap;

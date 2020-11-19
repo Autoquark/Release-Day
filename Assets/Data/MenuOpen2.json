@@ -1,0 +1,16 @@
+{
+	"Speaker": "Alex",
+	"Text": "It's far too far to jump here...",
+	"Next": [{
+		"Speaker": "Alex",
+		"Text": "Nevermind, I had an idea..."
+	},
+	{
+		"Speaker": "Alex",
+		"Text": "Can you help I am really stuck here...",
+		"Next": [{
+				"Speaker": "Colin",
+				"Text": "If you open the menu again, can you jump on that?"
+		}]
+	}]
+}

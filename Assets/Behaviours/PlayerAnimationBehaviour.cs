@@ -6,23 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-using Animation = Spine.Animation;
-
 namespace Assets.Behaviours
 {
-    class PlayerAnimationBehaviour : MonoBehaviour
+    class PlayerAnimationBehaviour : AnimationBase
     {
         public AnimationReferenceAsset run, idle, jumpStart, jumpUp, jumpApex, fall;
 
         public float runAnimationSpeedFactor = 30;
 
         private Lazy<PhysicsObject> _playerController;
-        private Lazy<SkeletonAnimation> _skeletonAnimation;
 
         public PlayerAnimationBehaviour()
         {
             _playerController = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
-            _skeletonAnimation = new Lazy<SkeletonAnimation>(GetComponent<SkeletonAnimation>);
         }
 
         private void Update()
@@ -51,17 +47,6 @@ namespace Assets.Behaviours
                 var facingRight = _playerController.Value.MovementLastFrame.x > 0;
                 _skeletonAnimation.Value.Skeleton.ScaleX = facingRight ? -1 : 1;
             }
-        }
-
-        private void SetAnimationIfDifferent(Animation animation)
-        {
-            if (_skeletonAnimation.Value.state.GetCurrent(0)?.Animation == animation)
-            {
-                return;
-            }
-
-            _skeletonAnimation.Value.state.SetAnimation(0, animation, true);
-            _skeletonAnimation.Value.AnimationState.TimeScale = 1;
         }
     }
 }

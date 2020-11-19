@@ -1,0 +1,16 @@
+{
+	"Speaker": "Alex",
+	"Text": "Weird!  The menu just opened right in front of me...",
+	"Next": [{
+		"Speaker": "Colin",
+		"Text": "So bug#2361 came back...  Put it in the system, I'll get to it later.",
+		"Next": [{
+			"Speaker": "Alex",
+			"Text": "You don't understand, the menu appeared in the corridor!",
+			"Next": [{
+				"Speaker": "Colin",
+				"Text": "Well close it..."
+			}]
+		}]
+	}]
+}

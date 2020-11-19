@@ -19,18 +19,38 @@ namespace Assets.Behaviours
         private float _minY;
         private float _maxY;
         private Vector3 _targetPosition;
+        private float _targetSize;
         bool _first = true;
 
         public float TravelSpeed = 0.2f;
+        public float SizeSpeed = 0.2f;
+        public float MinCameraSize = 5.0f;
 
         private void Start()
         {
             var camera = GetComponent<Camera>();
+            SetBounds(camera);
+
+            _targetSize = MinCameraSize;
+        }
+
+        private void SetBounds(Camera camera)
+        {
             var bounds = FindObjectsOfType<CameraBoundBehaviour>();
             _minX = bounds.MinOrDefault(x => x.transform.position.x, -999) + camera.orthographicSize * camera.aspect;
             _maxX = bounds.MaxOrDefault(x => x.transform.position.x, 999) - camera.orthographicSize * camera.aspect;
             _minY = bounds.MinOrDefault(x => x.transform.position.y, -999) + camera.orthographicSize;
             _maxY = bounds.MaxOrDefault(x => x.transform.position.y, 999) - camera.orthographicSize;
+
+            if (_minX > _maxX)
+            {
+                _minX = _maxX = (_minX + _maxX) / 2;
+            }
+
+            if (_minY > _maxY)
+            {
+                _minY = _maxY = (_minY + _maxY) / 2;
+            }
         }
 
         private void Update()
@@ -47,11 +67,23 @@ namespace Assets.Behaviours
 
             var camera = GetComponent<Camera>();
 
+            var include = FindObjectsOfType<CameraIncludeBehaviour>();
+
+            var all_points = include.Select(x => x.transform).Concat(rev_players.Select(x => x.transform));
+
+            Vector3 min = all_points.Aggregate(first_player.transform.position, (x, y) => Vector3.Min(x, y.position));
+            Vector3 max = all_points.Aggregate(first_player.transform.position, (x, y) => Vector3.Max(x, y.position));
+
+            float dx = (max.x - min.x) / camera.aspect;
+            float dy = max.y - min.y;
+
+            _targetSize = Mathf.Max(MinCameraSize, dx, dy);
+
             Vector3 keep_pos = camera.transform.position;
 
-            foreach (var player in rev_players)
+            foreach (var point in all_points)
             {
-                AccommodatePlayer(player.transform);
+                AccommodatePlayer(point);
             }
 
             _targetPosition = camera.transform.position;
@@ -60,13 +92,27 @@ namespace Assets.Behaviours
 
             if (_targetPosition != null) {
                 Vector3 full_move = _targetPosition - camera.transform.position;
-                float len = full_move.magnitude;
-                float max_move = Mathf.Min(len, Time.deltaTime * TravelSpeed);
-                Vector3 move = full_move.normalized * max_move;
+                float max_move = full_move.magnitude;
 
-                if (move != Vector3.zero)
+                if (rev_players.Count > 1)
                 {
-                    camera.transform.position += move;
+                    max_move = Mathf.Min(max_move, TravelSpeed * Time.deltaTime);
+                }
+
+                if (max_move > 0)
+                {
+                    camera.transform.position += full_move.normalized * max_move;
+                }
+
+                float full_size_change = _targetSize - camera.orthographicSize;
+
+                if (full_size_change != 0.0f)
+                {
+                    float scale_speed = SizeSpeed * Time.deltaTime;
+                    full_size_change = Mathf.Min(scale_speed, Mathf.Max(-scale_speed, full_size_change));
+                    camera.orthographicSize += full_size_change;
+
+                    SetBounds(camera);
                 }
             }
         }
