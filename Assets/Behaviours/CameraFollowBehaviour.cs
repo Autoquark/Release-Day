@@ -19,13 +19,23 @@ namespace Assets.Behaviours
         private float _minY;
         private float _maxY;
         private Vector3 _targetPosition;
+        private float _targetSize;
         bool _first = true;
 
         public float TravelSpeed = 0.2f;
+        public float SizeSpeed = 0.2f;
+        public float MinCameraSize = 5.0f;
 
         private void Start()
         {
             var camera = GetComponent<Camera>();
+            SetBounds(camera);
+
+            _targetSize = MinCameraSize;
+        }
+
+        private void SetBounds(Camera camera)
+        {
             var bounds = FindObjectsOfType<CameraBoundBehaviour>();
             _minX = bounds.MinOrDefault(x => x.transform.position.x, -999) + camera.orthographicSize * camera.aspect;
             _maxX = bounds.MaxOrDefault(x => x.transform.position.x, 999) - camera.orthographicSize * camera.aspect;
@@ -47,6 +57,14 @@ namespace Assets.Behaviours
 
             var camera = GetComponent<Camera>();
 
+            Vector3 min = rev_players.Aggregate(first_player.transform.position, (x, y) => Vector3.Min(x, y.transform.position));
+            Vector3 max = rev_players.Aggregate(first_player.transform.position, (x, y) => Vector3.Max(x, y.transform.position));
+
+            float dx = (max.x - min.x) / camera.aspect;
+            float dy = max.y - min.y;
+
+            _targetSize = Mathf.Max(MinCameraSize, dx, dy);
+
             Vector3 keep_pos = camera.transform.position;
 
             foreach (var player in rev_players)
@@ -67,6 +85,17 @@ namespace Assets.Behaviours
                 if (move != Vector3.zero)
                 {
                     camera.transform.position += move;
+                }
+
+                float full_size_change = _targetSize - camera.orthographicSize;
+
+                if (full_size_change != 0.0f)
+                {
+                    float scale_speed = SizeSpeed * Time.deltaTime;
+                    full_size_change = Mathf.Min(scale_speed, Mathf.Max(-scale_speed, full_size_change));
+                    camera.orthographicSize += full_size_change;
+
+                    SetBounds(camera);
                 }
             }
         }
