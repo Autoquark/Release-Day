@@ -15,21 +15,27 @@ namespace Assets.Behaviours
         public GameObject MessagePrefabOptions;
         public Sprite AlertImage1;
         public Sprite AlertImage2;
+        public AudioClip AlertSound;
+        public AudioClip OpenSound;
+        public AudioClip CloseSound;
+        public AudioClip DoSound;
 
         public bool Visible => _rootPanel.Value.activeSelf;
 
         public void ShowAlertIconThisFrame()
         {
-            _showAlertIcon = true;
+            _showAlertIconThisFrame = true;
         }
 
-        private bool _showAlertIcon = false;
+        private bool _showAlertIconThisFrame = false;
+        private bool _showAlertIconLastFrame = false;
         private readonly Lazy<GameObject> _rootPanel;
         private readonly Lazy<GameObject> _scrollContent;
         private readonly Lazy<ScrollRect> _scrollRect;
         private readonly Lazy<GameObject> _alertIcon;
         private readonly Lazy<Image> _alertIconInner;
         private readonly Lazy<Text> _promptText;
+        private readonly Lazy<AudioSource> _audioSource;
         private Conversation _conversation;
         private Conversation _currentNode;
         private Conversation _selectionsNode;
@@ -46,6 +52,7 @@ namespace Assets.Behaviours
             _scrollRect = new Lazy<ScrollRect>(() => _rootPanel.Value.transform.Find("Background/ScrollPanel").GetComponent<ScrollRect>());
             _promptText = new Lazy<Text>(() => _rootPanel.Value.transform.Find("Background/PromptPanel/Text").GetComponent<Text>());
             _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
+            _audioSource = new Lazy<AudioSource>(GetComponent<AudioSource>);
         }
 
         private void Start()
@@ -55,7 +62,7 @@ namespace Assets.Behaviours
 
         private void Update()
         {
-            if (_showAlertIcon)
+            if (_showAlertIconThisFrame)
             {
                 float adj_t = Time.time / 1.3f;
                 bool which = (adj_t - Mathf.Floor(adj_t)) > 0.8f;
@@ -63,7 +70,14 @@ namespace Assets.Behaviours
                 Sprite spr = which ? AlertImage2 : AlertImage1;
 
                 _alertIconInner.Value.sprite = spr;
+
+                if (!_showAlertIconLastFrame)
+                {
+
+                }
             }
+
+            _showAlertIconLastFrame = _showAlertIconThisFrame;
 
             if (!Visible)
             {
@@ -97,8 +111,8 @@ namespace Assets.Behaviours
 
         private void FixedUpdate()
         {
-            _alertIcon.Value.SetActive(_showAlertIcon);
-            _showAlertIcon = false;
+            _alertIcon.Value.SetActive(_showAlertIconThisFrame);
+            _showAlertIconThisFrame = false;
         }
 
         internal void SelectionMade(int selectedOption)
@@ -136,13 +150,38 @@ namespace Assets.Behaviours
             {
                 _currentNode = null;
             }
+
+            PlaySound(DoSound);
         }
 
         public void SetVisibility(bool visible)
         {
-            _rootPanel.Value.SetActive(visible);
+            bool was_active = _rootPanel.Value.activeSelf;
 
-            _levelController.Value.StopTime(gameObject, visible);
+            if (was_active != visible)
+            {
+                _rootPanel.Value.SetActive(visible);
+
+                _levelController.Value.StopTime(gameObject, visible);
+
+                if (visible)
+                {
+                    PlaySound(OpenSound);
+                }
+                else
+                {
+                    PlaySound(CloseSound);
+                }
+            }
+        }
+
+        private void PlaySound(AudioClip clip)
+        {
+            if (!_audioSource.Value.isPlaying || _audioSource.Value.clip != clip)
+            {
+                _audioSource.Value.clip = clip;
+                _audioSource.Value.Play();
+            }
         }
 
         public void SetConversation(Conversation conv, bool unlockHints = false)
