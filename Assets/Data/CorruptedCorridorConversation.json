@@ -1,0 +1,28 @@
+{
+  "Speaker": "Alex",
+  "Text": "Hey, Frances, should there be a pit full of spikes in the corridor?",
+  "Next": [
+    {
+      "Speaker": "Frances",
+      "Text": "Don't be ridiculous Alex, that would be a massive health and safety violation.",
+      "Next": [
+        {
+          "Speaker": "Frances",
+          "Text": "Stop planning absurd office redecorations and concentrate on making sure there's no bugs in the release candidate.",
+          "Next": [
+            {
+              "Speaker": "Alex",
+              "Text": "Frances, there's a massive pit in the middle of the corridor! And I keep telling you, the release candidate is full of bugs",
+              "Next": [
+                {
+                  "Speaker": "Frances",
+                  "Text": "Then stop talking to me and write them up so Colin can fix them!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

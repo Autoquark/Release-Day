@@ -69,13 +69,14 @@ namespace Assets.Behaviours
 
         private IEnumerator FadeBetween(Color a, Color b)
         {
-            var startTime = Time.time;
-            var endTime = Time.time + _fadeDuration;
-            while (Time.time < endTime)
+            var startTime = Time.unscaledTime;
+            var endTime = Time.unscaledTime + _fadeDuration;
+            while (Time.unscaledTime < endTime)
             {
-                _blackoutImage.Value.color = Color.Lerp(a, b, (Time.time - startTime) / _fadeDuration);
+                _blackoutImage.Value.color = Color.Lerp(a, b, (Time.unscaledTime - startTime) / _fadeDuration);
                 yield return null;
             }
+            _blackoutImage.Value.color = b;
         }
 
         private void Update()
