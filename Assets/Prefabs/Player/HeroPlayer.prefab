@@ -37,6 +37,11 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 1.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2272170010247721016, guid: 8b5e19f623ac62b48b96f61b0685dd37,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 2352197415294378845, guid: 8b5e19f623ac62b48b96f61b0685dd37,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

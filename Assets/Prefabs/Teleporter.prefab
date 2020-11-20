@@ -74,7 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347548e86d97500458bbb63f9c33d11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateAnimation: {fileID: 11400000, guid: ac3d8dfb5e3ff954bba21336845b5e4a, type: 2}
+  activateAnimation: {fileID: 11400000, guid: e88a97903d7e2194e84af27fec043cae, type: 2}
+  idleAnimation: {fileID: 11400000, guid: ed83bd2eeaa26ca4ca76e1f351754f52, type: 2}
   HasBug: 0
   SendsTo: {fileID: 0}
 --- !u!33 &7042189816523602678
@@ -159,8 +160,8 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: 
-  loop: 0
+  _animationName: Idel
+  loop: 1
   timeScale: 1
 --- !u!60 &9162159683154282243
 PolygonCollider2D:
