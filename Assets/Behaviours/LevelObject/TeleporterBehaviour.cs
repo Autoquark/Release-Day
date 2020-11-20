@@ -11,7 +11,7 @@ namespace Assets.Behaviours
 {
     class TeleporterBehaviour : AnimationBase
     {
-        public AnimationReferenceAsset activateAnimation;
+        public AnimationReferenceAsset activateAnimation, idleAnimation;
         public bool HasBug = false;
         public TeleporterBehaviour SendsTo;
 
@@ -22,7 +22,10 @@ namespace Assets.Behaviours
         {
             Filter.useTriggers = false;
             Filter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+            _skeletonAnimation.Value.AnimationState.Complete += AnimationState_Complete;
         }
+
+        private void AnimationState_Complete(Spine.TrackEntry trackEntry) => SetAnimationIfDifferent(idleAnimation);
 
         private void OnTriggerStay2D(Collider2D hitBy)
         {
@@ -33,7 +36,7 @@ namespace Assets.Behaviours
 
             if (SendsTo != null && player != null)
             {
-                CapsuleCollider2D capsule = player.GetComponent<CapsuleCollider2D>();
+                var capsule = player.GetComponent<CapsuleCollider2D>();
 
                 if (Physics2D.OverlapCapsule(SendsTo.transform.position, capsule.size, capsule.direction, capsule.transform.eulerAngles.z, Filter, new Collider2D[1]) == 0)
                 {
@@ -48,6 +51,7 @@ namespace Assets.Behaviours
 
                     _coolDownEnd = SendsTo._coolDownEnd = Time.time + 1.5f;
                     SetAnimationIfDifferent(activateAnimation, false);
+                    SendsTo.SetAnimationIfDifferent(activateAnimation, false);
                 }
             }
         }
