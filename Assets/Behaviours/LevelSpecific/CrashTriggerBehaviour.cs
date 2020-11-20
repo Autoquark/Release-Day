@@ -15,7 +15,6 @@ namespace Assets.Behaviours.LevelSpecific
     class CrashTriggerBehaviour : MonoBehaviour
     {
         public TextAsset _conversation;
-        public string _nextScene;
 
         private readonly Lazy<ConversationController> _conversationController;
         private readonly Lazy<GameObject> _crashUi;
@@ -25,7 +24,7 @@ namespace Assets.Behaviours.LevelSpecific
         {
             _conversationController = new Lazy<ConversationController>(() => FindObjectOfType<ConversationController>());
             _crashUi = new Lazy<GameObject>(() => GameObject.Find("CrashUi"));
-            _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
+            _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
         }
 
         private void Start()
@@ -51,7 +50,7 @@ namespace Assets.Behaviours.LevelSpecific
             _conversationController.Value.SetConversation(JsonUtility.FromJson<Conversation>(_conversation.text));
             _conversationController.Value.SetVisibility(true);
             yield return new WaitUntil(() => !_conversationController.Value.Visible);
-            SceneManager.LoadScene(_nextScene);
+            _levelController.Value.GoToNextLevel();
         }
     }
 }

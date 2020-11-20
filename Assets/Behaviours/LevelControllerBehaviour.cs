@@ -10,8 +10,17 @@ namespace Assets.Behaviours
 {
     class LevelControllerBehaviour : MonoBehaviour
     {
+        public static int test;
+        public List<string> LevelSequence = new List<string>();
+
         private float _time_out = 0.0f;
         private HashSet<GameObject> _timeStoppers = new HashSet<GameObject>();
+
+        public void GoToNextLevel()
+        {
+            var current = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(LevelSequence.SkipWhile(x => x != current).Skip(1).First());
+        }
 
         private void Update()
         {

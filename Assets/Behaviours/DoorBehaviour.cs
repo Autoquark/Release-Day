@@ -11,13 +11,20 @@ namespace Assets.Behaviours
     class DoorBehaviour : MonoBehaviour, IInteractable
     {
         public DoorBehaviour _linkedDoor;
-        public string _goToScene;
+        public bool _goToNextScene = false;
 
         public string Message => "Press E to enter";
 
+        private readonly Lazy<LevelControllerBehaviour> _levelController;
+
+        public DoorBehaviour()
+        {
+            _levelController = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
+        }
+
         public bool CanInteractWith(PlayerControllerBehaviour player)
         {
-            return (_linkedDoor != null || !string.IsNullOrWhiteSpace(_goToScene))
+            return (_linkedDoor != null || _goToNextScene)
                 && Mathf.Abs(player.transform.position.x - transform.position.x) <= 0.5 * player.GetComponent<Collider2D>().bounds.size.x
                 && Mathf.Abs(player.transform.position.y - transform.position.y) <= 0.5 * player.GetComponent<Collider2D>().bounds.size.y;
         }
@@ -30,7 +37,7 @@ namespace Assets.Behaviours
             }
             else
             {
-                SceneManager.LoadScene(_goToScene);
+                _levelController.Value.GoToNextLevel();
             }
         }
     }
