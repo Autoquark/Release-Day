@@ -1,0 +1,21 @@
+{
+	"Speaker": "Alex",
+	"Text": "How did you imagine people getting past this killer plant",
+	"Next": [{
+		"Speaker": "Myra",
+		"Text": "Jump over the phlegm!",
+		"Next" : [{
+			"Speaker": "Alex",
+			"Text": "Awkwardly, its in a low ceilinged bit.",
+			"Next": [{
+				"Speaker": "Alex",
+				"Text": "I really don't know how to get past this!",
+				"IsHint": true,
+				"Next": [{
+					"Speaker": "Myra",
+					"Text": "Can you pile something in the way?"
+				}]				
+			}]
+		}]
+	}]
+}
