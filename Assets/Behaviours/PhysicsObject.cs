@@ -37,7 +37,7 @@ namespace Assets.Behaviours
         protected float MaxStepAngle { get; set; } = 45;
         protected ContactFilter2D Filter;
 
-        private Lazy<Rigidbody2D> _rigidbody;
+        private readonly Lazy<Rigidbody2D> _rigidbody;
 
         public PhysicsObject()
         {

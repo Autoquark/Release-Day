@@ -23,8 +23,8 @@ namespace Assets.Behaviours
             public float? DelayStartTime { get; set; }
         }
 
-        private Lazy<ConversationController> _conversationController;
-        private Lazy<ConversationLoader> _loader;
+        private readonly Lazy<ConversationController> _conversationController;
+        private readonly Lazy<ConversationLoader> _loader;
         private readonly Lazy<LevelControllerBehaviour> _levelController;
         private bool _conversationButtonPressed = false;
         private float _lastTriggerTime = -999;

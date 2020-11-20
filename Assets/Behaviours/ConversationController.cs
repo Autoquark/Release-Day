@@ -21,11 +21,11 @@ namespace Assets.Behaviours
         }
 
         private bool _showAlertIcon = false;
-        private Lazy<GameObject> _rootPanel;
-        private Lazy<GameObject> _scrollContent;
-        private Lazy<ScrollRect> _scrollRect;
-        private Lazy<GameObject> _alertIcon;
-        private Lazy<Text> _promptText;
+        private readonly Lazy<GameObject> _rootPanel;
+        private readonly Lazy<GameObject> _scrollContent;
+        private readonly Lazy<ScrollRect> _scrollRect;
+        private readonly Lazy<GameObject> _alertIcon;
+        private readonly Lazy<Text> _promptText;
         private Conversation _conversation;
         private Conversation _currentNode;
         private Conversation _selectionsNode;

@@ -13,7 +13,7 @@ namespace Assets.Behaviours.Cutscene
     {
         protected PlayerControllerBehaviour PlayerControllerBehaviour => _playerControllerBehaviour.Value;
 
-        private Lazy<PlayerControllerBehaviour> _playerControllerBehaviour;
+        private readonly Lazy<PlayerControllerBehaviour> _playerControllerBehaviour;
         protected IDictionary<string, TalkBehaviour> SpeakersByName { get; } = new Dictionary<string, TalkBehaviour>();
 
         public CutsceneControllerBehaviour()
