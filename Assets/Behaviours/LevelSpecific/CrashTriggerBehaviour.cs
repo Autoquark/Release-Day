@@ -15,6 +15,7 @@ namespace Assets.Behaviours.LevelSpecific
     class CrashTriggerBehaviour : MonoBehaviour
     {
         public TextAsset _conversation;
+        public AudioClip _music;
 
         private readonly Lazy<ConversationController> _conversationController;
         private readonly Lazy<GameObject> _crashUi;
@@ -46,6 +47,10 @@ namespace Assets.Behaviours.LevelSpecific
         {
             _crashUi.Value.SetActive(true);
             _levelController.Value.StopTime(gameObject, true);
+
+            var musicSource = _levelController.Value.GetComponent<AudioSource>();
+            musicSource.clip = _music;
+            musicSource.Play();
             yield return new WaitForSecondsRealtime(5);
             _conversationController.Value.SetConversation(JsonUtility.FromJson<Conversation>(_conversation.text));
             _conversationController.Value.SetVisibility(true);
