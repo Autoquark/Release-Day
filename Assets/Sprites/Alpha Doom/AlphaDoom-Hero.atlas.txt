@@ -1,0 +1,55 @@
+
+AlphaDoom-Hero.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm
+  rotate: false
+  xy: 314, 155
+  size: 195, 187
+  orig: 195, 187
+  offset: 0, 0
+  index: -1
+Arm Back
+  rotate: true
+  xy: 218, 22
+  size: 131, 232
+  orig: 131, 232
+  offset: 0, 0
+  index: -1
+Arm Front
+  rotate: true
+  xy: 314, 344
+  size: 619, 520
+  orig: 619, 520
+  offset: 0, 0
+  index: -1
+Body
+  rotate: false
+  xy: 2, 323
+  size: 310, 640
+  orig: 310, 640
+  offset: 0, 0
+  index: -1
+Hand Back
+  rotate: true
+  xy: 2, 114
+  size: 207, 214
+  orig: 207, 214
+  offset: 0, 0
+  index: -1
+Leg
+  rotate: true
+  xy: 511, 168
+  size: 174, 435
+  orig: 174, 435
+  offset: 0, 0
+  index: -1
+Leg Back
+  rotate: true
+  xy: 511, 2
+  size: 164, 410
+  orig: 164, 410
+  offset: 0, 0
+  index: -1

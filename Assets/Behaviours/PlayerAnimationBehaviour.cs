@@ -11,6 +11,7 @@ namespace Assets.Behaviours
     class PlayerAnimationBehaviour : AnimationBase
     {
         public AnimationReferenceAsset run, idle, jumpStart, jumpUp, jumpApex, fall;
+        public bool flipX = false;
 
         public float runAnimationSpeedFactor = 30;
 
@@ -44,8 +45,8 @@ namespace Assets.Behaviours
 
             if(_playerController.Value.WalkIntent != 0)
             {
-                var facingRight = _playerController.Value.WalkIntent > 0;
-                _skeletonAnimation.Value.Skeleton.ScaleX = facingRight ? -1 : 1;
+                var shouldFlip = (_playerController.Value.WalkIntent > 0) ^ flipX;
+                _skeletonAnimation.Value.Skeleton.ScaleX = shouldFlip ? -1 : 1;
             }
         }
     }

@@ -52,5 +52,10 @@ namespace Assets.Behaviours.LevelSpecific
             yield return new WaitUntil(() => !_conversationController.Value.Visible);
             _levelController.Value.GoToNextLevel();
         }
+
+        private void OnDestroy()
+        {
+            _levelController.Value.StopTime(gameObject, false);
+        }
     }
 }
