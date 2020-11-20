@@ -72,7 +72,11 @@ namespace Assets.Behaviours
         private void Update()
         {
             PlayerControllerBehaviour first_player = this.FirstPlayer();
-            if (_first && first_player != null)
+
+            if (first_player == null)
+                return;
+
+            if (_first)
             {
                 _first = false;
                 AccommodatePlayer(first_player.transform, _margin);
