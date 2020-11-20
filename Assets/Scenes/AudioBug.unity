@@ -432,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 4350300997407591307, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125,
         type: 3}
       propertyPath: _delayBeforeHintOptions
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125, type: 3}
@@ -34526,6 +34526,26 @@ PrefabInstance:
     - target: {fileID: 2544036881219666199, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737100846879085327, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737100846879085327, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737100846879085327, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737100846879085327, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3857960004882082813, guid: 977274dcd7bf12946ada1239436153d0,

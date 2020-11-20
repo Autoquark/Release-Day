@@ -4,6 +4,7 @@ using Assets.Data;
 using Assets.Extensions;
 using UnityEngine.UI;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Assets.Behaviours
 {
@@ -33,6 +34,7 @@ namespace Assets.Behaviours
         private Conversation _currentNode;
         private Conversation _selectionsNode;
         private bool _newContentAdded = false;
+        private bool _unlockHints = false;
         private readonly Lazy<LevelControllerBehaviour> _levelController;
 
         public ConversationController()
@@ -124,7 +126,7 @@ namespace Assets.Behaviours
             }
             else if (numNextNodes > 1)
             {
-                AddOptionsToIM(_currentNode.Next);
+                AddOptionsToIM(_currentNode.Next.Where(x => !x.IsHint || _unlockHints));
                 _selectionsNode = _currentNode;
                 _currentNode = null;
 
@@ -143,12 +145,13 @@ namespace Assets.Behaviours
             _levelController.Value.StopTime(gameObject, visible);
         }
 
-        public void SetConversation(Conversation conv)
+        public void SetConversation(Conversation conv, bool unlockHints = false)
         {
             ClearIM();
 
             _conversation = conv;
             _currentNode = conv;
+            _unlockHints = unlockHints;
 
             AddStatementToIM(_currentNode);
 
@@ -174,12 +177,12 @@ namespace Assets.Behaviours
             _newContentAdded = true;
         }
 
-        private void AddOptionsToIM(Conversation[] c)
+        private void AddOptionsToIM(IEnumerable<Conversation> options)
         {
             var msg = Instantiate(MessagePrefabOptions, _scrollContent.Value.transform);
             msg.transform.localScale = new Vector3(1, 1, 1);
             var cms = msg.GetComponent<ConversationMessageUtil>();
-            cms.SetOptions(c, false, this);
+            cms.SetOptions(options.ToArray(), false, this);
 
             _newContentAdded = true;
         }

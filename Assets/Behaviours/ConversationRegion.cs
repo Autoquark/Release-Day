@@ -57,12 +57,14 @@ namespace Assets.Behaviours
                     data.DelayStartTime = Time.time;
                 }
 
+                var hintsUnlocked = Time.time - data.DelayStartTime > _delayBeforeHintOptions;
+
                 if ((!_requireGrounded || collision.GetComponent<PhysicsObject>().Grounded)
-                    && (_hasNonHintOptions || Time.time - data.DelayStartTime > _delayBeforeHintOptions))
+                    && (_hasNonHintOptions || hintsUnlocked))
                 {
                     if (_triggerAutomatically || _conversationButtonPressed)
                     {
-                        _conversationController.Value.SetConversation(_loader.Value.Conversation);
+                        _conversationController.Value.SetConversation(_loader.Value.Conversation, hintsUnlocked);
                         _conversationController.Value.SetVisibility(true);
                         data.HasTriggered = true;
                         _lastTriggerTime = Time.time;
