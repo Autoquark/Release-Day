@@ -1692,6 +1692,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 23877545401448375}
     m_Modifications:
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[0].m_Handle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[0]
+      value: IntroDesks
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[1]
+      value: QAroom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[2]
+      value: GameLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[3]
+      value: QAroom2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[4]
+      value: CorruptedOffice
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[5]
+      value: MenuBug
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[6]
+      value: TeleporterBug 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[7]
+      value: TeleporterBug 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[8]
+      value: AudioBug
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779754086114822882, guid: fbd953688e18a57419bef8f1a1f3ecd9,
+        type: 3}
+      propertyPath: LevelSequence.Array.data[9]
+      value: FinalLevel
+      objectReference: {fileID: 0}
     - target: {fileID: 2779754086114822883, guid: fbd953688e18a57419bef8f1a1f3ecd9,
         type: 3}
       propertyPath: m_LocalPosition.x

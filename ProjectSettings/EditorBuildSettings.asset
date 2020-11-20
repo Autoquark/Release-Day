@@ -23,4 +23,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TeleporterBug 3.unity
     guid: 7b8a3fb2e67d9bb4ba0e64edc0f04cb9
+  - enabled: 1
+    path: Assets/Scenes/AudioBug.unity
+    guid: b2969b8b1af562e468041249920cd09e
+  - enabled: 1
+    path: Assets/Scenes/QAroom.unity
+    guid: 626164a1c195efd44b8edb2044c6903a
+  - enabled: 1
+    path: Assets/Scenes/QAroom2.unity
+    guid: 6af5fd5c52bd60e40b89b41073d6377d
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel.unity
+    guid: fd659aecdd087ed41bcd5e3b0446a5fa
+  - enabled: 1
+    path: Assets/Scenes/GameLevel.unity
+    guid: fd618eb5582fae94cb1d271a00b55c60
+  - enabled: 1
+    path: Assets/Scenes/CorruptedOffice.unity
+    guid: 1df7304cbe9aa904a9724fdc469cd79c
   m_configObjects: {}

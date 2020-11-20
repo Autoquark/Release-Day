@@ -466,6 +466,11 @@ PrefabInstance:
       propertyPath: _goToScene
       value: TeleporterBug 1
       objectReference: {fileID: 0}
+    - target: {fileID: -496857082877363915, guid: 08ced9655bab15d4ba6375daa21a839b,
+        type: 3}
+      propertyPath: _goToNextScene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1937115378139122883, guid: 08ced9655bab15d4ba6375daa21a839b,
         type: 3}
       propertyPath: m_Name
