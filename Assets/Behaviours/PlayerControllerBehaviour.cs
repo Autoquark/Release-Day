@@ -19,6 +19,7 @@ class PlayerControllerBehaviour : MonoBehaviour
     public AudioClip JumpAudio = null;
     public AudioClip LandAudio = null;
     public AudioClip FootstepsAudio = null;
+    public AudioClip DeathAudio = null;
 
     const float _minSeparationDistance = 0.1f;
     private readonly Lazy<Rigidbody2D> _rigidbody;
@@ -28,7 +29,7 @@ class PlayerControllerBehaviour : MonoBehaviour
     private readonly Lazy<Tilemap> _tileMap;
     private readonly Lazy<AudioListener> _audioListener;
     private readonly Lazy<LevelControllerBehaviour> _levelController;
-    private readonly Lazy<AudioSource> _audioSource;
+    private readonly Lazy<List<AudioSource>> _audioSources;
 
     private bool _jumpPending = false;
     private float _lastGroundedTime = -999;
@@ -52,7 +53,7 @@ class PlayerControllerBehaviour : MonoBehaviour
         _tileMap = new Lazy<Tilemap>(FindObjectOfType<Tilemap>);
         _audioListener = new Lazy<AudioListener>(() => GetComponent<AudioListener>());
         _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
-        _audioSource = new Lazy<AudioSource>(GetComponent<AudioSource>);
+        _audioSources = new Lazy<List<AudioSource>>(() => GetComponents<AudioSource>().ToList());
     }
 
     // end-static
@@ -81,20 +82,22 @@ class PlayerControllerBehaviour : MonoBehaviour
         _allPlayers.Remove(this);
     }
 
-    private void PlayClip(AudioClip clip)
+    private void PlayClip(AudioClip clip, int channel)
     {
-        if (!_audioSource.Value.isPlaying || _audioSource.Value.clip != clip)
+        AudioSource audioSource = _audioSources.Value[channel];
+        if (!audioSource.isPlaying || audioSource.clip != clip)
         {
-            _audioSource.Value.clip = clip;
-            _audioSource.Value.Play();
+            audioSource.clip = clip;
+            audioSource.Play();
         }
     }
 
-    private void StopClip(AudioClip clip)
+    private void StopClip(AudioClip clip, int channel)
     {
-        if (_audioSource.Value.isPlaying && _audioSource.Value.clip == clip)
+        AudioSource audioSource = _audioSources.Value[channel];
+        if (audioSource.isPlaying && audioSource.clip == clip)
         {
-            _audioSource.Value.Stop();
+            audioSource.Stop();
         }
     }
 
@@ -125,7 +128,7 @@ class PlayerControllerBehaviour : MonoBehaviour
 
         if (!_wasGrounded && _physicsObject.Value.Grounded)
         {
-            PlayClip(LandAudio);
+            PlayClip(LandAudio, 1);
         }
 
         _wasGrounded = _physicsObject.Value.Grounded;
@@ -136,22 +139,22 @@ class PlayerControllerBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             _physicsObject.Value.WalkIntent = -runSpeed;
-            PlayClip(FootstepsAudio);
+            PlayClip(FootstepsAudio, 0);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             _physicsObject.Value.WalkIntent = runSpeed;
-            PlayClip(FootstepsAudio);
+            PlayClip(FootstepsAudio, 0);
         }
         else
         {
             _physicsObject.Value.WalkIntent = 0;
-            StopClip(FootstepsAudio);
+            StopClip(FootstepsAudio, 0);
         }
 
         if (!_physicsObject.Value.Grounded)
         {
-            StopClip(FootstepsAudio);
+            StopClip(FootstepsAudio, 0);
         }
 
         if (_jumpPending)
@@ -159,7 +162,7 @@ class PlayerControllerBehaviour : MonoBehaviour
             _physicsObject.Value.YVelocity = jumpVelocity;
             _jumpPending = false;
             _jumpedSinceLastGrounded = true;
-            PlayClip(JumpAudio);
+            PlayClip(JumpAudio, 1);
         }
         else if(_physicsObject.Value.Grounded)
         {
