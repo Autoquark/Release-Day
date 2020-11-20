@@ -1,0 +1,33 @@
+{
+	"Speaker": "Alex",
+	"Text": "I think I found your music...",
+	"Next": [{
+		"Speaker": "Henry",
+		"Text": "Excellent... Enjoy!",
+		"Next" : [{
+			"Speaker": "Alex",
+			"Text": "Actually it is sort of in the way...",
+			"Next": [{
+				"Speaker": "Henry",
+				"Text": "Well if that's your attitude!"
+			}]
+		},
+		{
+			"Speaker": "Alex",
+			"Text": "It is very moving but I am having trouble moving past it...",
+			"Next": [{
+				"Speaker": "Henry",
+				"Text": "I guess the emotional intensity can get a bit much, when you've had enough you don't need to carry on listening..."
+			}]
+		},
+		{
+			"Speaker": "Alex",
+			"Text": "I am really having difficulty leaving this wonderful music behind.",
+			"IsHint": true,
+			"Next": [{
+				"Speaker": "Henry",
+				"Text": "My dear boy!  Feel free to turn it down in the options menu..."
+			}]
+		}]
+	}]
+}
