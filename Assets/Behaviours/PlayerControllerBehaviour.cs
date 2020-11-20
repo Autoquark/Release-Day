@@ -82,7 +82,7 @@ class PlayerControllerBehaviour : MonoBehaviour
         _allPlayers.Remove(this);
     }
 
-    private void PlayClip(AudioClip clip, int channel)
+    private void PlaySound(AudioClip clip, int channel)
     {
         AudioSource audioSource = _audioSources.Value[channel];
         if (!audioSource.isPlaying || audioSource.clip != clip)
@@ -92,7 +92,7 @@ class PlayerControllerBehaviour : MonoBehaviour
         }
     }
 
-    private void StopClip(AudioClip clip, int channel)
+    private void StopSound(AudioClip clip, int channel)
     {
         AudioSource audioSource = _audioSources.Value[channel];
         if (audioSource.isPlaying && audioSource.clip == clip)
@@ -128,7 +128,7 @@ class PlayerControllerBehaviour : MonoBehaviour
 
         if (!_wasGrounded && _physicsObject.Value.Grounded)
         {
-            PlayClip(LandAudio, 1);
+            PlaySound(LandAudio, 1);
         }
 
         _wasGrounded = _physicsObject.Value.Grounded;
@@ -139,22 +139,22 @@ class PlayerControllerBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             _physicsObject.Value.WalkIntent = -runSpeed;
-            PlayClip(FootstepsAudio, 0);
+            PlaySound(FootstepsAudio, 0);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             _physicsObject.Value.WalkIntent = runSpeed;
-            PlayClip(FootstepsAudio, 0);
+            PlaySound(FootstepsAudio, 0);
         }
         else
         {
             _physicsObject.Value.WalkIntent = 0;
-            StopClip(FootstepsAudio, 0);
+            StopSound(FootstepsAudio, 0);
         }
 
         if (!_physicsObject.Value.Grounded)
         {
-            StopClip(FootstepsAudio, 0);
+            StopSound(FootstepsAudio, 0);
         }
 
         if (_jumpPending)
@@ -162,7 +162,7 @@ class PlayerControllerBehaviour : MonoBehaviour
             _physicsObject.Value.YVelocity = jumpVelocity;
             _jumpPending = false;
             _jumpedSinceLastGrounded = true;
-            PlayClip(JumpAudio, 1);
+            PlaySound(JumpAudio, 1);
         }
         else if(_physicsObject.Value.Grounded)
         {
@@ -184,16 +184,20 @@ class PlayerControllerBehaviour : MonoBehaviour
             if (_audioListener.Value.enabled)
             {
                 // If there are any other players, enable the audio listener on one. Otherwise, enable it on the corpse.
-                if (FirstPlayer() != null)
+                PlayerControllerBehaviour another_player = AllPlayers().Where(x => x != this).FirstOrDefault();
+
+                if (another_player != null)
                 {
                     corpse.GetComponent<AudioListener>().enabled = false;
-                    FirstPlayer()._audioListener.Value.enabled = true;
+                    another_player._audioListener.Value.enabled = true;
                 }
                 else
                 {
                     corpse.GetComponent<AudioListener>().enabled = true;
                 }
             }
+
+            corpse.GetComponent<CorpseController>().PlaySound(DeathAudio);
         }
 
         GameObject.Destroy(gameObject);
