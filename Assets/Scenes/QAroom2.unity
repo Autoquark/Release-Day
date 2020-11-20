@@ -272,6 +272,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 109557857188974404, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 110053939350852831, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -425,6 +430,11 @@ PrefabInstance:
     - target: {fileID: 2385552237159835008, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857960004882082813, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4279314206843036169, guid: 977274dcd7bf12946ada1239436153d0,

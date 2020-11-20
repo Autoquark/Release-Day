@@ -1,37 +1,93 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Behaviours
 {
     class LevelControllerBehaviour : MonoBehaviour
     {
+
         public static int test;
         public List<string> LevelSequence = new List<string>();
 
+        private const float _fadeDuration = 1;
+
         private float _time_out = 0.0f;
         private HashSet<GameObject> _timeStoppers = new HashSet<GameObject>();
+        private Lazy<Image> _blackoutImage;
+        private bool _loadingLevel = false;
+
+        public LevelControllerBehaviour()
+        {
+            _blackoutImage = new Lazy<Image>(() => transform.Find("../MenuRoot/Blackout").GetComponent<Image>());
+        }
+
+        private void Start()
+        {
+            StartCoroutine(LevelStartCoroutine());
+        }
+
+        private IEnumerator LevelStartCoroutine()
+        {
+            foreach (var player in PlayerControllerBehaviour.AllPlayers())
+            {
+                player.enabled = false;
+            }
+            yield return StartCoroutine(FadeBetween(Color.black, Color.clear));
+            foreach (var player in PlayerControllerBehaviour.AllPlayers())
+            {
+                player.enabled = true;
+            }
+        }
 
         public void GoToNextLevel()
         {
             var current = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(LevelSequence.SkipWhile(x => x != current).Skip(1).First());
+            StartCoroutine(GoToLevelCoroutine(LevelSequence.SkipWhile(x => x != current).Skip(1).First()));
+        }
+
+        private IEnumerator GoToLevelCoroutine(string sceneName)
+        {
+            _loadingLevel = true;
+            var operation = SceneManager.LoadSceneAsync(sceneName);
+            operation.allowSceneActivation = false;
+            foreach(var player in PlayerControllerBehaviour.AllPlayers())
+            {
+                player.enabled = false;
+            }
+            yield return StartCoroutine(FadeBetween(Color.clear, Color.black));
+            // 0.9 progress indicates that it is finished but being paused because allowSceneActivation is false
+            yield return new WaitUntil(() => operation.progress >= 0.9f);
+            operation.allowSceneActivation = true;
+        }
+
+        private IEnumerator FadeBetween(Color a, Color b)
+        {
+            var startTime = Time.time;
+            var endTime = Time.time + _fadeDuration;
+            while (Time.time < endTime)
+            {
+                _blackoutImage.Value.color = Color.Lerp(a, b, (Time.time - startTime) / _fadeDuration);
+                yield return null;
+            }
         }
 
         private void Update()
         {
-            if (_time_out != 0 && Time.time > _time_out)
+            if (!_loadingLevel && _time_out != 0 && Time.time > _time_out)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                StartCoroutine(GoToLevelCoroutine(SceneManager.GetActiveScene().name));
             }
 
             if (_time_out == 0 && !FindObjectsOfType<PlayerControllerBehaviour>().Any())
             {
-                _time_out = Time.time + 2.0f;
+                _time_out = Time.time + 1.0f;
             }
         }
 
