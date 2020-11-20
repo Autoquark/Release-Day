@@ -21,7 +21,7 @@ namespace Assets.Behaviours
             _skeletonAnimation = new Lazy<SkeletonAnimation>(GetComponent<SkeletonAnimation>);
         }
 
-        protected void SetAnimationIfDifferent(Animation animation)
+        protected void SetAnimationIfDifferent(Animation animation, bool loop = true)
         {
             if (_skeletonAnimation.Value == null || _skeletonAnimation.Value.state == null)
             {
@@ -33,7 +33,7 @@ namespace Assets.Behaviours
                 return;
             }
 
-            _skeletonAnimation.Value.state.SetAnimation(0, animation, true);
+            _skeletonAnimation.Value.state.SetAnimation(0, animation, loop);
             _skeletonAnimation.Value.AnimationState.TimeScale = 1;
         }
     }

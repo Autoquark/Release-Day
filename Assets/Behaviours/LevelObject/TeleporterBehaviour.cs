@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Assets.Data;
+using Spine.Unity;
 
 namespace Assets.Behaviours
 {
-    class TeleporterBehaviour : MonoBehaviour
+    class TeleporterBehaviour : AnimationBase
     {
+        public AnimationReferenceAsset activateAnimation;
         public bool HasBug = false;
         public TeleporterBehaviour SendsTo;
 
@@ -33,9 +35,7 @@ namespace Assets.Behaviours
             {
                 CapsuleCollider2D capsule = player.GetComponent<CapsuleCollider2D>();
 
-                Collider2D[] dummy = new Collider2D[1];
-
-                if (Physics2D.OverlapCapsule(SendsTo.transform.position, capsule.size, capsule.direction, capsule.transform.eulerAngles.z, Filter, dummy) == 0)
+                if (Physics2D.OverlapCapsule(SendsTo.transform.position, capsule.size, capsule.direction, capsule.transform.eulerAngles.z, Filter, new Collider2D[1]) == 0)
                 {
                     if (!HasBug)
                     {
@@ -47,6 +47,7 @@ namespace Assets.Behaviours
                     }
 
                     _coolDownEnd = SendsTo._coolDownEnd = Time.time + 1.5f;
+                    SetAnimationIfDifferent(activateAnimation, false);
                 }
             }
         }
