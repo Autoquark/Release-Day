@@ -51,6 +51,7 @@ namespace Assets.Behaviours.LevelSpecific
             var musicSource = _levelController.Value.GetComponent<AudioSource>();
             musicSource.clip = _music;
             musicSource.Play();
+            musicSource.loop = false;
             yield return new WaitForSecondsRealtime(5);
             _conversationController.Value.SetConversation(JsonUtility.FromJson<Conversation>(_conversation.text));
             _conversationController.Value.SetVisibility(true);
