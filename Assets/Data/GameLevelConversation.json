@@ -1,32 +1,19 @@
 {
 	"Speaker": "Alex",
-	"Text": "What about the bounce pad on the boss level?",
+	"Text": "Colin, Colin!  I got some sort of quantum entanglement error!",
 	"Next": [{
 		"Speaker": "Colin",
-		"Text": "What about it?",
+		"Text": "That can never happen.",
 		"Next": [{
 				"Speaker": "Alex",
-				"Text": "Did you fix it?",
+				"Text": "That what it says in the message.",
 				"Next": [{
 					"Speaker": "Colin",
-					"Text": "Not as such..."
-				}]
-			},
-			{
-				"Speaker": "Alex",
-				"Text": "It it safe?",
-				"Next": [{
-					"Speaker": "Colin",
-					"Text": "Define 'safe' ..."
-				}]
-			},
-			{
-				"Speaker": "Alex",
-				"Text": "Stop messing around and give me a hint!",
-				"IsHint": true,
-				"Next": [{
-					"Speaker": "Colin",
-					"Text": "I am sure you'll be fine if you hit it from high enough ;-)"
+					"Text": "So no problem, hey?",
+					"Next": [{
+						"Speaker": "Colin",
+						"Text": "Because if that did happen computational states from the CameCore-1.0 (tm) could leak into the real world, inexact though the term 'real' is..."
+					}]
 				}]
 			}
 		]
