@@ -16,6 +16,9 @@ class PlayerControllerBehaviour : MonoBehaviour
     public float walkSpeed = 0.1f;
     public float jumpGracePeriod = 0.1f;
     public GameObject DeadPlayer = null;
+    public AudioClip JumpAudio = null;
+    public AudioClip LandAudio = null;
+    public AudioClip FootstepsAudio = null;
 
     const float _minSeparationDistance = 0.1f;
     private readonly Lazy<Rigidbody2D> _rigidbody;
@@ -25,11 +28,13 @@ class PlayerControllerBehaviour : MonoBehaviour
     private readonly Lazy<Tilemap> _tileMap;
     private readonly Lazy<AudioListener> _audioListener;
     private readonly Lazy<LevelControllerBehaviour> _levelController;
+    private readonly Lazy<AudioSource> _audioSource;
 
     private bool _jumpPending = false;
     private float _lastGroundedTime = -999;
     private bool _jumpedSinceLastGrounded = false;
     private bool _quitting = false;
+    private bool _wasGrounded = true;
 
     // static
     static List<PlayerControllerBehaviour> _allPlayers = new List<PlayerControllerBehaviour>();
@@ -47,6 +52,7 @@ class PlayerControllerBehaviour : MonoBehaviour
         _tileMap = new Lazy<Tilemap>(FindObjectOfType<Tilemap>);
         _audioListener = new Lazy<AudioListener>(() => GetComponent<AudioListener>());
         _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
+        _audioSource = new Lazy<AudioSource>(GetComponent<AudioSource>);
     }
 
     // end-static
@@ -69,6 +75,23 @@ class PlayerControllerBehaviour : MonoBehaviour
     private void OnDestroy()
     {
         _allPlayers.Remove(this);
+    }
+
+    private void PlayClip(AudioClip clip)
+    {
+        if (!_audioSource.Value.isPlaying || _audioSource.Value.clip != clip)
+        {
+            _audioSource.Value.clip = clip;
+            _audioSource.Value.Play();
+        }
+    }
+
+    private void StopClip(AudioClip clip)
+    {
+        if (_audioSource.Value.isPlaying && _audioSource.Value.clip == clip)
+        {
+            _audioSource.Value.Stop();
+        }
     }
 
     // Update is called once per frame
@@ -95,6 +118,13 @@ class PlayerControllerBehaviour : MonoBehaviour
         {
             KillPlayer();
         }
+
+        if (!_wasGrounded && _physicsObject.Value.Grounded)
+        {
+            PlayClip(LandAudio);
+        }
+
+        _wasGrounded = _physicsObject.Value.Grounded;
     }
 
     private void FixedUpdate()
@@ -102,21 +132,30 @@ class PlayerControllerBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             _physicsObject.Value.WalkIntent = -runSpeed;
+            PlayClip(FootstepsAudio);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             _physicsObject.Value.WalkIntent = runSpeed;
+            PlayClip(FootstepsAudio);
         }
         else
         {
             _physicsObject.Value.WalkIntent = 0;
+            StopClip(FootstepsAudio);
         }
 
-        if(_jumpPending)
+        if (!_physicsObject.Value.Grounded)
+        {
+            StopClip(FootstepsAudio);
+        }
+
+        if (_jumpPending)
         {
             _physicsObject.Value.YVelocity = jumpVelocity;
             _jumpPending = false;
             _jumpedSinceLastGrounded = true;
+            PlayClip(JumpAudio);
         }
         else if(_physicsObject.Value.Grounded)
         {
