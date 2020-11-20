@@ -13,9 +13,9 @@ namespace Assets.Behaviours
     class TurretAnimation : AnimationBase
     {
         public AnimationReferenceAsset idle;
-        public float LaunchMoment = 2.0f;
+        public float LaunchInterval = 0.5f;
 
-        private bool _wasBelow = true;
+        private int _launchCounter = 0;
         private Lazy<Transform> _launchPoint;
         public GameObject Projectile;
 
@@ -29,15 +29,15 @@ namespace Assets.Behaviours
         {
             SetAnimationIfDifferent(idle);
 
-            bool isBelow = _skeletonAnimation.Value.AnimationState.Tracks.Items[0].AnimationTime < LaunchMoment;
+            int count = (int)(_skeletonAnimation.Value.AnimationState.Tracks.Items[0].AnimationTime / LaunchInterval);
 
-            if (_wasBelow && !isBelow)
+            if (count != _launchCounter)
             {
                 var proj = Instantiate(Projectile, _launchPoint.Value.transform.position, _launchPoint.Value.transform.rotation);
                 proj.transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
             }
 
-            _wasBelow = isBelow;
+            _launchCounter = count;
         } 
     }
 }
