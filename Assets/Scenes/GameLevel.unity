@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78a0e3ba93e23941ac8b17dbdca706d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _conversation: {fileID: 4900000, guid: 8ba7014dfc5b34848945c12508c6165e, type: 3}
+  _conversation: {fileID: 4900000, guid: 0f3ee75f4d224ed4e942e161556b48fd, type: 3}
   _music: {fileID: 8300000, guid: 1c6dc26fee2b34567ba6354d94985e20, type: 3}
 --- !u!4 &103401553
 Transform:
