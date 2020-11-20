@@ -139,22 +139,23 @@ class PlayerControllerBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             _physicsObject.Value.WalkIntent = -runSpeed;
-            PlaySound(FootstepsAudio, 0);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             _physicsObject.Value.WalkIntent = runSpeed;
-            PlaySound(FootstepsAudio, 0);
         }
         else
         {
             _physicsObject.Value.WalkIntent = 0;
-            StopSound(FootstepsAudio, 0);
         }
 
-        if (!_physicsObject.Value.Grounded)
+        if (!_physicsObject.Value.Grounded || Mathf.Abs(_physicsObject.Value.MovementLastFrame.x) < 0.01)
         {
             StopSound(FootstepsAudio, 0);
+        }
+        else
+        {
+            PlaySound(FootstepsAudio, 0);
         }
 
         if (_jumpPending)
