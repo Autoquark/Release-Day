@@ -14,7 +14,7 @@ namespace Assets.Behaviours
 
         public float runAnimationSpeedFactor = 30;
 
-        private Lazy<PhysicsObject> _playerController;
+        private readonly Lazy<PhysicsObject> _playerController;
 
         public PlayerAnimationBehaviour()
         {

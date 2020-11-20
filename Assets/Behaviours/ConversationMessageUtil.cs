@@ -8,11 +8,11 @@ namespace Assets.Behaviours
 {
     class ConversationMessageUtil : MonoBehaviour
     {
-        private Lazy<Text> _text;
-        private Lazy<Text> _name;
-        private Lazy<Image> _image;
-        private Lazy<GameObject> _id;
-        private Lazy<GameObject> _choices;
+        private readonly Lazy<Text> _text;
+        private readonly Lazy<Text> _name;
+        private readonly Lazy<Image> _image;
+        private readonly Lazy<GameObject> _id;
+        private readonly Lazy<GameObject> _choices;
         private int _selectedOption = 0;
         private ConversationController _controller;
 

@@ -9,7 +9,7 @@ namespace Assets.Behaviours.Cutscene
 {
     class TalkBehaviour : MonoBehaviour
     {
-        private Lazy<DialogueBubbleBehaviour> _dialogueBubble;
+        private readonly Lazy<DialogueBubbleBehaviour> _dialogueBubble;
 
         public TalkBehaviour()
         {

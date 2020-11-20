@@ -16,7 +16,7 @@ namespace Assets.Behaviours
         public float LaunchInterval = 0.5f;
 
         private int _launchCounter = 0;
-        private Lazy<Transform> _launchPoint;
+        private readonly Lazy<Transform> _launchPoint;
         public GameObject Projectile;
 
 

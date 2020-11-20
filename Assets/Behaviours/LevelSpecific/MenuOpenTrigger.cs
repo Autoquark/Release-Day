@@ -11,7 +11,7 @@ namespace Assets.Behaviours.LevelSpecific
     {
         public bool _open = true;
 
-        private Lazy<MenuRootBehaviour> _menuRoot;
+        private readonly Lazy<MenuRootBehaviour> _menuRoot;
 
         public MenuOpenTrigger()
         {
