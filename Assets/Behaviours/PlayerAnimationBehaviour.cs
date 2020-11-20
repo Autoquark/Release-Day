@@ -45,7 +45,7 @@ namespace Assets.Behaviours
 
             if(_physicsObject.Value.WalkIntent != 0)
             {
-                var facingRight = _physicsObject.Value.WalkIntent > 0;
+                var shouldFlip = (_physicsObject.Value.WalkIntent > 0) ^ flipX;
                 _skeletonAnimation.Value.Skeleton.ScaleX = shouldFlip ? -1 : 1;
             }
         }
