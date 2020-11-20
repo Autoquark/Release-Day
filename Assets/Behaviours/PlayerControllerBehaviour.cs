@@ -57,13 +57,17 @@ class PlayerControllerBehaviour : MonoBehaviour
 
     // end-static
 
-    private void Start()
+    private void Awake()
     {
         if(_allPlayers.Any())
         {
             GetComponent<AudioListener>().enabled = false;
         }
         _allPlayers.Add(this);
+    }
+
+    private void Start()
+    {
         _physicsObject.Value.PositionOnGround();
     }
 
