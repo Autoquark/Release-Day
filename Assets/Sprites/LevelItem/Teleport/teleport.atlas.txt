@@ -1,0 +1,48 @@
+
+teleport.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Anthene
+  rotate: false
+  xy: 2, 2
+  size: 195, 271
+  orig: 195, 271
+  offset: 0, 0
+  index: -1
+Light 02
+  rotate: false
+  xy: 199, 191
+  size: 536, 82
+  orig: 536, 82
+  offset: 0, 0
+  index: -1
+Light 03
+  rotate: false
+  xy: 199, 126
+  size: 519, 63
+  orig: 519, 63
+  offset: 0, 0
+  index: -1
+Light 04
+  rotate: false
+  xy: 199, 5
+  size: 434, 51
+  orig: 434, 51
+  offset: 0, 0
+  index: -1
+base
+  rotate: true
+  xy: 2, 275
+  size: 740, 1032
+  orig: 740, 1032
+  offset: 0, 0
+  index: -1
+light 01
+  rotate: false
+  xy: 199, 58
+  size: 434, 66
+  orig: 434, 66
+  offset: 0, 0
+  index: -1
