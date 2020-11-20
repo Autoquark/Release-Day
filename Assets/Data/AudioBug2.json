@@ -1,0 +1,21 @@
+{
+  "Speaker": "Alex",
+  "Text": "I turned the music down so I could move on.",
+  "Next": [
+    {
+      "Speaker": "Alex",
+      "Text": "But now I'm feeling stuck. Got any hints for me?",
+      "IsHint": true,
+      "Next": [
+        {
+          "Speaker": "Henry",
+          "Text": "If you're feeling down, turn the music back on. I'm sure it will lift you right up."
+        }
+      ]
+    },
+    {
+      "Speaker": "Alex",
+      "Text": "Never mind."
+    }
+  ]
+}
