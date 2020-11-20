@@ -12,6 +12,8 @@ namespace Assets.Behaviours
         public GameObject MessagePrefabLeft;
         public GameObject MessagePrefabRight;
         public GameObject MessagePrefabOptions;
+        public Sprite AlertImage1;
+        public Sprite AlertImage2;
 
         public bool Visible => _rootPanel.Value.activeSelf;
 
@@ -25,6 +27,7 @@ namespace Assets.Behaviours
         private readonly Lazy<GameObject> _scrollContent;
         private readonly Lazy<ScrollRect> _scrollRect;
         private readonly Lazy<GameObject> _alertIcon;
+        private readonly Lazy<Image> _alertIconInner;
         private readonly Lazy<Text> _promptText;
         private Conversation _conversation;
         private Conversation _currentNode;
@@ -37,6 +40,7 @@ namespace Assets.Behaviours
             _rootPanel = new Lazy<GameObject>(() => transform.Find("MessageRoot").gameObject);
             _scrollContent = new Lazy<GameObject>(() => _rootPanel.Value.transform.Find("Background/ScrollPanel/Viewport/ScrollContent").gameObject);
             _alertIcon = new Lazy<GameObject>(() => transform.Find("AlertIcon").gameObject);
+            _alertIconInner = new Lazy<Image>(() => _alertIcon.Value.transform.Find("AlertIconInner").GetComponent<Image>());
             _scrollRect = new Lazy<ScrollRect>(() => _rootPanel.Value.transform.Find("Background/ScrollPanel").GetComponent<ScrollRect>());
             _promptText = new Lazy<Text>(() => _rootPanel.Value.transform.Find("Background/PromptPanel/Text").GetComponent<Text>());
             _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
@@ -49,6 +53,16 @@ namespace Assets.Behaviours
 
         private void Update()
         {
+            if (_showAlertIcon)
+            {
+                float adj_t = Time.time / 1.3f;
+                bool which = (adj_t - Mathf.Floor(adj_t)) > 0.8f;
+
+                Sprite spr = which ? AlertImage2 : AlertImage1;
+
+                _alertIconInner.Value.sprite = spr;
+            }
+
             if (!Visible)
             {
                 return;

@@ -16,12 +16,12 @@ namespace Assets.Behaviours
         private int _selectedOption = 0;
         private ConversationController _controller;
 
-        public UnityEngine.Sprite AlexFace;
-        public UnityEngine.Sprite ColinFace;
-        public UnityEngine.Sprite FrancesFace;
-        public UnityEngine.Sprite HenryFace;
-        public UnityEngine.Sprite LaylaFace;
-        public UnityEngine.Sprite MyraFace;
+        public Sprite AlexFace;
+        public Sprite ColinFace;
+        public Sprite FrancesFace;
+        public Sprite HenryFace;
+        public Sprite LaylaFace;
+        public Sprite MyraFace;
 
         public GameObject ChoicePrefab;
 
