@@ -34,11 +34,11 @@ namespace Assets.Behaviours
 
             if (_controller)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow) && _selectedOption > 0)
+                if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _selectedOption > 0)
                 {
                     _selectedOption--;
                 }
-                else if (Input.GetKeyDown(KeyCode.DownArrow) && _selectedOption < _choices.Value.transform.childCount - 1)
+                else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && _selectedOption < _choices.Value.transform.childCount - 1)
                 {
                     _selectedOption++;
                 }
@@ -158,7 +158,7 @@ namespace Assets.Behaviours
 
             foreach(var child in _choices.Value.transform.Children())
             {
-                child.transform.Find("Image").GetComponent<Image>().color = _selectedOption == count ? Color.white : Color.grey;
+                child.transform.Find("Image").GetComponent<Image>().enabled = _selectedOption == count;
                 count++;
             }
         }

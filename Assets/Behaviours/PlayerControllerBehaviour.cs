@@ -108,7 +108,7 @@ class PlayerControllerBehaviour : MonoBehaviour
             interactable.InteractWith(this);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             && (_physicsObject.Value.Grounded || Time.fixedTime - _lastGroundedTime < jumpGracePeriod)
             && !_jumpedSinceLastGrounded)
         {
@@ -130,11 +130,11 @@ class PlayerControllerBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             _physicsObject.Value.WalkIntent = -runSpeed;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) )
         {
             _physicsObject.Value.WalkIntent = runSpeed;
         }

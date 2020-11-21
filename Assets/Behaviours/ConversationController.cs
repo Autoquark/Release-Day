@@ -144,7 +144,7 @@ namespace Assets.Behaviours
                 _selectionsNode = _currentNode;
                 _currentNode = null;
 
-                _promptText.Value.text = "E to select";
+                _promptText.Value.text = "W/S or Up/Down select, E to confirm";
             }
             else
             {
@@ -194,7 +194,7 @@ namespace Assets.Behaviours
 
             AddStatementToIM(_currentNode);
 
-            _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to exit";
+            _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to close";
         }
 
         private void ClearIM()
@@ -211,7 +211,7 @@ namespace Assets.Behaviours
             var cms = msg.GetComponent<ConversationMessageUtil>();
             cms.SetMessage(c, is_right);
 
-            _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to exit";
+            _promptText.Value.text = _currentNode.Next.Any() ? "E to advance" : "Q to close";
 
             _newContentAdded = true;
         }
