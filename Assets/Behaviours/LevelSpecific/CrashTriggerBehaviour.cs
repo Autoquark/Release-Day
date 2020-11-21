@@ -48,10 +48,8 @@ namespace Assets.Behaviours.LevelSpecific
             _crashUi.Value.SetActive(true);
             _levelController.Value.StopTime(gameObject, true);
 
-            var musicSource = _levelController.Value.GetComponent<AudioSource>();
-            musicSource.clip = _music;
-            musicSource.Play();
-            musicSource.loop = false;
+            var musicController = FindObjectOfType<MusicController>();
+            musicController.SetMusic(_music, false);
             yield return new WaitForSecondsRealtime(5);
             _conversationController.Value.SetConversation(JsonUtility.FromJson<Conversation>(_conversation.text));
             _conversationController.Value.SetVisibility(true);

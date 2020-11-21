@@ -49121,6 +49121,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 23877544671858148, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 23877545401448374, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
       propertyPath: m_Name

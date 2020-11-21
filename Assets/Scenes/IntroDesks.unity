@@ -571,6 +571,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 23877544671858148, guid: 977274dcd7bf12946ada1239436153d0,
+        type: 3}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 43e4246230d86264ba1c5d6d57e8e7b2, type: 3}
     - target: {fileID: 23877545366682288, guid: 977274dcd7bf12946ada1239436153d0,
         type: 3}
       propertyPath: orthographic size
@@ -1698,7 +1703,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1365587989
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
