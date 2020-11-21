@@ -1,22 +1,22 @@
 {
   "Speaker": "Myra",
-  "Text": "Oh, Alex! Could you test a level for me? I wanna make sure it's fun!",
+  "Text": "I'm so happy to see you.",
   "Next": [
     {
       "Speaker": "Alex",
-      "Text": "Is this the section with 15 jump pads?",
+      "Text": "Me? I-- I didn't know you noticed...",
       "Next": [
         {
           "Speaker": "Myra",
-          "Text": "Maybe.",
+          "Text": "Sure! Alan from QA. I need an enemy testing!",
           "Next": [
             {
               "Speaker": "Alex",
-              "Text": "And is your solution more jump pads?",
+              "Text": "Oh. Yeah, yeah. Anything for you!",
               "Next": [
                 {
                   "Speaker": "Myra",
-                  "Text": "Let me know how it goes!"
+                  "Text": "Watch out for the plants!"
                 }
               ]
             }
