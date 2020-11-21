@@ -159,7 +159,19 @@ namespace Assets.Behaviours
             foreach(var child in _choices.Value.transform.Children())
             {
                 child.transform.Find("Image").GetComponent<Image>().enabled = _selectedOption == count;
-                child.transform.Find("Text").GetComponent<Text>().color = _selectedOption == count ? Color.white : Color.grey;
+                Text text = child.transform.Find("Text").GetComponent<Text>();
+
+                Color pink = Color.Lerp(Color.red, Color.grey, 0.5f);
+
+                if (text.color == Color.red || text.color == pink)
+                {
+                    text.color = _selectedOption == count ? Color.red : pink;
+                }
+                else
+                {
+                    text.color = _selectedOption == count ? Color.white : Color.grey;
+                }
+
                 count++;
             }
         }

@@ -22,13 +22,15 @@ namespace Assets.Behaviours
 
         public bool Visible => _rootPanel.Value.activeSelf;
 
-        public void ShowAlertIconThisFrame()
+        public void ShowAlertIconThisFrame(bool suppressPing)
         {
             _showAlertIconThisFrame = true;
+            _suppressPing = suppressPing;
         }
 
         private bool _showAlertIconThisFrame = false;
         private bool _showAlertIconLastFrame = false;
+        private bool _suppressPing = false;
         private readonly Lazy<GameObject> _rootPanel;
         private readonly Lazy<GameObject> _scrollContent;
         private readonly Lazy<ScrollRect> _scrollRect;
@@ -71,7 +73,7 @@ namespace Assets.Behaviours
 
                 _alertIconInner.Value.sprite = spr;
 
-                if (!_showAlertIconLastFrame)
+                if (!_suppressPing)
                 {
                     PlaySound(AlertSound);
                 }
