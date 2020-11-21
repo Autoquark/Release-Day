@@ -16,6 +16,7 @@ namespace Assets.Behaviours
         public TeleporterBehaviour SendsTo;
 
         private float _coolDownEnd = 0.0f;
+        private bool _usedOnce = false;
         protected ContactFilter2D Filter;
 
         public void Start()
@@ -42,7 +43,11 @@ namespace Assets.Behaviours
                 {
                     if (!HasBug)
                     {
-                        player.GetComponent<Rigidbody2D>().position = SendsTo.transform.position;
+                        if (!_usedOnce)
+                        {
+                            player.GetComponent<Rigidbody2D>().position = SendsTo.transform.position;
+                            SendsTo._usedOnce = true;
+                        }
                     }
                     else
                     {
@@ -53,6 +58,17 @@ namespace Assets.Behaviours
                     SetAnimationIfDifferent(activateAnimation, false);
                     SendsTo.SetAnimationIfDifferent(activateAnimation, false);
                 }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D hitBy)
+        {
+            PlayerControllerBehaviour player = hitBy.GetComponent<PlayerControllerBehaviour>();
+
+            if (player != null)
+            {
+                // wait for the player to step off the teleporter before triggering again
+                _usedOnce = false;
             }
         }
     }
