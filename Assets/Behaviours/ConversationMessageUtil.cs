@@ -25,6 +25,20 @@ namespace Assets.Behaviours
 
         public GameObject ChoicePrefab;
 
+        public ConversationMessageUtil()
+        {
+            _text = new Lazy<Text>(() => transform.Find("Text").GetComponent<Text>());
+            _name = new Lazy<Text>(() => transform.Find("Id/Name").GetComponent<Text>());
+            _image = new Lazy<Image>(() => transform.Find("Id/Image").GetComponent<Image>());
+            _choices = new Lazy<GameObject>(
+                () =>
+                {
+                    var obj = transform.Find("Choices");
+                    return obj ? obj.gameObject : null;
+                }
+            );
+        }
+
         void Update()
         {
             if (_choices.Value)
@@ -48,20 +62,6 @@ namespace Assets.Behaviours
                     _controller = null;
                 }
             }
-        }
-
-        public ConversationMessageUtil()
-        {
-            _text = new Lazy<Text>(() => transform.Find("Text").GetComponent<Text>());
-            _name = new Lazy<Text>(() => transform.Find("Id/Name").GetComponent<Text>());
-            _image = new Lazy<Image>(() => transform.Find("Id/Image").GetComponent<Image>());
-            _choices = new Lazy<GameObject>(
-                () =>
-                {
-                    var obj = transform.Find("Choices");
-                    return obj ? obj.gameObject : null;
-                }
-            );
         }
 
         public void SetMessage(Conversation c, bool isRight)
