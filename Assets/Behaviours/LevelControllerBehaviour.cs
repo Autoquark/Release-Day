@@ -12,8 +12,7 @@ namespace Assets.Behaviours
 {
     class LevelControllerBehaviour : MonoBehaviour
     {
-
-        public static int test;
+        public AudioClip levelMusic;
         public List<string> LevelSequence = new List<string>();
 
         private const float _fadeDuration = 1;

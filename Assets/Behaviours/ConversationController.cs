@@ -70,11 +70,6 @@ namespace Assets.Behaviours
                 Sprite spr = which ? AlertImage2 : AlertImage1;
 
                 _alertIconInner.Value.sprite = spr;
-
-                if (!_showAlertIconLastFrame)
-                {
-
-                }
             }
 
             _showAlertIconLastFrame = _showAlertIconThisFrame;
