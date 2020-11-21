@@ -152,7 +152,7 @@ class PlayerControllerBehaviour : MonoBehaviour
             PlaySound(FootstepsAudio, 0);
         }
 
-        if (_jumpPending)
+        if (_jumpPending && jumpVelocity > 0)
         {
             _physicsObject.Value.YVelocity = jumpVelocity;
             _jumpPending = false;
