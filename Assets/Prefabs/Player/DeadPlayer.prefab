@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 877376677156231230}
   - component: {fileID: 877376677156231234}
   - component: {fileID: 4674945092984185096}
-  - component: {fileID: 8831634796127331721}
   - component: {fileID: 7403460420588143460}
+  - component: {fileID: 3274069764142589100}
   m_Layer: 0
   m_Name: DeadPlayer
   m_TagString: Untagged
@@ -148,14 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633cb10e31ce75f4496c78e0a00ce8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &8831634796127331721
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877376677156231229}
-  m_Enabled: 1
 --- !u!82 &7403460420588143460
 AudioSource:
   m_ObjectHideFlags: 0
@@ -252,3 +244,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3274069764142589100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877376677156231229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f6add6c96637d4086b78d87be012a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spatialize: 1
+  Volume: 0.8
+  MaxHeard: 30
+  FallDist: 15
+  PanRange: 6

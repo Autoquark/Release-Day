@@ -27,7 +27,6 @@ class PlayerControllerBehaviour : MonoBehaviour
     private readonly Lazy<PhysicsObject> _physicsObject;
     private readonly Lazy<GameObject> _prompt;
     private readonly Lazy<Tilemap> _tileMap;
-    private readonly Lazy<AudioListener> _audioListener;
     private readonly Lazy<LevelControllerBehaviour> _levelController;
     private readonly Lazy<List<AudioSource>> _audioSources;
 
@@ -51,7 +50,6 @@ class PlayerControllerBehaviour : MonoBehaviour
         _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
         _prompt = new Lazy<GameObject>(() => transform.Find("Prompt").gameObject);
         _tileMap = new Lazy<Tilemap>(FindObjectOfType<Tilemap>);
-        _audioListener = new Lazy<AudioListener>(() => GetComponent<AudioListener>());
         _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
         _audioSources = new Lazy<List<AudioSource>>(() => GetComponents<AudioSource>().ToList());
     }
@@ -60,10 +58,6 @@ class PlayerControllerBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        if(_allPlayers.Any())
-        {
-            GetComponent<AudioListener>().enabled = false;
-        }
         _allPlayers.Add(this);
     }
 
@@ -182,21 +176,6 @@ class PlayerControllerBehaviour : MonoBehaviour
         if (!_quitting && DeadPlayer != null)
         {
             var corpse = Instantiate(DeadPlayer, transform.position, transform.rotation);
-            if (_audioListener.Value.enabled)
-            {
-                // If there are any other players, enable the audio listener on one. Otherwise, enable it on the corpse.
-                PlayerControllerBehaviour another_player = AllPlayers().Where(x => x != this).FirstOrDefault();
-
-                if (another_player != null)
-                {
-                    corpse.GetComponent<AudioListener>().enabled = false;
-                    another_player._audioListener.Value.enabled = true;
-                }
-                else
-                {
-                    corpse.GetComponent<AudioListener>().enabled = true;
-                }
-            }
 
             corpse.GetComponent<CorpseController>().PlaySound(DeathAudio);
         }

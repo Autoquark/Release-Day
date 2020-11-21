@@ -50296,6 +50296,7 @@ GameObject:
   - component: {fileID: 1671189888}
   - component: {fileID: 1671189890}
   - component: {fileID: 1671189891}
+  - component: {fileID: 1671189892}
   m_Layer: 0
   m_Name: SoundWave
   m_TagString: Untagged
@@ -50493,6 +50494,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1671189892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671189886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f6add6c96637d4086b78d87be012a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spatialize: 1
+  Volume: 1
+  MaxHeard: 30
+  FallDist: 15
+  PanRange: 10
 --- !u!1001 &1857595953
 PrefabInstance:
   m_ObjectHideFlags: 0
