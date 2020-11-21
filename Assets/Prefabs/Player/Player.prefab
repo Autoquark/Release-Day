@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2449e16f12aceef4ba1b3743dec5a448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  talkerName: Alex
 --- !u!82 &1908987215711542418
 AudioSource:
   m_ObjectHideFlags: 0
