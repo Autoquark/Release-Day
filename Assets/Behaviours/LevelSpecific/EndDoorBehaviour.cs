@@ -17,10 +17,12 @@ namespace Assets.Behaviours.LevelSpecific
 
         private readonly Lazy<GameObject> _hero;
         private readonly Lazy<CutsceneControllerBehaviour> _cutsceneController;
+        private readonly Lazy<GameObject> _credits;
 
         public EndDoorBehaviour()
         {
             _hero = new Lazy<GameObject>(() => SceneManager.GetActiveScene().GetRootGameObjects().First(x => x.name == "HeroPlayer"));
+            _credits = new Lazy<GameObject>(() => SceneManager.GetActiveScene().GetRootGameObjects().First(x => x.name == "Credits"));
             _cutsceneController = new Lazy<CutsceneControllerBehaviour>(() => FindObjectOfType<CutsceneControllerBehaviour>());
         }
 
@@ -47,9 +49,12 @@ namespace Assets.Behaviours.LevelSpecific
             physicsObject.PositionOnGround();
             yield return StartCoroutine(_cutsceneController.Value.WalkToX(physicsObject, marker.transform.position.x, controller.runSpeed * 0.5f));
             yield return StartCoroutine(_cutsceneController.Value.PlayConversationCoroutine(JsonUtility.FromJson<Conversation>(_conversation.text)));
+            yield return new WaitForSecondsRealtime(0.5f);
+
+            _credits.Value.SetActive(true);
             //physicsObject.YVelocity = controller.jumpVelocity;
             //StartCoroutine(_cutsceneController.Value.WalkToX(physicsObject, marker2.transform.position.x, controller.runSpeed));
-            // Quit or whatever
+            
         }
     }
 }
