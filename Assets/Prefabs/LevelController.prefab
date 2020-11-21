@@ -44,4 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelMusic: {fileID: 8300000, guid: 4f18e5a5cb6c94aba990dc9c06550bda, type: 3}
-  LevelSequence: []
+  LevelSequence:
+  - MainMenu
+  - IntroDesks
+  - QAroom
+  - GameLevel
+  - QAroom2
+  - CorruptedOffice
+  - MenuBug
+  - TeleporterBug 1
+  - TeleporterBug 2
+  - AudioBug
+  - FinalLevel

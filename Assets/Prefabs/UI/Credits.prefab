@@ -147,6 +147,8 @@ GameObject:
   - component: {fileID: 2685643255768543811}
   - component: {fileID: 2685643255768543808}
   - component: {fileID: 2685643255768543812}
+  - component: {fileID: 1686407384644259663}
+  - component: {fileID: 7718783195119107250}
   m_Layer: 0
   m_Name: Credits
   m_TagString: Untagged
@@ -262,6 +264,35 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1686407384644259663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685643255768543809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89300f4c4ad8ae64785846fc0a304fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7718783195119107250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685643255768543809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7412380655874920315
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +451,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1686407384644259663}
+        m_MethodName: OnBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7104152294543478751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,15 +1716,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a113e1ab56b23f4cb75858719ca0bd6, type: 3}
---- !u!224 &3485102194875105789 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7602885903586704462, guid: 7a113e1ab56b23f4cb75858719ca0bd6,
-    type: 3}
-  m_PrefabInstance: {fileID: 6476019625433447859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6443057932441954359 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 50989320069977476, guid: 7a113e1ab56b23f4cb75858719ca0bd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6476019625433447859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3485102194875105789 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7602885903586704462, guid: 7a113e1ab56b23f4cb75858719ca0bd6,
     type: 3}
   m_PrefabInstance: {fileID: 6476019625433447859}
   m_PrefabAsset: {fileID: 0}

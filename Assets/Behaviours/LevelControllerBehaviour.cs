@@ -14,6 +14,7 @@ namespace Assets.Behaviours
     {
         public AudioClip levelMusic;
         public List<string> LevelSequence = new List<string>();
+        public bool restartOnNoPlayers = true;
 
         private const float _fadeDuration = 1;
 
@@ -51,8 +52,17 @@ namespace Assets.Behaviours
             StartCoroutine(GoToLevelCoroutine(LevelSequence.SkipWhile(x => x != current).Skip(1).First()));
         }
 
+        public void GoToLevel(string sceneName)
+        {
+            StartCoroutine(GoToLevelCoroutine(sceneName));
+        }
+
         private IEnumerator GoToLevelCoroutine(string sceneName)
         {
+            if(_loadingLevel)
+            {
+                yield break;
+            }
             _loadingLevel = true;
             var operation = SceneManager.LoadSceneAsync(sceneName);
             operation.allowSceneActivation = false;
@@ -90,7 +100,7 @@ namespace Assets.Behaviours
                 RestartLevel();
             }
 
-            if (_time_out == 0 && !FindObjectsOfType<PlayerControllerBehaviour>().Any())
+            if (_time_out == 0 && !FindObjectsOfType<PlayerControllerBehaviour>().Any() && restartOnNoPlayers)
             {
                 _time_out = Time.time + 1.0f;
             }

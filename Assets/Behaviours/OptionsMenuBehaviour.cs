@@ -19,6 +19,7 @@ namespace Assets.Behaviours
         private readonly Lazy<MenuRootBehaviour> _menuRoot;
 
         private bool _slidersInitialized = false;
+        public Action _closeAction = null;
 
         public OptionsMenuBehaviour()
         {
@@ -31,6 +32,7 @@ namespace Assets.Behaviours
         private void Start()
         {
             UpdateAudioSliders();
+            GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         }
 
         private void OnEnable()
@@ -78,7 +80,9 @@ namespace Assets.Behaviours
 
         public void OnBack()
         {
-            _menuRoot.Value.ShowInGameMenu();
+            //_menuRoot.Value.ShowInGameMenu();
+            gameObject.SetActive(false);
+            _closeAction?.Invoke();
         }
     }
 }

@@ -35,7 +35,11 @@ namespace Assets.Behaviours
         }
 
         public void ShowInGameMenu() => SetActiveChild(_inGameMenu.Value);
-        public void ShowOptionsMenu() => SetActiveChild(_optionsMenu.Value);
+        public void ShowOptionsMenu()
+        {
+            SetActiveChild(_optionsMenu.Value);
+            _optionsMenu.Value.GetComponent<OptionsMenuBehaviour>()._closeAction = () => ShowInGameMenu();
+        }
 
         private void Update()
         {
