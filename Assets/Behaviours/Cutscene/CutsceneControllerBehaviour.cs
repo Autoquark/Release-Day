@@ -35,7 +35,12 @@ namespace Assets.Behaviours.Cutscene
             obj.WalkIntent = 0;
         }
 
-        public IEnumerator PlayConversation(Conversation conversation)
+        public void PlayConversation(Conversation conversation)
+        {
+            StartCoroutine(PlayConversationCoroutine(conversation));
+        }
+
+        private IEnumerator PlayConversationCoroutine(Conversation conversation)
         {
             var wasEnabled = _playerControllerBehaviour.Value.enabled;
             _playerControllerBehaviour.Value.enabled = false;
@@ -51,7 +56,7 @@ namespace Assets.Behaviours.Cutscene
                 speaker.ShowListening();
                 conversation = conversation.Next?.SingleOrDefault();
             }
-            foreach(var speaker in SpeakersByName.Values)
+            foreach (var speaker in SpeakersByName.Values)
             {
                 speaker.EndConversation();
             }

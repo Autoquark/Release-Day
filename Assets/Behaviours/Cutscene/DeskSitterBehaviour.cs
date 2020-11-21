@@ -61,8 +61,10 @@ namespace Assets.Behaviours.Cutscene
             _playableOutput.SetSourcePlayable(_idlePlayable);
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             _playableGraph = PlayableGraph.Create();
 
             _playableGraph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
@@ -92,6 +94,6 @@ namespace Assets.Behaviours.Cutscene
             && Mathf.Abs(player.transform.position.x - transform.position.x) <= player.GetComponent<Collider2D>().bounds.size.x + _spriteRenderer.Value.bounds.extents.x
             && Mathf.Abs(player.transform.position.y - transform.position.y) <= 0.5 * player.GetComponent<Collider2D>().bounds.size.y;
 
-        public void InteractWith(PlayerControllerBehaviour player) => StartCoroutine(_cutsceneController.Value.PlayConversation(_conversationData));
+        public void InteractWith(PlayerControllerBehaviour player) => _cutsceneController.Value.PlayConversation(_conversationData);
     }
 }

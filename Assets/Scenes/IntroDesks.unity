@@ -493,6 +493,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &467613964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 467613966}
+  - component: {fileID: 467613965}
+  - component: {fileID: 467613967}
+  m_Layer: 0
+  m_Name: ConversationTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &467613965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467613964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d68979f89d73348b4466f9335e0420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _conversation: {fileID: 4900000, guid: 971efd3ca30a6914993bbcc7ab6ceae3, type: 3}
+--- !u!4 &467613966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467613964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.5, y: -3, z: -4.515625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &467613967
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467613964}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 2}
+  m_EdgeRadius: 0
 --- !u!1001 &536629415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1296,12 +1367,12 @@ PrefabInstance:
     - target: {fileID: 3971372527021893089, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3971372527021893089, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5005386419299085267, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
@@ -1319,6 +1390,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 19720e096c9cbf34e9475fbd02f0eeca,
         type: 3}
+    - target: {fileID: 5005386419299085267, guid: f7d4d3d6ee001944aafab29bc156f6a1,
+        type: 3}
+      propertyPath: talkerName
+      value: Frances
+      objectReference: {fileID: 0}
     - target: {fileID: 5746015763461271839, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -9433,6 +9509,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2009944686965902312, guid: 8b5e19f623ac62b48b96f61b0685dd37,
+        type: 3}
+      propertyPath: talkerName
+      value: Alex
+      objectReference: {fileID: 0}
     - target: {fileID: 2460606060124653111, guid: 8b5e19f623ac62b48b96f61b0685dd37,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -9763,6 +9844,11 @@ PrefabInstance:
       propertyPath: _name
       value: Myra
       objectReference: {fileID: 0}
+    - target: {fileID: 5005386419299085267, guid: f7d4d3d6ee001944aafab29bc156f6a1,
+        type: 3}
+      propertyPath: talkerName
+      value: Myra
+      objectReference: {fileID: 0}
     - target: {fileID: 5746015763461271839, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -10071,6 +10157,11 @@ PrefabInstance:
       propertyPath: _name
       value: Henry
       objectReference: {fileID: 0}
+    - target: {fileID: 5005386419299085267, guid: f7d4d3d6ee001944aafab29bc156f6a1,
+        type: 3}
+      propertyPath: talkerName
+      value: Henry
+      objectReference: {fileID: 0}
     - target: {fileID: 5746015763461271839, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -10183,14 +10274,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1503458593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e74fad0408a25428a78aa321a130e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f558b93b3a8a447b115a3c76c22114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laylaConversation: {fileID: 4900000, guid: d8eadc20920ca06478b4fa1371e576e5, type: 3}
-  henryConversation: {fileID: 4900000, guid: 257b289bc61bfcc41805ce16ae1df2d3, type: 3}
-  myraConversation: {fileID: 4900000, guid: 79022c5f7805e5244800698a3151e27f, type: 3}
-  colinConversation: {fileID: 4900000, guid: 353b613b0026fbd469ad749a7ce708ce, type: 3}
-  francesConversation: {fileID: 4900000, guid: 971efd3ca30a6914993bbcc7ab6ceae3, type: 3}
 --- !u!1001 &1629250962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28046,6 +28132,11 @@ PrefabInstance:
       propertyPath: _name
       value: Colin
       objectReference: {fileID: 0}
+    - target: {fileID: 5005386419299085267, guid: f7d4d3d6ee001944aafab29bc156f6a1,
+        type: 3}
+      propertyPath: talkerName
+      value: Colin
+      objectReference: {fileID: 0}
     - target: {fileID: 5746015763461271839, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -28297,6 +28388,11 @@ PrefabInstance:
       propertyPath: _conversation
       value: 
       objectReference: {fileID: 4900000, guid: d8eadc20920ca06478b4fa1371e576e5, type: 3}
+    - target: {fileID: 5005386419299085267, guid: f7d4d3d6ee001944aafab29bc156f6a1,
+        type: 3}
+      propertyPath: talkerName
+      value: Layla
+      objectReference: {fileID: 0}
     - target: {fileID: 5746015763461271839, guid: f7d4d3d6ee001944aafab29bc156f6a1,
         type: 3}
       propertyPath: m_AnchorMin.y
