@@ -1,0 +1,22 @@
+{
+  "Speaker": "Doomguy",
+  "Text": "What is this place?",
+  "Next": [
+    {
+      "Speaker": "Doomguy",
+      "Text": "And what was that creature?",
+      "Next": [
+        {
+          "Speaker": "Doomguy",
+          "Text": "It looked like some kind of... hipster goblin",
+          "Next": [
+            {
+              "Speaker": "Doomguy",
+              "Text": "I'm going to follow it"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

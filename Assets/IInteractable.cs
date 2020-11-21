@@ -8,8 +8,6 @@ namespace Assets
 {
     interface IInteractable
     {
-        string Message { get; }
-
         bool CanInteractWith(PlayerControllerBehaviour player);
 
         void InteractWith(PlayerControllerBehaviour player);
