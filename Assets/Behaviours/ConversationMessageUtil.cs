@@ -27,7 +27,7 @@ namespace Assets.Behaviours
 
         public ConversationMessageUtil()
         {
-            _text = new Lazy<Text>(() => transform.Find("Text").GetComponent<Text>());
+            _text = new Lazy<Text>(() => transform.Find("Text")?.GetComponent<Text>());
             _name = new Lazy<Text>(() => transform.Find("Id/Name").GetComponent<Text>());
             _image = new Lazy<Image>(() => transform.Find("Id/Image").GetComponent<Image>());
             _choices = new Lazy<GameObject>(
@@ -159,9 +159,25 @@ namespace Assets.Behaviours
             foreach(var child in _choices.Value.transform.Children())
             {
                 child.transform.Find("Image").GetComponent<Image>().enabled = _selectedOption == count;
+                child.transform.Find("Text").GetComponent<Text>().color = _selectedOption == count ? Color.white : Color.grey;
                 count++;
             }
         }
 
+        internal void Grey()
+        {
+            if (_text.Value != null)
+            {
+                _text.Value.color = Color.grey;
+            }
+            if (_name.Value != null)
+            {
+                _name.Value.color = Color.grey;
+            }
+            if (_image.Value != null)
+            {
+                _image.Value.color = Color.grey;
+            }
+        }
     }
 }

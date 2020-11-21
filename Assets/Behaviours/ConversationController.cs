@@ -204,6 +204,8 @@ namespace Assets.Behaviours
 
         private void AddStatementToIM(Conversation c)
         {
+            GreyExistingStatements();
+
             bool is_right = c.Speaker != "Alex";
 
             var msg = Instantiate(is_right ? MessagePrefabRight : MessagePrefabLeft, _scrollContent.Value.transform);
@@ -218,6 +220,8 @@ namespace Assets.Behaviours
 
         private void AddOptionsToIM(IEnumerable<Conversation> options)
         {
+            GreyExistingStatements();
+
             var msg = Instantiate(MessagePrefabOptions, _scrollContent.Value.transform);
             msg.transform.localScale = new Vector3(1, 1, 1);
             var cms = msg.GetComponent<ConversationMessageUtil>();
@@ -226,5 +230,13 @@ namespace Assets.Behaviours
             _newContentAdded = true;
         }
 
+        private void GreyExistingStatements()
+        {
+            foreach(var obj in _scrollContent.Value.transform.Children())
+            {
+                var ctrl = obj.transform.GetComponent<ConversationMessageUtil>();
+                ctrl.Grey();
+            }
+        }
     }
 }
