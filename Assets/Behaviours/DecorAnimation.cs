@@ -21,7 +21,6 @@ namespace Assets.Behaviours
         public float MinRunTime = 0.5f;
         public float MaxStopTime = 10f;
         public float MinStopTime = 2f;
-        public float StopProbPerSec = 0.5f;
         public float MaxSpeedChange = 0.01f;
 
         float _nextChange;
