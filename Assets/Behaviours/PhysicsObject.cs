@@ -21,7 +21,7 @@ namespace Assets.Behaviours
 
         /// <summary>
         /// The sign and magnitude of this value indicate the direction and magnitude of the movement along floors (if grounded) or left/right in midair that this PhysicsObject
-        /// intends to make in each FixedUpdate.
+        /// intends to make per second.
         /// </summary>
         public float WalkIntent { get; set; }
         /// <summary>

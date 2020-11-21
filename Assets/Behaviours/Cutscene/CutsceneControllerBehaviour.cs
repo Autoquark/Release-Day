@@ -27,10 +27,10 @@ namespace Assets.Behaviours.Cutscene
         {
             while (Mathf.Abs(obj.transform.position.x - x) > 0.01f)
             {
-                obj.WalkIntent = Mathf.Clamp(x - obj.transform.position.x,
+                obj.WalkIntent = Mathf.Clamp((x - obj.transform.position.x) / Time.fixedDeltaTime,
                     -speed,
                     speed);
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
             obj.WalkIntent = 0;
         }
@@ -40,7 +40,7 @@ namespace Assets.Behaviours.Cutscene
             StartCoroutine(PlayConversationCoroutine(conversation));
         }
 
-        private IEnumerator PlayConversationCoroutine(Conversation conversation)
+        public IEnumerator PlayConversationCoroutine(Conversation conversation)
         {
             var wasEnabled = _playerControllerBehaviour.Value.enabled;
             _playerControllerBehaviour.Value.enabled = false;
