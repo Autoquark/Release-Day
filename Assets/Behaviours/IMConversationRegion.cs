@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Behaviours
 {
-    class ConversationRegion : MonoBehaviour
+    class IMConversationRegion : MonoBehaviour
     {
         const float _retriggerDelay = 1;
 
@@ -29,7 +29,7 @@ namespace Assets.Behaviours
         private bool _conversationButtonPressed = false;
         private float _lastTriggerTime = -999;
 
-        public ConversationRegion()
+        public IMConversationRegion()
         {
             _conversationController = new Lazy<ConversationController>(() => FindObjectOfType<ConversationController>());
             _loader = new Lazy<ConversationLoader>(GetComponent<ConversationLoader>);
