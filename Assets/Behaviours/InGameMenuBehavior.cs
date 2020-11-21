@@ -14,12 +14,14 @@ namespace Assets.Behaviours
         private readonly Lazy<GameObject> _panel;
         private readonly Lazy<LevelControllerBehaviour> _levelController;
         private readonly Lazy<MenuRootBehaviour> _menuRoot;
+        private readonly Lazy<GameObject> _confirmQuitRoot;
 
         public InGameMenuBehavior()
         {
             _panel = new Lazy<GameObject>(() => transform.Find("Panel").gameObject);
             _menuRoot = new Lazy<MenuRootBehaviour>(() => GetComponentInParent<MenuRootBehaviour>());
             _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
+            _confirmQuitRoot = new Lazy<GameObject>(() => transform.Find("Mask").gameObject);
         }
 
         public void OnEnable()
@@ -57,7 +59,17 @@ namespace Assets.Behaviours
 
         public void OnQuit()
         {
+            _confirmQuitRoot.Value.SetActive(true);
+        }
+
+        public void OnConfirmQuit()
+        {
             Application.Quit();
+        }
+
+        public void OnCancelQuit()
+        {
+            _confirmQuitRoot.Value.SetActive(false);
         }
     }
 }
