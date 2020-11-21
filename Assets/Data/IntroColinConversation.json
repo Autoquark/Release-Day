@@ -1,28 +1,23 @@
 {
   "Speaker": "Alex",
-  "Text": "Hey Colin, just wondered if you'd fixed the inverted input on level 5?",
+  "Text": "Hey Colin. Ready for launch day tomorrow?",
   "Next": [
     {
       "Speaker": "Colin",
-      "Text": "Is that a question?",
+      "Text": "Sure! We've ironed out every glitch. It runs perfect.",
       "Next": [
         {
           "Speaker": "Alex",
-          "Text": "No I just--",
+          "Text": "Really? That's gre--",
           "Next": [
             {
               "Speaker": "Colin",
-              "Text": "Where do questions go?",
+              "Text": "--Zero chance of any major quantum catastrophes.",
               "Next": [
                 {
                   "Speaker": "Alex",
-                  "Text": "... In the ticket system?",
-                  "Next": [
-                    {
-                      "Speaker": "Colin",
-                      "Text": "That sounded awfully like another question Alex. Don't make me report you again. "
-                    }
-                  ]
+                  "Text": "That's worryingly specific."
+                  
                 }
               ]
             }
