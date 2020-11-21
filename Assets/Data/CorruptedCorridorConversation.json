@@ -1,6 +1,6 @@
 {
   "Speaker": "Alex",
-  "Text": "Hey, Frances, should there be a pit full of spikes in the corridor?",
+  "Text": "Hey boss, should there be a pit full of spikes in the corridor?",
   "Next": [
     {
       "Speaker": "Frances",
@@ -12,7 +12,7 @@
           "Next": [
             {
               "Speaker": "Alex",
-              "Text": "Frances, there's a massive pit in the middle of the corridor! And I keep telling you, the release candidate is full of bugs",
+              "Text": "There's a massive pit in the middle of the corridor! And I keep telling you, the release candidate is full of bugs",
               "Next": [
                 {
                   "Speaker": "Frances",
