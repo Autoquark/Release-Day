@@ -78,11 +78,16 @@ namespace Assets.Behaviours
             _blackoutImage.Value.color = b;
         }
 
+        public void RestartLevel()
+        {
+            StartCoroutine(GoToLevelCoroutine(SceneManager.GetActiveScene().name));
+        }
+
         private void Update()
         {
             if (!_loadingLevel && _time_out != 0 && Time.time > _time_out)
             {
-                StartCoroutine(GoToLevelCoroutine(SceneManager.GetActiveScene().name));
+                RestartLevel();
             }
 
             if (_time_out == 0 && !FindObjectsOfType<PlayerControllerBehaviour>().Any())

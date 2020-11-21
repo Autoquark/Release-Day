@@ -50,6 +50,11 @@ namespace Assets.Behaviours
             _menuRoot.Value.ShowOptionsMenu();
         }
 
+        public void OnRestart()
+        {
+            _levelController.Value.RestartLevel();
+        }
+
         public void OnQuit()
         {
             Application.Quit();
