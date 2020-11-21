@@ -21,6 +21,8 @@ namespace Assets.Behaviours
         {
             public bool HasTriggered { get; set; } = false;
             public float? DelayStartTime { get; set; }
+            public bool AlreadyPinged { get; set; }
+            public bool AlreadyPingedForHints { get; set; }
         }
 
         private readonly Lazy<ConversationController> _conversationController;
@@ -71,7 +73,18 @@ namespace Assets.Behaviours
                     }
                     else if(!_triggerAutomatically)
                     {
-                        _conversationController.Value.ShowAlertIconThisFrame();
+                        if (hintsUnlocked)
+                        {
+                            _conversationController.Value.ShowAlertIconThisFrame(data.AlreadyPingedForHints);
+                            data.AlreadyPingedForHints = true;
+                            data.AlreadyPinged = true;
+                        }
+                        else
+                        {
+                            _conversationController.Value.ShowAlertIconThisFrame(data.AlreadyPinged);
+                            data.AlreadyPinged = true;
+                        }
+
                     }
                 }
             }
