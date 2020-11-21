@@ -511,7 +511,7 @@ MonoBehaviour:
     type: 3}
   AlertImage1: {fileID: 21300000, guid: 59dee7b9dc0fd1948953087a842192d0, type: 3}
   AlertImage2: {fileID: 21300000, guid: 8d0742663840bec49ba5f8fba6c4618d, type: 3}
-  AlertSound: {fileID: 8300000, guid: 2cb0f5eaa14f34ad8b8fee6cb0d1ce4b, type: 3}
+  AlertSound: {fileID: 8300000, guid: 302b7c2322cd0450cb3a2ec1ee78ef7e, type: 3}
   OpenSound: {fileID: 8300000, guid: bb47117f555a348b6aa9095ed5cecd44, type: 3}
   CloseSound: {fileID: 8300000, guid: 44016e974b920410388d7e70e7608a71, type: 3}
   DoSound: {fileID: 8300000, guid: c7e8c8aa9b61b49be8953ca079ccc257, type: 3}
