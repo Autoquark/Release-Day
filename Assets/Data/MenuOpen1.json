@@ -6,7 +6,7 @@
 		"Text": "So bug#2361 came back...  Put it in the system, I'll get to it later.",
 		"Next": [{
 			"Speaker": "Alex",
-			"Text": "You don't understand, the menu appeared in the corridor!",
+			"Text": "You don't understand, the menu appeared in the middle of the room!",
 			"Next": [{
 				"Speaker": "Colin",
 				"Text": "Well close it..."
