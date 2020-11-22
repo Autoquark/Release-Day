@@ -3,13 +3,13 @@
 	"Text": "Weird!  The menu just opened right in front of me...",
 	"Next": [{
 		"Speaker": "Colin",
-		"Text": "So bug#2361 came back...  Put it in the system, I'll get to it later.",
+		"Text": "And you've already reported this. Can't you see I'm busy?",
 		"Next": [{
 			"Speaker": "Alex",
-			"Text": "You don't understand, the menu appeared in the middle of the room!",
+			"Text": "You don't understand, it's physically in the room!",
 			"Next": [{
 				"Speaker": "Colin",
-				"Text": "Well close it..."
+				"Text": "Oh, physically? Sounds like a job for maintenance."
 			}]
 		}]
 	}]
