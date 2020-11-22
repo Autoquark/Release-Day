@@ -5,15 +5,15 @@ format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Arm
-  rotate: false
-  xy: 375, 139
+  rotate: true
+  xy: 375, 74
   size: 72, 114
   orig: 72, 114
   offset: 0, 0
   index: -1
 Arm back
   rotate: false
-  xy: 388, 32
+  xy: 375, 148
   size: 86, 105
   orig: 86, 105
   offset: 0, 0
@@ -26,15 +26,15 @@ Body
   offset: 0, 0
   index: -1
 Brown 01
-  rotate: true
-  xy: 248, 15
+  rotate: false
+  xy: 397, 2
   size: 49, 30
   orig: 49, 30
   offset: 0, 0
   index: -1
 Brown 02
-  rotate: true
-  xy: 200, 13
+  rotate: false
+  xy: 359, 34
   size: 51, 30
   orig: 51, 30
   offset: 0, 0
@@ -48,35 +48,49 @@ Face
   index: -1
 Mouth 02
   rotate: false
-  xy: 291, 6
+  xy: 430, 52
   size: 18, 20
   orig: 18, 20
   offset: 0, 0
   index: -1
 Mouth 03
-  rotate: true
-  xy: 232, 13
+  rotate: false
+  xy: 344, 15
   size: 51, 14
   orig: 51, 14
   offset: 0, 0
   index: -1
 Mouth 04
-  rotate: true
-  xy: 179, 5
+  rotate: false
+  xy: 235, 6
   size: 56, 19
   orig: 56, 19
   offset: 0, 0
   index: -1
+Mouth 05
+  rotate: false
+  xy: 293, 11
+  size: 49, 18
+  orig: 49, 18
+  offset: 0, 0
+  index: -1
+Mouth 06
+  rotate: false
+  xy: 179, 3
+  size: 54, 22
+  orig: 54, 22
+  offset: 0, 0
+  index: -1
 eyes
   rotate: false
-  xy: 298, 30
+  xy: 179, 27
   size: 88, 34
   orig: 88, 34
   offset: 0, 0
   index: -1
 eyes close
-  rotate: true
-  xy: 449, 165
+  rotate: false
+  xy: 269, 31
   size: 88, 33
   orig: 88, 33
   offset: 0, 0
@@ -97,14 +111,14 @@ foot 2
   index: -1
 mouth 01
   rotate: false
-  xy: 248, 2
+  xy: 344, 2
   size: 41, 11
   orig: 41, 11
   offset: 0, 0
   index: -1
 nose
   rotate: true
-  xy: 280, 28
+  xy: 412, 36
   size: 36, 16
   orig: 36, 16
   offset: 0, 0
