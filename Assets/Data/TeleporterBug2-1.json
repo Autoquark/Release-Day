@@ -3,13 +3,13 @@
 	"Text": "There's one of those plant monsters you designed here...",
 	"Next": [{
 		"Speaker": "Myra",
-		"Text": "Oo!  Send me a photo.",
+		"Text": "Oo!  Send me a screenshot.",
 		"Next" : [{
 			"Speaker": "Alex",
 			"Text": "Trouble is it's spitting poison just where I need to get through...",
 			"Next": [{
 				"Speaker": "Myra",
-				"Text": "That's how I designed them!"
+				"Text": "That's how I designed them Alan!"
 			}]
 		}]
 	}]
