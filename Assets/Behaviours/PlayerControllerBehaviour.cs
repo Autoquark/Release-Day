@@ -145,7 +145,7 @@ class PlayerControllerBehaviour : MonoBehaviour
 
         if (!_physicsObject.Value.Grounded || Mathf.Abs(_physicsObject.Value.MovementLastFrame.x) < 0.01)
         {
-            StopSound(FootstepsAudio, 0);
+            StopFootsteps();
         }
         else
         {
@@ -164,6 +164,11 @@ class PlayerControllerBehaviour : MonoBehaviour
             _lastGroundedTime = Time.fixedTime;
             _jumpedSinceLastGrounded = false;
         }
+    }
+
+    public void StopFootsteps()
+    {
+        StopSound(FootstepsAudio, 0);
     }
 
     private void OnDisable()

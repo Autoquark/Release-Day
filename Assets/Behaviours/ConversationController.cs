@@ -169,6 +169,11 @@ namespace Assets.Behaviours
                 if (visible)
                 {
                     PlaySound(OpenSound);
+                    PlayerControllerBehaviour player = PlayerControllerBehaviour.FirstPlayer();
+                    if (player != null)
+                    {
+                        player.StopFootsteps();
+                    }
                 }
                 else
                 {
