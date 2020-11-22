@@ -26,7 +26,7 @@ class PlayerControllerBehaviour : MonoBehaviour
     private readonly Lazy<Collider2D> _collider;
     private readonly Lazy<PhysicsObject> _physicsObject;
     private readonly Lazy<GameObject> _prompt;
-    private readonly Lazy<Tilemap> _tileMap;
+    private readonly Lazy<Tilemap[]> _tileMaps;
     private readonly Lazy<LevelControllerBehaviour> _levelController;
     private readonly Lazy<List<AudioSource>> _audioSources;
 
@@ -49,7 +49,7 @@ class PlayerControllerBehaviour : MonoBehaviour
         _collider = new Lazy<Collider2D>(GetComponent<Collider2D>);
         _physicsObject = new Lazy<PhysicsObject>(GetComponent<PhysicsObject>);
         _prompt = new Lazy<GameObject>(() => transform.Find("Prompt").gameObject);
-        _tileMap = new Lazy<Tilemap>(FindObjectOfType<Tilemap>);
+        _tileMaps = new Lazy<Tilemap[]>(FindObjectsOfType<Tilemap>);
         _levelController = new Lazy<LevelControllerBehaviour>(() => GameObject.FindObjectOfType<LevelControllerBehaviour>());
         _audioSources = new Lazy<List<AudioSource>>(() => GetComponents<AudioSource>().ToList());
     }
@@ -115,7 +115,7 @@ class PlayerControllerBehaviour : MonoBehaviour
             _jumpPending = true;
         }
 
-        if (_tileMap.Value.localBounds.SqrDistance(transform.position) > 100)
+        if (_tileMaps.Value.All(x => x.localBounds.SqrDistance(transform.position) > 100))
         {
             KillPlayer();
         }
