@@ -24,7 +24,7 @@ namespace Assets.Behaviours.LevelSpecific
         public CrashTriggerBehaviour()
         {
             _conversationController = new Lazy<ConversationController>(() => FindObjectOfType<ConversationController>());
-            _crashUi = new Lazy<GameObject>(() => GameObject.Find("CrashUi"));
+            _crashUi = new Lazy<GameObject>(() => GameObject.Find("CrashUi").transform.Find("Panel").gameObject);
             _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
         }
 
