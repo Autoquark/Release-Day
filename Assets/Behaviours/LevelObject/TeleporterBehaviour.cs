@@ -14,10 +14,17 @@ namespace Assets.Behaviours
         public AnimationReferenceAsset activateAnimation, idleAnimation;
         public bool HasBug = false;
         public TeleporterBehaviour SendsTo;
+        public AudioClip Sound;
 
         private float _coolDownEnd = 0.0f;
         private bool _usedOnce = false;
         protected ContactFilter2D Filter;
+        private readonly Lazy<AudioSource> _audioSource;
+
+        public TeleporterBehaviour()
+        {
+            _audioSource = new Lazy<AudioSource>(GetComponent<AudioSource>);
+        }
 
         public void Start()
         {
@@ -58,6 +65,7 @@ namespace Assets.Behaviours
                     _coolDownEnd = SendsTo._coolDownEnd = Time.time + 1.5f;
                     SetAnimationIfDifferent(activateAnimation, false);
                     SendsTo.SetAnimationIfDifferent(activateAnimation, false);
+                    SendsTo.PlaySound(Sound);
                 }
             }
         }
@@ -70,6 +78,15 @@ namespace Assets.Behaviours
             {
                 // wait for the player to step off the teleporter before triggering again
                 _usedOnce = false;
+            }
+        }
+
+        internal void PlaySound(AudioClip clip)
+        {
+            if (!_audioSource.Value.isPlaying || _audioSource.Value.clip != clip)
+            {
+                _audioSource.Value.clip = clip;
+                _audioSource.Value.Play();
             }
         }
     }
