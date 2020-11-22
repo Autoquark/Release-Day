@@ -24,9 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TeleporterBug 2.unity
     guid: fa02bbdf813fb2a42a001f3cfc244134
   - enabled: 1
-    path: Assets/Scenes/TeleporterBug 3.unity
-    guid: 7b8a3fb2e67d9bb4ba0e64edc0f04cb9
-  - enabled: 1
     path: Assets/Scenes/AudioBug.unity
     guid: b2969b8b1af562e468041249920cd09e
   - enabled: 1
