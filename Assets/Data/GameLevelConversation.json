@@ -12,7 +12,15 @@
 					"Text": "So no problem, hey?",
 					"Next": [{
 						"Speaker": "Colin",
-						"Text": "Because if that did happen computational states from the CameCore-1.0 (tm) could leak into the real world, inexact though the term 'real' is..."
+						"Text": "Because if that did happen wave function states from the QGameCore-1.0 (tm) would have to have a real component in their spin vector...",
+						"Next": [{
+							"Speaker": "Colin",
+							"Text": "...which is obviously crazy talk.  Leave it with me!",
+							"Next": [{
+								"Speaker": "Colin",
+								"Text": "But put a t"
+							}]
+						}]
 					}]
 				}]
 			}
