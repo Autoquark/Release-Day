@@ -132,7 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idle: {fileID: 11400000, guid: 0efe48a16a47a034fa6c3360d1628a64, type: 2}
+  MinSpeed: 1
   MaxSpeed: 1
-  MinSpeed: -1
-  ChangeProbPerSec: 0.01
+  MaxRunTime: 10
+  MinRunTime: 10
+  MaxStopTime: 0
+  MinStopTime: 0
   MaxSpeedChange: 0.01

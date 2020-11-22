@@ -22,13 +22,15 @@ namespace Assets.Behaviours
 
         public bool Visible => _rootPanel.Value.activeSelf;
 
-        public void ShowAlertIconThisFrame()
+        public void ShowAlertIconThisFrame(bool suppressPing)
         {
             _showAlertIconThisFrame = true;
+            _suppressPing = suppressPing;
         }
 
         private bool _showAlertIconThisFrame = false;
         private bool _showAlertIconLastFrame = false;
+        private bool _suppressPing = false;
         private readonly Lazy<GameObject> _rootPanel;
         private readonly Lazy<GameObject> _scrollContent;
         private readonly Lazy<ScrollRect> _scrollRect;
@@ -71,7 +73,7 @@ namespace Assets.Behaviours
 
                 _alertIconInner.Value.sprite = spr;
 
-                if (!_showAlertIconLastFrame)
+                if (!_suppressPing)
                 {
                     PlaySound(AlertSound);
                 }
@@ -204,6 +206,8 @@ namespace Assets.Behaviours
 
         private void AddStatementToIM(Conversation c)
         {
+            GreyExistingStatements();
+
             bool is_right = c.Speaker != "Alex";
 
             var msg = Instantiate(is_right ? MessagePrefabRight : MessagePrefabLeft, _scrollContent.Value.transform);
@@ -218,6 +222,8 @@ namespace Assets.Behaviours
 
         private void AddOptionsToIM(IEnumerable<Conversation> options)
         {
+            GreyExistingStatements();
+
             var msg = Instantiate(MessagePrefabOptions, _scrollContent.Value.transform);
             msg.transform.localScale = new Vector3(1, 1, 1);
             var cms = msg.GetComponent<ConversationMessageUtil>();
@@ -226,5 +232,13 @@ namespace Assets.Behaviours
             _newContentAdded = true;
         }
 
+        private void GreyExistingStatements()
+        {
+            foreach(var obj in _scrollContent.Value.transform.Children())
+            {
+                var ctrl = obj.transform.GetComponent<ConversationMessageUtil>();
+                ctrl.Grey();
+            }
+        }
     }
 }

@@ -15,12 +15,12 @@ namespace Assets.Behaviours
         public AnimationReferenceAsset idle;
         float _speed = 0f;
         float _targetSpeed = 0f;
+        public float MinSpeed = 0.5f;
         public float MaxSpeed = 1;
         public float MaxRunTime = 1f;
         public float MinRunTime = 0.5f;
         public float MaxStopTime = 10f;
         public float MinStopTime = 2f;
-        public float StopProbPerSec = 0.5f;
         public float MaxSpeedChange = 0.01f;
 
         float _nextChange;

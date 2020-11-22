@@ -11,9 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IntroDesks.unity
     guid: 2c1b401bd9880dc4c85d548f67f6a338
-  - enabled: 0
-    path: Assets/Scenes/LargeLevel.unity
-    guid: 142d279f81a73c04788aca28778cc51b
   - enabled: 1
     path: Assets/Scenes/MenuBug.unity
     guid: 127ed158d72bbc94893e724a90d44691
