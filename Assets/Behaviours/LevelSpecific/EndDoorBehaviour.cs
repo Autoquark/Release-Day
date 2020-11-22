@@ -13,6 +13,7 @@ namespace Assets.Behaviours.LevelSpecific
 {
     class EndDoorBehaviour : MonoBehaviour, IInteractable
     {
+        public AudioClip _creditsMusic;
         public TextAsset _conversation;
 
         private readonly Lazy<GameObject> _hero;
@@ -51,6 +52,7 @@ namespace Assets.Behaviours.LevelSpecific
             yield return StartCoroutine(_cutsceneController.Value.PlayConversationCoroutine(JsonUtility.FromJson<Conversation>(_conversation.text)));
             yield return new WaitForSecondsRealtime(0.5f);
 
+            FindObjectOfType<MusicController>().SetMusic(_creditsMusic, true);
             _credits.Value.SetActive(true);
             //physicsObject.YVelocity = controller.jumpVelocity;
             //StartCoroutine(_cutsceneController.Value.WalkToX(physicsObject, marker2.transform.position.x, controller.runSpeed));

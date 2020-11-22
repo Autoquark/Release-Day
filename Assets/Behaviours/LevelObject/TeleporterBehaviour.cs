@@ -23,6 +23,7 @@ namespace Assets.Behaviours
         {
             Filter.useTriggers = false;
             Filter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+            _skeletonAnimation.Value.Initialize(false);
             _skeletonAnimation.Value.AnimationState.Complete += AnimationState_Complete;
         }
 

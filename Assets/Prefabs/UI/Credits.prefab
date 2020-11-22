@@ -122,11 +122,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 72
+    m_FontSize: 96
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 72
+    m_MaxSize: 96
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 2685643255768543812}
   - component: {fileID: 1686407384644259663}
   - component: {fileID: 7718783195119107250}
+  - component: {fileID: 6136001831624048960}
   m_Layer: 0
   m_Name: Credits
   m_TagString: Untagged
@@ -293,6 +294,28 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6136001831624048960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685643255768543809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0.5
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
 --- !u!1 &7412380655874920315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,15 +1739,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a113e1ab56b23f4cb75858719ca0bd6, type: 3}
---- !u!224 &6443057932441954359 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 50989320069977476, guid: 7a113e1ab56b23f4cb75858719ca0bd6,
-    type: 3}
-  m_PrefabInstance: {fileID: 6476019625433447859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3485102194875105789 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7602885903586704462, guid: 7a113e1ab56b23f4cb75858719ca0bd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6476019625433447859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6443057932441954359 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 50989320069977476, guid: 7a113e1ab56b23f4cb75858719ca0bd6,
     type: 3}
   m_PrefabInstance: {fileID: 6476019625433447859}
   m_PrefabAsset: {fileID: 0}
