@@ -100,7 +100,7 @@ namespace Assets.Behaviours
                 RestartLevel();
             }
 
-            if (_time_out == 0 && !FindObjectsOfType<PlayerControllerBehaviour>().Any() && restartOnNoPlayers)
+            if (_time_out == 0 && PlayerControllerBehaviour.FirstPlayer() == null && restartOnNoPlayers)
             {
                 _time_out = Time.time + 1.0f;
             }
