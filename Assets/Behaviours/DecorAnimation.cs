@@ -31,6 +31,7 @@ namespace Assets.Behaviours
         {
             if (_first)
             {
+                _speed = _targetSpeed = MinSpeed;
                 _nextChange = Time.time + UnityEngine.Random.Range(MinStopTime, MaxStopTime);
 
                 _first = false;
