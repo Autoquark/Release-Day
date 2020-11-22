@@ -40782,6 +40782,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConversationTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 4350300997407591307, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125,
+        type: 3}
+      propertyPath: _showOnlyOnce
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f3c2cc6fbbf2d4ea3b03a9f741d125, type: 3}
 --- !u!1 &1690678646

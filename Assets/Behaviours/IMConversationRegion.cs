@@ -14,7 +14,8 @@ namespace Assets.Behaviours
         public bool _requireGrounded = true;
         public bool _triggerAutomatically = true;
         public bool _hasNonHintOptions = true;
-        public float _delayBeforeHintOptions = 30;
+        public bool _showOnlyOnce = false;
+        public float _delayBeforeHintOptions = -1f;
 
 
         class Info
@@ -40,7 +41,7 @@ namespace Assets.Behaviours
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Q) && !_levelController.Value.IsTimeStopped)
+            if (Input.GetKeyDown(KeyCode.Q) && !_levelController.Value.IsTimeStopped)
             {
                 _conversationButtonPressed = true;
             }
@@ -50,7 +51,7 @@ namespace Assets.Behaviours
         {
             var data = LevelDataStore.GetOrCreate<Info>(gameObject.name);
 
-            if ((!_triggerAutomatically || !data.HasTriggered)
+            if ((!(_triggerAutomatically || _showOnlyOnce) || !data.HasTriggered)
                 && collision.GetComponent<PlayerControllerBehaviour>() != null
                 && Time.time - _lastTriggerTime >= _retriggerDelay)
             {
@@ -59,7 +60,7 @@ namespace Assets.Behaviours
                     data.DelayStartTime = Time.time;
                 }
 
-                var hintsUnlocked = Time.time - data.DelayStartTime > _delayBeforeHintOptions;
+                var hintsUnlocked = _delayBeforeHintOptions != -1 && Time.time - data.DelayStartTime > _delayBeforeHintOptions;
 
                 if ((!_requireGrounded || collision.GetComponent<PhysicsObject>().Grounded)
                     && (_hasNonHintOptions || hintsUnlocked))
@@ -71,7 +72,7 @@ namespace Assets.Behaviours
                         data.HasTriggered = true;
                         _lastTriggerTime = Time.time;
                     }
-                    else if(!_triggerAutomatically)
+                    else if (!_triggerAutomatically)
                     {
                         if (hintsUnlocked)
                         {
@@ -84,7 +85,6 @@ namespace Assets.Behaviours
                             _conversationController.Value.ShowAlertIconThisFrame(data.AlreadyPinged);
                             data.AlreadyPinged = true;
                         }
-
                     }
                 }
             }

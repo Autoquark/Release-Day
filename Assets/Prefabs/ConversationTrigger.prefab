@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4350300997407591307}
   - component: {fileID: 4350300997407591302}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ConversationTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,6 +71,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1441c77dac8469749957c57ea125794e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _requireGrounded: 1
+  _triggerAutomatically: 1
+  _hasNonHintOptions: 1
+  _showOnlyOnce: 0
+  _delayBeforeHintOptions: -1
 --- !u!114 &4350300997407591302
 MonoBehaviour:
   m_ObjectHideFlags: 0
