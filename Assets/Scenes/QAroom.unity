@@ -291,7 +291,7 @@ PrefabInstance:
     - target: {fileID: -5635367554689566686, guid: 0e575d4957f2fb04f854747e1a0c838c,
         type: 3}
       propertyPath: _text
-      value: I can't believe the rest of the QA team quit
+      value: I can't believe team quit after testing this level.
       objectReference: {fileID: 0}
     - target: {fileID: 640174258936552668, guid: 0e575d4957f2fb04f854747e1a0c838c,
         type: 3}
