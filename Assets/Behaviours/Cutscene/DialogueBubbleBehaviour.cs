@@ -10,7 +10,7 @@ namespace Assets.Behaviours.Cutscene
 {
     class DialogueBubbleBehaviour : MonoBehaviour
     {
-        private const float _remarkDisplayTime = 1;
+        private const float _remarkDisplayTime = 1.5f;
         private const float _remarkFadeTime = 1;
         private const int _paddingWithPrompt = 15;
         private const int _paddingWithoutPrompt = 7;
