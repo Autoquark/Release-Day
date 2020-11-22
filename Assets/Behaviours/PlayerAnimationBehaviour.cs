@@ -10,8 +10,9 @@ namespace Assets.Behaviours
 {
     class PlayerAnimationBehaviour : AnimationBase
     {
-        public AnimationReferenceAsset run, idle, jumpStart, jumpUp, jumpApex, fall;
+        public AnimationReferenceAsset run, idle, jumpStart, jumpUp, jumpApex, fall, talk;
         public bool flipX = false;
+        public bool IsTalking { get; set; } = false;
 
         public float runAnimationSpeedFactor = 30;
 
@@ -24,6 +25,12 @@ namespace Assets.Behaviours
 
         private void Update()
         {
+            if(IsTalking)
+            {
+                SetAnimationIfDifferent(talk);
+                return;
+            }
+
             if(_physicsObject.Value.MovementLastFrame.y > 0)
             {
                 SetAnimationIfDifferent(jumpStart);
