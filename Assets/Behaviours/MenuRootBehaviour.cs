@@ -47,6 +47,11 @@ namespace Assets.Behaviours
             {
                 if(_inGameMenu.Value.activeSelf)
                 {
+                    // Kind of hacky
+                    if (_inGameMenu.Value.GetComponent<InGameMenuBehavior>().ConfirmQuitDisplayed)
+                    {
+                        return;
+                    }
                     SetActiveChild(null);
                 }
                 else if(_optionsMenu.Value.activeSelf)

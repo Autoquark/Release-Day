@@ -9,6 +9,8 @@ namespace Assets.Behaviours
 {
     public class InGameMenuBehavior : MonoBehaviour
     {
+        public bool ConfirmQuitDisplayed => _confirmQuitRoot.Value.activeInHierarchy;
+
         protected bool PauseWhenOpen { get; set; } = true;
 
         private readonly Lazy<GameObject> _panel;
@@ -22,6 +24,14 @@ namespace Assets.Behaviours
             _menuRoot = new Lazy<MenuRootBehaviour>(() => GetComponentInParent<MenuRootBehaviour>());
             _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
             _confirmQuitRoot = new Lazy<GameObject>(() => transform.Find("Mask").gameObject);
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                _confirmQuitRoot.Value.SetActive(false);
+            }
         }
 
         public void OnEnable()
