@@ -25,7 +25,7 @@ namespace Assets.Behaviours
 
         private void Update()
         {
-            if(IsTalking)
+            if(IsTalking && talk != null)
             {
                 SetAnimationIfDifferent(talk);
                 return;
