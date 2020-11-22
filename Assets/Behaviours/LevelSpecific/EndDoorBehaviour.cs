@@ -37,7 +37,9 @@ namespace Assets.Behaviours.LevelSpecific
 
         private IEnumerator CutsceneCoroutine(PlayerControllerBehaviour player)
         {
-            FindObjectOfType<LevelControllerBehaviour>().restartOnNoPlayers = false;
+            LevelControllerBehaviour levelController = FindObjectOfType<LevelControllerBehaviour>();
+
+            levelController.restartOnNoPlayers = false;
             Destroy(player.gameObject);
             yield return new WaitForSeconds(2);
 
@@ -56,10 +58,13 @@ namespace Assets.Behaviours.LevelSpecific
             yield return new WaitForSeconds(1f);
 
             FindObjectOfType<MusicController>().SetMusic(_creditsMusic, true);
+            yield return levelController.FadeBetween(Color.clear, Color.black);
             _credits.Value.SetActive(true);
+            yield return levelController.FadeBetween(Color.black, Color.clear);
+
             //physicsObject.YVelocity = controller.jumpVelocity;
             //StartCoroutine(_cutsceneController.Value.WalkToX(physicsObject, marker2.transform.position.x, controller.runSpeed));
-            
+
         }
     }
 }

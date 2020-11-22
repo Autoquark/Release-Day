@@ -1,22 +1,24 @@
 {
-  "Speaker": "Doomguy",
-  "Text": "What is this place?",
-  "Next": [
+	"Speaker": "Doomguy",
+	"Text": "What is this place?",
+	"Next": [
     {
-      "Speaker": "Doomguy",
-      "Text": "And what was that creature?",
-      "Next": [
+		"Speaker": "Doomguy",
+		"Text": "Why is there this huge portrait of me?",
+		"Next": [
         {
-          "Speaker": "Doomguy",
-          "Text": "It looked like some kind of... goblin??",
-          "Next": [
+			"Speaker": "Doomguy",
+			"Text": "And what was that creature?",
+			"Next": [
             {
-              "Speaker": "Doomguy",
-              "Text": "I'm sure it's to blame for all this chaos!  I'll track it to it'a lair..."
-            }
-          ]
-        }
-      ]
-    }
-  ]
+				"Speaker": "Doomguy",
+				"Text": "It looked like some kind of... goblin??",
+				"Next": [
+				{
+					"Speaker": "Doomguy",
+					"Text": "I'm sure it's to blame for all this chaos!  I'll follow it to it's lair..."
+				}]
+            }]
+        }]
+    }]
 }

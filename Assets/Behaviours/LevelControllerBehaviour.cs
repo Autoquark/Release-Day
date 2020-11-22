@@ -76,7 +76,7 @@ namespace Assets.Behaviours
             operation.allowSceneActivation = true;
         }
 
-        private IEnumerator FadeBetween(Color a, Color b)
+        public IEnumerator FadeBetween(Color a, Color b)
         {
             var startTime = Time.unscaledTime;
             var endTime = Time.unscaledTime + _fadeDuration;
