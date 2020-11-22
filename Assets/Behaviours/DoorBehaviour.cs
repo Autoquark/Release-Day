@@ -15,10 +15,12 @@ namespace Assets.Behaviours
 
         public string Message => "Press E to enter";
 
+        private readonly Lazy<AudioSource> _audioSource;
         private readonly Lazy<LevelControllerBehaviour> _levelController;
 
         public DoorBehaviour()
         {
+            _audioSource = new Lazy<AudioSource>(GetComponent<AudioSource>);
             _levelController = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
         }
 
@@ -39,6 +41,8 @@ namespace Assets.Behaviours
             {
                 _levelController.Value.GoToNextLevel();
             }
+
+            _audioSource.Value.Play();
         }
     }
 }
