@@ -32,15 +32,20 @@ namespace Assets.Behaviours.LevelSpecific
 
         public void InteractWith(PlayerControllerBehaviour player)
         {
-            _hero.Value.SetActive(true);
-            _hero.Value.GetComponent<PlayerControllerBehaviour>().enabled = false;
-            Destroy(player.gameObject);
-
-            StartCoroutine(CutsceneCoroutine());
+            StartCoroutine(CutsceneCoroutine(player));
         }
 
-        private IEnumerator CutsceneCoroutine()
+        private IEnumerator CutsceneCoroutine(PlayerControllerBehaviour player)
         {
+            LevelControllerBehaviour levelController = FindObjectOfType<LevelControllerBehaviour>();
+
+            levelController.restartOnNoPlayers = false;
+            Destroy(player.gameObject);
+            yield return new WaitForSeconds(2);
+
+            _hero.Value.SetActive(true);
+            _hero.Value.GetComponent<PlayerControllerBehaviour>().enabled = false;
+
             _cutsceneController.Value.RegisterSpeaker("Doomguy", _hero.Value.GetComponent<TalkBehaviour>());
             var physicsObject = _hero.Value.GetComponent<PhysicsObject>();
             var controller = _hero.Value.GetComponent<PlayerControllerBehaviour>();
@@ -50,13 +55,16 @@ namespace Assets.Behaviours.LevelSpecific
             physicsObject.PositionOnGround();
             yield return StartCoroutine(_cutsceneController.Value.WalkToX(physicsObject, marker.transform.position.x, controller.runSpeed * 0.5f));
             yield return StartCoroutine(_cutsceneController.Value.PlayConversationCoroutine(JsonUtility.FromJson<Conversation>(_conversation.text)));
-            yield return new WaitForSecondsRealtime(0.5f);
+            yield return new WaitForSeconds(1f);
 
             FindObjectOfType<MusicController>().SetMusic(_creditsMusic, true);
+            yield return levelController.FadeBetween(Color.clear, Color.black);
             _credits.Value.SetActive(true);
+            yield return levelController.FadeBetween(Color.black, Color.clear);
+
             //physicsObject.YVelocity = controller.jumpVelocity;
             //StartCoroutine(_cutsceneController.Value.WalkToX(physicsObject, marker2.transform.position.x, controller.runSpeed));
-            
+
         }
     }
 }
