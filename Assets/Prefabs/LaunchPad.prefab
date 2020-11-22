@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 10
-  LaunchSound: {fileID: 8300000, guid: 25a0a56047fdf4a618310196300b65a5, type: 3}
+  LaunchSound: {fileID: 8300000, guid: a5c80990e693b4bf1bcadc160481404a, type: 3}
 --- !u!82 &1119041139961669514
 AudioSource:
   m_ObjectHideFlags: 0
