@@ -1,8 +1,22 @@
 {
 	"Speaker": "Alex",
 	"Text": "There's a teleporter here that looks kinda broken...",
-	"Next": [{
-		"Speaker": "Colin",
-		"Text": "What is the worst that could happen?"
-	}]
+	"Next": [
+		{
+			"Speaker": "Colin",
+			"Text": "We fixed teleporters last patch.",
+			"Next": [
+				{
+					"Speaker": "Alex",
+					"Text": "So it's safe to use?",
+					"Next": [
+						{
+							"Speaker": "Colin",
+							"Text": "Almost certainly."
+						}
+					]
+				}
+			]
+		}
+	]
 }
