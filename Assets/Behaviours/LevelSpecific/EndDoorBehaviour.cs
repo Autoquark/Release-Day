@@ -60,7 +60,6 @@ namespace Assets.Behaviours.LevelSpecific
             FindObjectOfType<MusicController>().SetMusic(_creditsMusic, true);
             yield return levelController.FadeBetween(Color.clear, Color.black);
             _credits.Value.SetActive(true);
-            yield return levelController.FadeBetween(Color.black, Color.clear);
 
             //physicsObject.YVelocity = controller.jumpVelocity;
             //StartCoroutine(_cutsceneController.Value.WalkToX(physicsObject, marker2.transform.position.x, controller.runSpeed));
