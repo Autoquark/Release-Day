@@ -13,8 +13,8 @@ namespace Assets.Behaviours
     class DecorAnimation : AnimationBase
     {
         public AnimationReferenceAsset idle;
-        float _speed = 0f;
-        float _targetSpeed = 0f;
+        protected float _speed = 0f;
+        protected float _targetSpeed = 0f;
         public float MinSpeed = 0.5f;
         public float MaxSpeed = 1;
         public float MaxRunTime = 1f;
@@ -31,6 +31,7 @@ namespace Assets.Behaviours
         {
             if (_first)
             {
+                _speed = _targetSpeed = MinSpeed;
                 _nextChange = Time.time + UnityEngine.Random.Range(MinStopTime, MaxStopTime);
 
                 _first = false;
